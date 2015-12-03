@@ -1,0 +1,17 @@
+{
+  "name": "atnow",
+  "version": "1.0.0",
+  "description": "group project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Becky B., Jared N., Samir M.",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3",
+    "kerberos": "0.0.17",
+    "mongo": "^0.1.0",
+    "mongoose": "^4.2.9"
+  }
+}
