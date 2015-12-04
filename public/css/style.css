@@ -1,3 +1,10 @@
 body {
-  font-size: 26px;
+  font-size: 18px;
+
+}
+
+li {
+  padding-left: 20px;
+  padding-top: 10px;
+  color: white;
 }
