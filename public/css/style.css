@@ -1,0 +1,40 @@
+body {
+  font-size: 18px;
+  background-color: #424242;
+
+}
+
+.navbar-custom {
+  background-color: #d8f2bc;
+  border-bottom: thick solid #b2b8ab;
+}
+
+li {
+  padding-left: 20px;
+  padding-top: 15px;
+  color: #333;
+  font-size: 14px;
+}
+
+.custom {
+  font-size: 22px;
+}
+
+.mid-test {
+    display:inline-block;
+    min-height: 600px;
+    width: 65%;
+    background-color: #e88f7e;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.side {
+  display:inline-block;
+  min-height: 600px;
+  padding-left: 10px;
+  width:32%;
+  background-color: #ffcb87;
+  border-radius: 10px 10px 10px 10px;
+  margin-left: 20px;
+
+}
