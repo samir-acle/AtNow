@@ -11,23 +11,23 @@ var session = require("express-session");
 var app = express();
 
 mongoose.connect("mongodb://localhost/test")
-//
-// app.use(morgan('dev'));
-// app.use(cookieParser());
-// app.use(bodyParser());
+
+app.use(morgan('dev'));
+app.use(cookieParser());
+app.use(bodyParser());
 
 app.set('view engine', 'hbs');
 app.set("views","./views");
 app.use(express.static(__dirname + '/public'));
 
-// app.use(session({ secret: 'WDI-GENERAL-ASSEMBLY-EXPRESS' }));
-// app.use(passport.initialize());
-// app.use(passport.session());
-// app.use(flash());
+app.use(session({ secret: 'session' }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 
-// require('./config/passport');
-// require("./config/routes");
+require('./config/passport');
+
 // comes up with error object is not a function, have not set up config passport yet
 // (passport);
 
@@ -39,6 +39,5 @@ app.get("/", function(req, res){
   res.render("index.html");
 });
 
-app.get("/signup", function(req,res){
-  res.render("index.hbs");
-});
+var routes = require("./config/routes");
+app.use(routes);
