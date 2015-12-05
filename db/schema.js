@@ -3,16 +3,6 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
 
-var UserSchema = new Schema ({
-    local: {
-      email: String,
-      password: String,
-    }
-      votes: [VoteSchema],
-      preferences: [PreferenceSchema]
-    }
-)};
-
 var VoteSchema = new Schema ({
     location_id: String,
     vote_flag: Boolean,
@@ -28,3 +18,13 @@ var voteCountSchema = new Schema ({
     location_id: String,
     count: Number,
 });
+
+var UserSchema = new Schema ({
+    local: {
+      email: String,
+      password: String,
+    }
+      votes: [VoteSchema],
+      preferences: [PreferenceSchema]
+    }
+)};
