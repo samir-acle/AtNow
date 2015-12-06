@@ -20,7 +20,8 @@
     "method-override": "^2.3.5",
     "mongo": "^0.1.0",
     "mongoose": "^4.2.9",
-    "passport": "^0.3.2",
     "morgan": "~1.0.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
   }
 }
