@@ -7,10 +7,8 @@ $(document).ready(function(){
   })
   .then(function(locations){
     locations.forEach(function(location){
-      location.getHours().then(function(hours){
-        var view = new LocationView(location);
-        view.render();
-      });
+      var view = new LocationView(location);
+      view.render();
     });
   });
 });

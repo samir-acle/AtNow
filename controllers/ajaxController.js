@@ -14,28 +14,26 @@ function error(response, message){
 
 router.get("/", function(req, res){
   var latlong = req.query.lat ? req.query.lat + "," + req.query.long : 38.9 + "," + -77.0;
-  var base = "https://api.foursquare.com/v2/venues/search";
+  //TODO: use next page token at scroll bottom to load more results
+  var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
   var options = [
-    ["intent", "browse"],
+    // ["types", "amusement_park | aquarium | art_gallery | "],
+    ["opennow", ""],
+    ["location", latlong],
     ["radius", 1600],
-    ["limit", 50],
-    ["ll", latlong],
-    ["categoryId", "4d4b7105d754a06374d81259,4d4b7104d754a06370d81259,4d4b7105d754a06376d81259"]
-    //Food = 4d4b7105d754a06374d81259
-    //Arts & Entertainment = 4d4b7104d754a06370d81259
-    //nightlife spot = 4d4b7105d754a06376d81259
-    //shops = 4d4b7105d754a06378d81259
-    // ["section", "food"]
-    // ["openNow", 1]
+    ["key", env.googleKey],
+    ["pagetoken", req.query.nextPage || ""]
+    // ["rankby", ]
   ];
-  var url = base + "?client_id=" + env.clientID + "&client_secret=" + env.clientSecret + "&v=20151203";
 
   options.forEach(function(option){
     url = url + "&"+ option[0] + "=" + option[1];
   });
 
+  console.log(url);
+
   request(url, function(err, response, body) {
-    res.send(body); //res.json did not work, bc already json??
+    res.send(body);
   });
 });
 
