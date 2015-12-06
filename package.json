@@ -9,8 +9,10 @@
   "author": "Becky B., Jared N., Samir M.",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.14.1",
     "express": "^4.13.3",
     "hbs": "^4.0.0",
+    "jasmine": "^2.4.1",
     "kerberos": "0.0.17",
     "mongo": "^0.1.0",
     "mongoose": "^4.2.9"
