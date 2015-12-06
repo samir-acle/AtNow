@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var request = require("request");
-var env = require("../env")
+var env = require("../env");
 
 function error(response, message){
   response.status(500);
@@ -27,7 +27,7 @@ router.get("/", function(req, res){
   });
 
   request(url, function(err, response, body) {
-    res.json(body);
+    res.send(body); //res.json did not work, bc already json??
   });
 });
 
