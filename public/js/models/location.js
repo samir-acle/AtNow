@@ -10,7 +10,7 @@ Location.fetch = function(){
     for (var i =0; i < venues.length; i++) {
       locations.push(new Location(venues[i]));
     }
-    console.log(locations);
+    return locations;
   })
   .fail(function(){
     console.log('location fetch fail');
