@@ -13,11 +13,13 @@ function error(response, message){
 // });
 
 router.get("/", function(req, res){
+  var latlong = req.query.lat ? req.query.lat + "," + req.query.long : 38.9 + "," + -77.0;
+  console.log(latlong);
   var base = "https://api.foursquare.com/v2/venues/search";
   var options = [
     // ["intent", "checkin"],
     // ["radius", 800], //meters of specified location
-    ["ll", 38.9 + "," + -77.0],
+    ["ll", latlong],
     ["openNow", 1]
   ];
   var url = base + "?client_id=" + env.clientID + "&client_secret=" + env.clientSecret + "&v=20151203";

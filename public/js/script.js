@@ -1,8 +1,13 @@
 $(document).ready(function(){
-  Location.fetch().then(function(locations){
+  Location.getLocation.then(function(res){
+    console.log(res);
+    return Location.fetch();
+  }, function(err) {
+    console.log(err);
+  })
+  .then(function(locations){
     locations.forEach(function(location){
       var view = new LocationView(location);
-      console.log(view);
       view.render();
     });
   });
