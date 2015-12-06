@@ -14,13 +14,19 @@ function error(response, message){
 
 router.get("/", function(req, res){
   var latlong = req.query.lat ? req.query.lat + "," + req.query.long : 38.9 + "," + -77.0;
-  console.log(latlong);
   var base = "https://api.foursquare.com/v2/venues/search";
   var options = [
-    // ["intent", "checkin"],
-    // ["radius", 800], //meters of specified location
+    ["intent", "browse"],
+    ["radius", 1600],
+    ["limit", 50],
     ["ll", latlong],
-    ["openNow", 1]
+    ["categoryId", "4d4b7105d754a06374d81259,4d4b7104d754a06370d81259,4d4b7105d754a06376d81259"]
+    //Food = 4d4b7105d754a06374d81259
+    //Arts & Entertainment = 4d4b7104d754a06370d81259
+    //nightlife spot = 4d4b7105d754a06376d81259
+    //shops = 4d4b7105d754a06378d81259
+    // ["section", "food"]
+    // ["openNow", 1]
   ];
   var url = base + "?client_id=" + env.clientID + "&client_secret=" + env.clientSecret + "&v=20151203";
 
@@ -30,6 +36,15 @@ router.get("/", function(req, res){
 
   request(url, function(err, response, body) {
     res.send(body); //res.json did not work, bc already json??
+  });
+});
+
+router.get("/:id", function(req, res){
+  var locID = req.params.id;
+  var base = "https://api.foursquare.com/v2/venues/" + locID + "/hours";
+  var url = base + "?client_id=" + env.clientID + "&client_secret=" + env.clientSecret + "&v=20151203";
+  request(url, function(err, response, body){
+    res.send(body);
   });
 });
 

@@ -1,5 +1,6 @@
 var Location = function(info){
   this.name = info.name;
+  this.id = info.id;
 };
 
 Location.currentLoc = "0,0";
@@ -18,7 +19,7 @@ Location.fetch = function(){
   .then(function(res){
     var venues = res.response.venues;
     var locations = [];
-    for (var i =0; i < venues.length; i++) {
+    for (var i = 0; i < venues.length; i++) {
       locations.push(new Location(venues[i]));
     }
     return locations;
@@ -28,6 +29,32 @@ Location.fetch = function(){
   });
 
   return request;
+};
+
+Location.prototype = {
+  getHours: function(){
+    var loc = this;
+    var url = "http://localhost:3000/locations/" + loc.id;
+    var request = $.getJSON(url)
+    .then(function(res){
+      var dailyHours = res.response.hours.timeframes;
+      console.log(loc.name);
+      console.log(dailyHours);
+      var today;
+      dailyHours.some(function(day){   //find better way to do this
+        today = day.includesToday ? day : nil;
+        return day.includesToday;
+      });
+      var hoursToday = today.open[0]; //will need to account for times when have multiple items in this array
+      loc.hoursToday = hoursToday.start + ' - ' + hoursToday.end; //move this into different file since returning below?
+      return hoursToday;
+    })
+    .fail(function(){
+      console.log('failure at hours');
+    });
+
+    return request;
+  }
 };
 
 // Location.getLocation = function(){

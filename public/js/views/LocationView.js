@@ -7,6 +7,7 @@ LocationView.prototype = {
   render: function(){
     var self = this;
     self.$el.append("<h3>" + self.loc.name + "</h3>");
+    self.$el.append("<p>" + self.loc.hoursToday + "</p>");
     $('.loc-container').append(self.$el);
   }
 };
