@@ -2,10 +2,10 @@ var passport = require("passport");
 
 var usersController = {
   getSignup: function(req, res){
-    res.render("signup.hbs"), { message: req.flash('signupMessage') };
+    res.render("signup.hbs", { message: req.flash('signupMessage')});
   },
   postSignup: function(req, res){
-    var signUpStrategy = passport.authenticate('local', {
+    var signUpStrategy = passport.authenticate('local-signup', {
       successRedirect: '/',
       failureRedirect: '/signup',
       failureFlash: true
@@ -13,7 +13,7 @@ var usersController = {
     return signUpStrategy(req, res);
   },
   getLogin: function(req, res) {
-    res.render('login.hbs', { message: req.flash('loginMessage') });
+    res.render('login.hbs', {message: req.flash('loginMessage')});
   },
   postLogin: function(req, res) {
     var loginProperty = passport.authenticate('local-login', {
@@ -24,9 +24,11 @@ var usersController = {
     return loginProperty(req, res);
   },
   getLogout:  function(req, res) {
-    request.logout();
-    response.redirect('/');
+    req.logout();
+    res.redirect('/');
+  },
+  secret: function (req, res){
+    res.render("secret.hbs");
   }
 };
-
 module.exports = usersController;

@@ -1,8 +1,12 @@
 <h2>Login</h2>
 
-{{#if message.length}}
   <div class="alert alert-danger">{{message}}</div>
-{{/if}}
+
+<!--not working  -->
+<!-- {{# if currentUser }}
+<p>{{ currentUser.local.email }}</p>
+{{/if}} -->
+
 
 <form method="post" action="/login">
   <div class="form-group">

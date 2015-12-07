@@ -18,9 +18,14 @@
         <nav class="collapse navbar-collapse navbar-ex1-collapse">
           <!-- If user signed in etc. -->
           <ul id="custom" class="nav navbar-nav navbar-right">
+
             <li>Home</li>
             <li>Account</li>
             <li>Contact Us</li>
+            <li><a href="/logout">Logout </a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Signup</a></li>
+
             <li>Sign Out</li>
           </ul>
           <!-- if use signed in else etc. -->
@@ -45,6 +50,7 @@
       </div>
       <div id="container" class="col-md-9 center-block">
       </nav>
+      <div class="alert alert-danger">{{message}}</div>
       {{{body}}}
     </body>
     </html>
