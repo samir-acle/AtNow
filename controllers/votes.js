@@ -16,6 +16,7 @@ router.post("/", function(req, res){
   var voteInfo = req.body;
   var currentUser = global.currentUser;
   voteInfo.votes = true;
+  console.log("currentUser:", currentUser)
   currentUser.votes(new Vote(voteInfo)).save().then(function(votes){
     res.json(votes);
   });
