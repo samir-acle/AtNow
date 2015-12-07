@@ -1,10 +1,2 @@
 node_modules
 env.js
-var env = {
-  clientID: "SQDXNZ5I3Z5JEC0MJDIQCNMH2UMQXPZZGBZMHQ0CAXTEHLNJ",
-  clientSecret: "1YIV2F4NQNVOVF4RUOPQL3F1RTYSVRFMQRHG2WKXRIK0I4MW",
-  //google places api key
-  googleKey: "AIzaSyC1jsucteAG2wVkZ9S265SPj8Xmqjkk2Pc"
-};
-​
-module.exports = env;

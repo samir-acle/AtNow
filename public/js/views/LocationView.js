@@ -1,6 +1,9 @@
 var LocationView = function(location) {
   this.loc = location;
   this.$el = $("<li class='location'></li>");
+  $(this).append('<input type="button" value="Upvote">').on("click", "button", function(){
+    
+});
 };
 
 LocationView.prototype = {
