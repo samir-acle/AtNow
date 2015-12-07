@@ -9,6 +9,50 @@ function error(response, message){
   response.json({error: message})
 }
 
+// var preferencesController = {
+//   index: function(req, res){
+//     PreferenceModel.find({}, function(err, docs){
+//       res.render("/index", {preferences: docs})
+//     })
+//   },
+//
+// }
+router.get("/", function(req, res){
+  Preference.find({}).populate("preferences").then(function(Preferences){
+    res.json(Preferences);
+  });
+});
 
+router.post("/", function(req, res){
+  new Preference(req.body).save().then(function(Preference){
+    res.json(Preference);
+  });
+});
+
+router.get("/:location_id", function(req, res){
+  Preference.findById(req.params.id).populate("preferences").then(function(Preference){
+    res.json(Preference);
+  });
+});
+
+router.get("/:id/songs", function(req, res){
+  Preference.findById(req.params.id).populate("songs").then(function(Preference){
+    res.json(Preference.songs);
+  });
+});
+
+router.patch("/:id", function(req, res){
+  Preference.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true}).then(function(Preference){
+    res.json(Preference);
+  })
+});
+
+router.delete("/:id", function(req, res){
+  Preference.findByIdAndRemove(req.params.id).then(function(){
+    res.json({success: true});
+  });
+});
+
+module.exports = router;
 
 module.exports = router;

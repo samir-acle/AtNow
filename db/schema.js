@@ -28,3 +28,7 @@ var voteCountSchema = new Schema ({
     location_id: String,
     count: Number,
 });
+
+var PreferenceModel = mongoose.model("Preference", PreferenceSchema);
+var VoteModel = mongoose.model("Vote", VoteSchema);
+var VoteCountModel = mongoose.model("VoteCount", VoteCountSchema);
