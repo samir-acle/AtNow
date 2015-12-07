@@ -1,7 +1,9 @@
 var LocalStrategy = require("passport-local").Strategy;
 var TwitterStrategy = require("passport-twitter").Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var User = require("../models/user");
 var env = require("../env");
+
 module.exports = function(passport){
 
   passport.serializeUser(function(user, done) {
@@ -9,7 +11,7 @@ module.exports = function(passport){
   });
 
   passport.deserializeUser(function(id, callback) {
-    console.log("id:", id)
+    console.log("id:", id);
     User.findById(id, function(err, user) {
       callback(err, user);
     });
@@ -47,34 +49,67 @@ module.exports = function(passport){
 
 
   passport.use('twitter', new TwitterStrategy({
-  consumerKey: env.twitter.consumerKey,
-  consumerSecret: env.twitter.consumerSecret,
-  callbackUrl: env.twitter.callbackUrl
-}, function(token, secret, profile, done){
-  process.nextTick(function(){
-    User.findOne({'twitter.id': profile.id}, function(err, user){
-      if(err) return done(err);
-      // If the user already exists, just return that user.
-      if(user){
-        return done(null, user);
-      } else {
-        // Otherwise, create a brand new user using information passed from Twitter.
-        var newUser = new User();
-        // Here we're saving information passed to us from Twitter.
-        newUser.twitter.id = profile.id;
-        newUser.twitter.token = token;
-        newUser.twitter.username = profile.username;
-        newUser.twitter.displayName = profile.displayName;
+    consumerKey: env.twitter.consumerKey,
+    consumerSecret: env.twitter.consumerSecret,
+    callbackUrl: env.twitter.callbackUrl
+  }, function(token, secret, profile, done){
+    process.nextTick(function(){
+      User.findOne({'twitter.id': profile.id}, function(err, user){
+        if(err) return done(err);
+        // If the user already exists, just return that user.
+        if(user){
+          return done(null, user);
+        } else {
+          // Otherwise, create a brand new user using information passed from Twitter.
+          var newUser = new User();
+          // Here we're saving information passed to us from Twitter.
+          newUser.twitter.id = profile.id;
+          newUser.twitter.token = token;
+          newUser.twitter.username = profile.username;
+          newUser.twitter.displayName = profile.displayName;
 
-        newUser.save(function(err){
-          if(err) throw err;
-          return done(null, newUser);
-        });
-      }
+          newUser.save(function(err){
+            if(err) throw err;
+            return done(null, newUser);
+          });
+        }
+      });
     });
-  });
-}));
+  }));
 
+  passport.use('google', new GoogleStrategy({
+    clientID: env.google.clientID,
+    clientSecret: env.google.clientSecret,
+    callbackURL: env.google.callbackURL
+  },
+    function(accessToken, refreshToken, profile, done) {
+      // asynchronous verification, for effect...
+      process.nextTick(function () {
+        User.findOne({'google.id': profile.id}, function(err, user){
+          if(err) return done(err);
+          // If the user already exists, just return that user.
+          if(user){
+            return done(null, user);
+          } else {
+            // Otherwise, create a brand new user using information passed from Twitter.
+            var newUser = new User();
+            // Here we're saving information passed to us from Twitter.
+            console.log('A token', accessToken);
+            console.log('R token', refreshToken);
+            console.log('profiel', profile);
+            newUser.google.id = profile.id;
+            // newUser.google.token = token;
+            // newUser.google.username = profile.username;
+            // newUser.google.displayName = profile.displayName;
+
+            newUser.save(function(err){
+              if(err) throw err;
+              return done(null, newUser);
+            });
+          }
+        });
+      });
+  }));
 
   passport.use('local-login', new LocalStrategy({
     usernameField : 'email',

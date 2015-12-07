@@ -17,13 +17,13 @@ router.get("/", function(req, res){
   //TODO: use next page token at scroll bottom to load more results
   var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
   var options = [
+    // ["rankby", "distance"],
     ["types", req.query.type],
     ["opennow", ""],
     ["location", latlong],
-    ["radius", 1600],
+    // ["radius", 1600],
     ["key", env.googleKey],
     ["pagetoken", req.query.nextPage || ""]
-    // ["rankby", "distance"]
   ];
   console.log(options);
 
@@ -48,3 +48,7 @@ router.get("/", function(req, res){
 // });
 
 module.exports = router;
+
+//TODO:function(error, response, body) {
+//         var data = JSON.parse(body);
+// …}
