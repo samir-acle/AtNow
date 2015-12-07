@@ -4,8 +4,7 @@ var ObjectId = Schema.Types.ObjectId;
 
 var VoteSchema = new Schema ({
     location_id: String,
-    downvotes: {type: Number, default: 0},
-    upvotes: {type: Number, default: 0},
+    votes: Boolean,
     user: {type: ObjectId, ref: "User"},
     createdAt: {type: Date, default: Date.now}
 });

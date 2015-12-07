@@ -6,6 +6,22 @@ var Location = function(info){
   this.types = info.types;
 };
 
+Location.prototype.postVote = function(id) {
+  $.ajax({
+    url: "http://localhost:3000/votes/",
+    type: "POST",
+    dataType: "json",
+    data: {
+      location_id: id,
+      user_id
+    }
+  }).then(function(res){
+    console.log(res);
+  }).fail(function(){
+    alert('FAILRUE');
+  });
+};
+
 //TODO: refactor - move storing of location arrays and coords to a new model?
 // Location.currentLoc = "0,0";
 Location.fetchAll = function() {

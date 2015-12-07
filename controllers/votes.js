@@ -1,9 +1,9 @@
 var express = require("express");
 var router = express.Router();
-var Vote = mongoose.model('Vote');
+// var Vote = mongoose.model('Vote');
 var Preference = require("../models/preference");
 var Vote = require("../models/vote");
-var VoteCount = require("../models/voteCount");
+// var VoteCount = require("../models/voteCount");
 
 router.get("/", function(req, res){
   Vote.find({}).populate("user").then(function(votes){
@@ -12,7 +12,10 @@ router.get("/", function(req, res){
 });
 
 router.post("/", function(req, res){
-  new Votes(req.body).save().then(function(votes){
+  console.log(req.body);
+  var voteInfo = req.body;
+  voteInfo.votes = true;
+  new Vote(voteInfo).save().then(function(votes){
     res.json(votes);
   });
 });
@@ -42,3 +45,4 @@ router.post("/", function(req, res){
 //           			});
 //           		}
 //             }
+module.exports = router;

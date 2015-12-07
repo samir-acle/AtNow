@@ -27,6 +27,7 @@ app.use(session({
     expires: false,
   },
   resave: true,
+  saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -49,6 +50,7 @@ app.use(function(req, res, next) {
 });
 
 app.use("/locations", require("./controllers/ajaxController"));
+app.use("/votes", require("./controllers/votes"));
 
 var routes = require("./config/routes");
 app.use(routes);
