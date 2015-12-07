@@ -5,10 +5,8 @@ var VoteModel = Backbone.Model.extend({
     urlRoot : '/',
     idAttribute: '_id',
     defaults:{
-        name: '',
         votes: 0,
         votetype: 0,
-        postedBy : '',
     },
 
     upvote: function(){

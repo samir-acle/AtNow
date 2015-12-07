@@ -38,13 +38,13 @@ router.get("/", function(req, res){
   });
 });
 
-router.get("/:id", function(req, res){
-  var locID = req.params.id;
-  var base = "https://api.foursquare.com/v2/venues/" + locID + "/hours";
-  var url = base + "?client_id=" + env.clientID + "&client_secret=" + env.clientSecret + "&v=20151203";
-  request(url, function(err, response, body){
-    res.send(body);
-  });
-});
+// router.get("/:id", function(req, res){
+//   var locID = req.params.id;
+//   var base = "https://api.foursquare.com/v2/venues/" + locID + "/hours";
+//   var url = base + "?client_id=" + env.clientID + "&client_secret=" + env.clientSecret + "&v=20151203";
+//   request(url, function(err, response, body){
+//     res.send(body);
+//   });
+// });
 
 module.exports = router;
