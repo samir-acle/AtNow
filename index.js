@@ -26,7 +26,7 @@ app.use(session({
   cookie : {
     expires: false,
   },
-  resave: true,
+  resave: false,
   saveUninitialized: true
 }));
 app.use(passport.initialize());
@@ -37,6 +37,9 @@ require('./config/passport')(passport);
 
 app.use(function (req, res, next) {
   global.currentUser = req.user;
+  console.log(req.user);
+  console.log('set');
+  console.log(global.currentUser);
   res.locals.currentUser = req.user;
   next();
 });

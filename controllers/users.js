@@ -29,6 +29,9 @@ var usersController = {
   },
   secret: function (req, res){
     res.render("secret.hbs");
+  },
+  getUser: function(req, res) {
+    res.json(global.currentUser);
   }
 };
 module.exports = usersController;
