@@ -12,14 +12,16 @@ router.get("/", function(req, res){
 });
 
 router.post("/", function(req, res){
-  console.log('body ',req.body);
   var voteInfo = req.body;
   var currentUser = global.currentUser;
   voteInfo.votes = true;
-  console.log("currentUser:", currentUser)
-  currentUser.votes(new Vote(voteInfo)).save().then(function(votes){
-    res.json(votes);
+  // var currentUser = User.findOne({"local.email": "sammehta88@gmail.com"}, function(err, user){
+  currentUser.votes.push(new Vote(voteInfo));
+  currentUser.save().then(function(votes){
+      //call function to update locations table
+      res.json(votes);
   });
+  // });
 });
 
 // module.exports = (function() {
