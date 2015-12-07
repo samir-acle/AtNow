@@ -7,9 +7,9 @@ var UserSchema = new Schema ({
     local: {
       email: String,
       password: String,
-    }
-      votes: [VoteSchema],
-      preferences: [PreferenceSchema]
+    },
+    votes: [VoteSchema],
+    preferences: [PreferenceSchema]
     }
 )};
 
@@ -24,7 +24,7 @@ var PreferenceSchema = new Schema ({
     removed_location: [],
 });
 
-var voteCountSchema = new Schema ({
+var VoteCountSchema = new Schema ({
     location_id: String,
     count: Number,
 });
