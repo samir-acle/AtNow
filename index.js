@@ -10,14 +10,13 @@ var bodyParser = require("body-parser");
 var session = require("express-session");
 var flash = require("connect-flash");
 
-
 mongoose.connect("mongodb://localhost/test");
 var app = express();
 
 app.set('view engine', 'hbs');
 app.set("views",__dirname + "/views");
 
-// app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -27,7 +26,8 @@ app.use(session({
   cookie : {
     expires: false,
   },
-  resave: true,
+  resave: false,
+  saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -49,6 +49,8 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use("/locations", require("./controllers/ajaxController"));
+app.use("/votes", require("./controllers/votes"));
 
 var routes = require("./config/routes");
 app.use(routes);

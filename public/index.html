@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="/js/models/session.js"></script>
+    <script src="/js/models/location.js"></script>
+    <script src="/js/models/user.js"></script>
+    <script src="/js/views/locationView.js"></script>
+    <script src="/js/script.js"></script>
   </head>
   <body>
     <header class="navbar navbar-custom" role="navigation">
@@ -18,10 +22,12 @@
         <nav class="collapse navbar-collapse navbar-ex1-collapse">
           <!-- If user signed in etc. -->
             <ul id="custom" class="nav navbar-nav navbar-right">
-              <li>Home</li>
+              <li><a href="/">Home</a></li>
               <li>Account</li>
               <li>Contact Us</li>
-              <li>Sign Out</li>
+              <li><a href="/logout">Logout </a></li>
+              <li><a href="/login">Login</a></li>
+              <li><a href="/signup">Signup</a></li>
             </ul>
             <!-- if use signed in else etc. -->
             <ul class="nav navbar-nav pull-right">
@@ -34,12 +40,12 @@
     </div>
   </header>
   <div class="container">
-  <ul class="mid-test">
-    <li>Location etc.</li>
-    <li>Location etc.</li>
-    <li>Location etc.</li>
-    <li>Location etc.</li>
-  </ul>
+  <div class="mid-test">
+    <button class="restaurants">Restaurants</button>
+    <button class="stores">Stores</button>
+    <button class="bars">Bars</button>
+    <ul class="loc-container"></ul>
+  </div>
   <div class="side">
     <h1> Other stuff can go here</h1>
   </div>

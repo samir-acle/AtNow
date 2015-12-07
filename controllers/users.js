@@ -29,6 +29,21 @@ var usersController = {
   },
   secret: function (req, res){
     res.render("secret.hbs");
+  },
+  getUser: function(req, res) {
+    res.json(global.currentUser);
+  },
+  getTwitter: function(req, res){
+    var loginProperty = passport.authenticate('twitter');
+    return loginProperty(req, res);
+  },
+  getUserTwitter: function(req, res){
+    var loginProperty = passport.authenticate('twitter', {
+      successRedirect: '/',
+      failureRedirect: '/login'
+    });
+    return loginProperty(req, res);
   }
 };
+
 module.exports = usersController;
