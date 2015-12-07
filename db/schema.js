@@ -26,6 +26,12 @@ var UserSchema = new Schema ({
       email: String,
       password: String,
     },
+    // facebook: {
+    //   id: String,
+    //   token: String,
+    //   username: String,
+    //   displayName: String
+    // },
       votes: [VoteSchema],
       preferences: [PreferenceSchema]
 });

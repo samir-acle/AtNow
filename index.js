@@ -48,8 +48,6 @@ app.use(function(req, res, next) {
   };
   next();
 });
-// var FACEBOOK_APP_ID = "--insert-facebook-app-id-here--"
-// var FACEBOOK_APP_SECRET = "--insert-facebook-app-secret-here--";
 
 
 var routes = require("./config/routes");
