@@ -12,10 +12,11 @@ router.get("/", function(req, res){
 });
 
 router.post("/", function(req, res){
-  console.log(req.body);
+  console.log('body ',req.body);
   var voteInfo = req.body;
+  var currentUser = global.currentUser;
   voteInfo.votes = true;
-  new Vote(voteInfo).save().then(function(votes){
+  currentUser.votes(new Vote(voteInfo)).save().then(function(votes){
     res.json(votes);
   });
 });
