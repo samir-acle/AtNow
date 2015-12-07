@@ -43,6 +43,17 @@ var usersController = {
       failureRedirect: '/login'
     });
     return loginProperty(req, res);
+  },
+  getFacebook: function(req, res){
+    var loginProperty = passport.authenticate('facebook');
+    return loginProperty(req, res);
+  },
+  getUserFacebook: function(req, res){
+    var loginProperty = passport.authenticate('facebook', {
+      successRedirect: '/',
+      failureRedirect: '/login'
+    });
+    return loginProperty(req, res);
   }
 };
 

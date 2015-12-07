@@ -36,4 +36,10 @@ router.route('/auth/twitter')
 router.route('/auth/twitter/callback')
 .get(usersController.getUserTwitter);
 
+router.route('/auth/facebook')
+.get(usersController.getFacebook);
+
+router.route('/auth/facebook/callback')
+.get(usersController.getUserFacebook);
+
 module.exports = router;
