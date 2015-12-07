@@ -6,18 +6,37 @@ var Location = function(info){
   this.types = info.types;
 };
 
-Location.currentLoc = "0,0";
+//TODO: refactor - move storing of location arrays and coords to a new model?
+// Location.currentLoc = "0,0";
+Location.fetchAll = function() {
+  var restaurantsRequest = Location.fetch('restaurant').then(function(res){
+    Location.restaurants = res;
+    return res;
+  });
+  var storeRequest = Location.fetch('store').then(function(res){
+    Location.stores = res;
+    return res;
+  });
+  var barRequest = Location.fetch('bar').then(function(res){
+    Location.bars = res;
+    return res;
+  });
+  return restaurantsRequest;
+};
 
-Location.fetch = function(){
+Location.fetch = function(type){
   var lat;
   var long;
+  type = type || "food|store|bar"; //change defaults - make it preference?
+  console.log(type);
   if (this.currentLat) {
     lat = this.currentLat;
     long = this.currentLong;
   }
   var request = $.getJSON("http://localhost:3000/locations/", {
     lat: lat,
-    long: long
+    long: long,
+    type: type
   })
   .then(function(res){
     var venues = res.results;
@@ -34,54 +53,6 @@ Location.fetch = function(){
 
   return request;
 };
-
-// Location.prototype = {
-//   getHours: function(){
-//     var loc = this;
-//     var url = "http://localhost:3000/locations/" + loc.id;
-//     var request = $.getJSON(url)
-//     .then(function(res){
-//       var dailyHours = res.response.hours.timeframes;
-//       console.log(loc.name);
-//       console.log(dailyHours);
-//       var today;
-//       dailyHours.some(function(day){   //find better way to do this
-//         today = day.includesToday ? day : nil;
-//         return day.includesToday;
-//       });
-//       var hoursToday = today.open[0]; //will need to account for times when have multiple items in this array
-//       loc.hoursToday = hoursToday.start + ' - ' + hoursToday.end; //move this into different file since returning below?
-//       return hoursToday;
-//     })
-//     .fail(function(){
-//       console.log('failure at hours');
-//     });
-//
-//     return request;
-//   }
-// };
-
-// Location.getLocation = function(){
-//   // if ("geolocation" in navigator) {
-//   // /* geolocation is available */
-//   // var geoLoc = function() {
-//     var geoSuccess = function(position) {
-//       startPos = position;
-//       var lat = startPos.coords.latitude;
-//       var long = startPos.coords.longitude;
-//       console.log('what what');
-//       Location.currentLoc = lat + ',' + long;
-//     };
-//
-//     navigator.geolocation.getCurrentPosition(geoSuccess, function(){
-//       alert('unable to get position');
-//     });
-//   };
-  // } else {
-  //   /* geolocation IS NOT available */
-  // }
-  // return geoLoc;
-// };
 
 Location.getLocation = new Promise(function(resolve, reject) {
   var geoSuccess = function(position) {

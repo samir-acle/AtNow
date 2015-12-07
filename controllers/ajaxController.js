@@ -17,7 +17,7 @@ router.get("/", function(req, res){
   //TODO: use next page token at scroll bottom to load more results
   var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
   var options = [
-    // ["types", "amusement_park | aquarium | art_gallery | "],
+    ["types", req.query.type],
     ["opennow", ""],
     ["location", latlong],
     ["radius", 1600],
@@ -25,6 +25,7 @@ router.get("/", function(req, res){
     ["pagetoken", req.query.nextPage || ""]
     // ["rankby", ]
   ];
+  console.log(options);
 
   options.forEach(function(option){
     url = url + "&"+ option[0] + "=" + option[1];
