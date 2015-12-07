@@ -23,7 +23,7 @@ router.get("/", function(req, res){
     ["radius", 1600],
     ["key", env.googleKey],
     ["pagetoken", req.query.nextPage || ""]
-    // ["rankby", ]
+    // ["rankby", "distance"]
   ];
   console.log(options);
 

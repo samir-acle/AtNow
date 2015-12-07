@@ -1,6 +1,6 @@
 require("../db/schema");
 var mongoose = require("mongoose");
-// var VoteModel = mongoose.model("Vote");
+var VoteModel = mongoose.model("Vote");
 
 // var VoteModel = Backbone.Model.extend({
 //     urlRoot : '/',

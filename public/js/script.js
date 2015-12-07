@@ -6,11 +6,9 @@ $(document).ready(function(){
     console.log(err);
   })
   .then(function(locations){
-    locations.forEach(function(location){
-      var view = new LocationView(location); //store in model for future access
-      view.render();
-    });
+    showLocations(locations);
   });
+
 
   $('.restaurants').on('click', function(){
     showLocations(Location.restaurants);
