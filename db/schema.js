@@ -15,7 +15,9 @@ var UserSchema = new Schema ({
 
 var VoteSchema = new Schema ({
     location_id: String,
-    vote_flag: Boolean,
+    downvotes: {type: Number, default: 0},
+    upvotes: {type: Number, default: 0},
+    _topicId: Number
     createdAt: {type: Date, default: Date.now},
 });
 

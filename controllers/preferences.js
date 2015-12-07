@@ -35,8 +35,8 @@ router.get("/:location_id", function(req, res){
   });
 });
 
-router.get("/:id/songs", function(req, res){
-  Preference.findById(req.params.id).populate("songs").then(function(Preference){
+router.get("/:id/preferences", function(req, res){
+  Preference.findById(req.params.id).populate("preferences").then(function(Preference){
     res.json(Preference.songs);
   });
 });
@@ -52,7 +52,5 @@ router.delete("/:id", function(req, res){
     res.json({success: true});
   });
 });
-
-module.exports = router;
 
 module.exports = router;
