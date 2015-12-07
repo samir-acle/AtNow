@@ -1,22 +1,24 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
-var bcrypt = require("bcrypt-nodejs");
 
 var VoteSchema = new Schema ({
     location_id: String,
-    vote_flag: Boolean,
-    createdAt: {type: Date, default: Date.now},
+    downvotes: {type: Number, default: 0},
+    upvotes: {type: Number, default: 0},
+    user: {type: ObjectId, ref: "User"},
+    createdAt: {type: Date, default: Date.now}
 });
 
 var PreferenceSchema = new Schema ({
     default_location: String,
-    removed_location: [],
+    user: {type: ObjectId, ref: "User"},
+    removed_location: []
 });
 
-var voteCountSchema = new Schema ({
+var LocationSchema = new Schema ({
     location_id: String,
-    count: Number,
+    count: Number
 });
 
 var UserSchema = new Schema ({
@@ -35,6 +37,12 @@ var UserSchema = new Schema ({
       votes: [VoteSchema],
       preferences: [PreferenceSchema]
 });
+
+var bcrypt = require("bcrypt-nodejs");
+
+var PreferenceModel = mongoose.model("Preference", PreferenceSchema);
+var VoteModel = mongoose.model("Vote", VoteSchema);
+var LocationModel = mongoose.model("Location", LocationSchema);
 
 UserSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.local.password);

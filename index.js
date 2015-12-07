@@ -10,14 +10,13 @@ var bodyParser = require("body-parser");
 var session = require("express-session");
 var flash = require("connect-flash");
 
-
 mongoose.connect("mongodb://localhost/test");
 var app = express();
 
 app.set('view engine', 'hbs');
 app.set("views",__dirname + "/views");
 
-// app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -49,6 +48,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use("/locations", require("./controllers/ajaxController"));
 
 var routes = require("./config/routes");
 app.use(routes);
