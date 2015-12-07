@@ -2,6 +2,7 @@ var LocalStrategy = require("passport-local").Strategy;
 var TwitterStrategy = require("passport-twitter").Strategy;
 var User = require("../models/user");
 var env = require("../env");
+
 module.exports = function(passport){
 
   passport.serializeUser(function(user, done) {
@@ -9,7 +10,6 @@ module.exports = function(passport){
   });
 
   passport.deserializeUser(function(id, callback) {
-    console.log("id:", id)
     User.findById(id, function(err, user) {
       callback(err, user);
     });
