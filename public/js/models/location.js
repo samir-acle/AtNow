@@ -6,6 +6,23 @@ var Location = function(info){
   this.types = info.types;
 };
 
+Location.prototype.getVoteCount = function(){
+  var self = this; //cahnge back to id
+  var request = $.ajax({
+    url: "http://localhost:3000/locations/" + self.id,
+    type: "GET",
+    dataType: "json"
+  }).then(function(res){
+    console.log('res',res);
+    return res;
+  }).fail(function(){
+    alert('FAILRUE');
+  });
+
+  return request;
+};
+
+
 Location.prototype.postVote = function(id, vote) {
   $.ajax({
     url: "http://localhost:3000/votes/",
@@ -22,21 +39,67 @@ Location.prototype.postVote = function(id, vote) {
   });
 };
 
+function createPromise(array) {
+  Location.addCount = new Promise(function(resolve, reject){
+      var oldArray = array;
+      var newArray = [];
+      console.log('old array',oldArray);
+
+      function getCount() {
+        if (oldArray.length === 0) {
+          resolve(newArray);
+          return;
+        }
+
+        console.log(oldArray);
+        var location = oldArray.pop();
+        console.log(location);
+        location.getVoteCount().then(function(count){
+          location.count = count;
+          newArray.push(location);
+          getCount();
+        });
+      }
+
+      getCount();
+
+      return newArray;
+  });
+  console.log(Location.addCount);
+}
+
 //TODO: refactor - move storing of location arrays and coords to a new model?
 // Location.currentLoc = "0,0";
 Location.fetchAll = function() {
-  var restaurantsRequest = Location.fetch('restaurant').then(function(res){
-    Location.restaurants = res;
-    return res;
+  var restaurantsRequest = Location.fetch('restaurant|bar').then(function(res){
+    createPromise(res);
+    var request = Location.addCount.then(function(res){
+      console.log('res fetch all', res);
+      Location.restaurants = res;
+      var sortedList = Location.restaurants.sort(function(a,b){
+        return b.count - a.count;
+      });
+      console.log('sortedList',sortedList);
+
+      return res;
+    });
+    return request;
   });
-  var storeRequest = Location.fetch('store').then(function(res){
-    Location.stores = res;
-    return res;
+
+  var storesRequest = Location.fetch('store').then(function(res){
+    createPromise(res);
+    var request = Location.addCount.then(function(res){
+      console.log('res fetch all', res);
+      Location.stores = res;
+      var sortedList = Location.stores.sort(function(a,b){
+        return b.count - a.count;
+      });
+      console.log('sortedList',sortedList);
+      return res;
+    });
+    return request;
   });
-  var barRequest = Location.fetch('bar').then(function(res){
-    Location.bars = res;
-    return res;
-  });
+
   return restaurantsRequest;
 };
 
