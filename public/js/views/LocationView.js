@@ -12,10 +12,11 @@ LocationView.prototype = {
     var self = this;
 
     var showLocations = self.$el.find(".showLocations");
-    var locationsDiv = self.$el.find("div.locations");
+    var locationsDiv = self.$el.find("div.location");
 
 
     showLocations.on("click", function(){
+      console.log("setup click");
         self.toggleLocations(locationsDiv);
       });
 
@@ -38,7 +39,7 @@ LocationView.prototype = {
        });
      },
   toggleLocations: function(locationsDiv){
-    console.log(test);
+    console.log("test");
     var self = this;
     if(locationDiv.children().length === 0){
       this.Location.fetch().then(function(locations){
