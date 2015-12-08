@@ -13,19 +13,21 @@ router.get("/", function(req, res){
 });
 
 //TODO: modularize
+//TODO: add route to retrive users votes
+//TODO: add route to delete user vote
 router.post("/", function(req, res){
   var voteInfo = {
     location_id: req.body.location_id,
     vote: req.body.vote === 'true' ? true : false //converts string to boolean
   };
-  console.log('body', req.body);
-  console.log('body vote',req.body.vote);
-  console.log('voteInfo', voteInfo);
+  // console.log('body', req.body);
+  // console.log('body vote',req.body.vote);
+  // console.log('voteInfo', voteInfo);
   var match, prevVote;
   var currentUser = global.currentUser;
   // User.findOne({"local.email": "sammehta88@gmail.com"}, function(err, currentUser){
     var votesArray = currentUser.votes;
-    console.log(votesArray);
+    // console.log(votesArray);
 
     function findMatch() {
       for (var i = 0; i < votesArray.length; i++) {
@@ -38,11 +40,11 @@ router.post("/", function(req, res){
       }
     }
     findMatch();
-    console.log('match', match);
-    console.log('prevvote', prevVote);
+    // console.log('match', match);
+    // console.log('prevvote', prevVote);
 
     if (!match) {
-      console.log('no match');
+      // console.log('no match');
       currentUser.votes.push(new Vote(voteInfo));
       currentUser.save().then(function(){
         //TODO: refactor, separate out code into different function
@@ -60,14 +62,14 @@ router.post("/", function(req, res){
         });
       });
     } else if (voteInfo.vote === prevVote){
-      console.log('match - same');
+      // console.log('match - same');
       res.json(currentUser.votes.length);
     } else {
-      console.log(voteInfo.vote === votesArray[match].vote);
-      console.log(votesArray[match].vote);
-      console.log('match - different');
+      // console.log(voteInfo.vote === votesArray[match].vote);
+      // console.log(votesArray[match].vote);
+      // console.log('match - different');
       currentUser.votes[match].vote = voteInfo.vote;
-      console.log('this should be false', currentUser.votes.vote);
+      // console.log('this should be false', currentUser.votes.vote);
       currentUser.save().then(function(){
         Location.findOne({"location_id": voteInfo.location_id}, function(err, loc){
           loc.count = prevVote ? loc.count - 2 : loc.count + 2;

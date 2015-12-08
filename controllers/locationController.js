@@ -41,7 +41,7 @@ router.get("/", function(req, res){
 
 router.get("/:id", function(req, res){
   var locID = req.params.id;
-  console.log(locID);
+  console.log('licid', locID);
   console.log('params', req.params);
   Location.findOne({"location_id": locID}, function(err, location){
     console.log('location',location);
