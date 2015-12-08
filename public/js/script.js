@@ -1,35 +1,9 @@
 $(document).ready(function(){
 
-  function makeFormAppear(){
-    $(".login").on("click", function(){
-      $("form").css("visibility", "visible");
-      console.log("jquery working");
-    });
-  }
-  makeFormAppear();
-
-  // looks like its refreshing page still
-
-  $('form').submit(function(evt) {
-    var error;
-    if ( !$('input').val() ) {
-      console.log(userFormData);
-      error = true;
-    }
-    if (error) {
-      alert('Please fill in the rest of the fields');
-      return false;
-    }
-  });
-
-
-
-    $("form").submit(function(evt){
-      User.postLogin();
-      console.log("PREVENT EVENT DEFAULT");
-      evt.preventDefault();
-     $("form").css("visibility", "hidden");
-    });
+  userView.showLogin();
+  userView.showSignup();
+  userView.submitForm();
+  userView.logOut();
 
 
   Location.getLocation.then(function(res){

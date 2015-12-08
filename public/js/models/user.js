@@ -3,6 +3,7 @@ var User = function(info) {
   this.lastname = info.lastname;
   this.email = info.email;
   this.password = info.password;
+  this.id = info.id;
 };
 
 User.fetch = function() {
@@ -13,6 +14,20 @@ User.fetch = function() {
     return user;
   });
 };
+
+User.logOut = function(){
+  var self = this;
+  var url = "http://localhost:3000/logout";
+  $.getJSON(url, function(response){
+    console.log(response);
+  }).then(function(res){
+    alert("LOGOUT!");
+  }).fail(function(res){
+    console.log("FAILED LOGOUTTTT");
+    alert("failure from user post");
+  });
+};
+
 
 // explaining options???
 User.post = function(){
@@ -28,10 +43,12 @@ User.post = function(){
       email: $("#email").val(),
       password: $("#password").val()
     }
-  }).then(function(postedUserinfo){
-    self.reload(postedUserinfo);
+  }).then(function(res){
+    alert("sucess user!");
+  }).fail(function(res){
+    console.log(res);
+    alert("failure from user post");
   });
-  return request;
 };
 
 User.postLogin = function(){

@@ -10,6 +10,9 @@ function authenticatedUser(req, res, next) {
   res.redirect('/');
 }
 
+router.route("/currentuser")
+.get(usersController.postRedirect);
+
 router.route('/signup')
 .post(usersController.postSignup);
 

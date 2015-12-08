@@ -1,5 +1,7 @@
+var express = require("express");
+var router = express.Router();
 var passport = require("passport");
-
+var User = require("../models/user");
 // if(currentUser) {
 //   res.json(currentUser);
 // } else {
@@ -30,27 +32,26 @@ var passport = require("passport");
 //   })
 // })
 
+
 var usersController = {
-  getSignup: function(req, res){
-    res.json({message: 'get request from signup'});
-    res.render('/');
+
+  postRedirect: function(req, res){
+    var user = global.currentUser;
+    console.log("In this route, I am sending json!!!!" + user);
+    res.json(global.currentUser);
   },
   postSignup: function(req, res){
     var signUpStrategy = passport.authenticate('local-signup', {
-      successRedirect: '/',
-      failureRedirect: '/signup',
+      successRedirect: '/currentUser',
+      failureRedirect: '/',
       failureFlash: true
     });
-
     return signUpStrategy(req, res);
-  },
-  getLogin: function(req, res) {
-    res.render('/');
   },
   postLogin: function(req, res) {
     console.log("Route being hit");
     var loginProperty = passport.authenticate('local-login', {
-      successRedirect: '/',
+      successRedirect: '/currentUser',
       failureRedirect: '/',
       failureFlash: true
     });
@@ -59,6 +60,8 @@ var usersController = {
   },
   getLogout:  function(req, res) {
     req.logout();
+    res.json({message: "User is logged out"});
+    // res.redirect('/');
   },
   secret: function (req, res){
     res.render("secret.hbs");

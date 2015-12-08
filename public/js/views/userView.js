@@ -1,36 +1,54 @@
-// function makeFormAppear(){
-//   $(".login").on("click", function(){
-//     $("form").css("visibility", "visible");
-//     console.log("jquery working");
-//   });
-// }
-// makeFormAppear();
-//
-// // looks like its refreshing page still
-//
-// $('form').submit(function() {
-//   var error;
-//   if ( !$('input').val() ) {
-//     error = true;
-//   }
-//   if (error) {
-//     alert('there are errors');
-//     return false;
-//   }
-// });
-//
-// $("form").on("click", function(evt){
-//   console.log("PREVENT EVENT DEFAULT");
-//   evt.preventDefault();
-// });
-
-// $('.logout').click(function(){
-// var value = $(this).html('id');
-// window.location.hash = value;
-// // it appends id to url without refresh
-// });
-//
-// $(window).bind('hashchange' function() {
-//     var newhash = window.location.hash.substring(1)
-//     // use load function of jquery to do the necessary...
-// });
+// code is not DRY, need to refactor methods in this object
+var userView = {
+  showLogin: function(){
+    $(".login").on("click", function(){
+      $("form").css("visibility", "visible");
+      $(".form-names").css("display", "none");
+      $('form').attr('action', '/login');
+      $("h2").html("Log In");
+      console.log("jquery working");
+    });
+  },
+  showSignup: function(){
+    $(".signup").on("click", function(){
+      $("form").css("visibility", "visible");
+      $(".form-names").css("display", "inline");
+      $("h2").html("Sign Up");
+      $('form').attr('action', '/signup');
+    });
+  },
+  logOut: function(){
+    $(".logout").on("click", function(){
+      User.logOut();
+      console.log("logout jquery working");
+    });
+  },
+  submitForm: function(){
+    $("form").submit(function(evt){
+        if($('form').attr('action') == '/signup'){
+          User.post();
+        }
+        else{
+          User.postLogin();
+        }
+        console.log("PREVENT EVENT DEFAULT");
+        evt.preventDefault();
+        $("form").css("visibility", "hidden");
+    });
+  },
+  // we can use something like this to check if fields have value:
+  // checkIfValid: function(){
+  //   var formDivs = $(".form-group input");
+  //   for(var i = 0; i < formDivs.length; i++){
+  //
+  //     if(!formDivs.eq(i).val()){
+  //       console.log("Your missing a field");
+  //       return false;
+  //     }
+  //     else{
+  //       console.log("true");
+  //       return true;
+  //     }
+  //   }
+  // }
+};
