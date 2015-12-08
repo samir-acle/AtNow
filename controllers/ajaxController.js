@@ -21,7 +21,7 @@ router.get("/", function(req, res){
     ["types", req.query.type],
     ["opennow", ""],
     ["location", latlong],
-    // ["radius", 1600],
+    ["radius", 1600],
     ["key", env.googleKey],
     ["pagetoken", req.query.nextPage || ""]
   ];

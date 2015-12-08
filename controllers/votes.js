@@ -1,8 +1,11 @@
 var express = require("express");
 var router = express.Router();
 // var Vote = mongoose.model('Vote');
+// var User = mongoose.model('User');
 var Preference = require("../models/preference");
 var Vote = require("../models/vote");
+var User = require("../models/user");
+var Location = require("../models/location");
 // var VoteCount = require("../models/voteCount");
 
 router.get("/", function(req, res){
@@ -12,13 +15,28 @@ router.get("/", function(req, res){
 });
 
 router.post("/", function(req, res){
-  console.log('body ',req.body);
   var voteInfo = req.body;
-  var currentUser = global.currentUser;
+  // var currentUser = global.currentUser;
   voteInfo.votes = true;
-  console.log("currentUser:", currentUser)
-  currentUser.votes(new Vote(voteInfo)).save().then(function(votes){
-    res.json(votes);
+  User.findOne({"local.email": "sammehta88@gmail.com"}, function(err, currentUser){
+    currentUser.votes.push(new Vote(voteInfo));
+    currentUser.save().then(function(){
+      //TODO: refactor, separate out code into different function
+      Location.findOne({"location_id": req.body.location_id}, function(err, loc){
+        if (loc){
+          console.log('in exists');
+          loc.count = req.body.vote ? loc.count + 1 : loc.count - 1;
+        } else {
+          console.log('in doesnt exist');
+          loc = new Location({
+            "location_id": req.body.location_id,
+            "count": req.body.vote ? 1 : 0  //TODO: -1 or 0? can they have negative votes?
+          });
+        }
+        loc.save();
+        res.json(loc);
+      });
+    });
   });
 });
 

@@ -13,7 +13,7 @@ Location.prototype.postVote = function(id) {
     dataType: "json",
     data: {
       location_id: id,
-      user: session.currentUser
+      vote: true
     }
   }).then(function(res){
     console.log(res);
