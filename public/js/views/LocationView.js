@@ -19,6 +19,7 @@ LocationView.prototype = {
     var self = this;
     self.$el.find('h3').on('click', function(){
       console.log(self.loc);
+      self.loc.getVoteCount(self.loc.id);
     });
     self.$el.find('.upvote').on('click', function(){
       self.loc.postVote(self.loc.id, true);

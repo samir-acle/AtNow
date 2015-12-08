@@ -9,9 +9,7 @@ var Location = require("../models/location");
 // var VoteCount = require("../models/voteCount");
 
 router.get("/", function(req, res){
-  Vote.find({}).populate("user").then(function(votes){
-    res.json(votes);
-  });
+    res.json(global.currentUser.votes);
 });
 
 //TODO: modularize
@@ -29,7 +27,6 @@ router.post("/", function(req, res){
     var votesArray = currentUser.votes;
     console.log(votesArray);
 
-    //TODO: change so if vote matches do nothing, if opposite, update and subtract
     function findMatch() {
       for (var i = 0; i < votesArray.length; i++) {
         if (votesArray[i].location_id === voteInfo.location_id){

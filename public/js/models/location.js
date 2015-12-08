@@ -6,6 +6,19 @@ var Location = function(info){
   this.types = info.types;
 };
 
+Location.prototype.getVoteCount = function(id){
+  $.ajax({
+    url: "http://localhost:3000/locations/" + id,
+    type: "GET",
+    dataType: "json"
+  }).then(function(res){
+    console.log(res);
+  }).fail(function(){
+    alert('FAILRUE');
+  });
+};
+
+
 Location.prototype.postVote = function(id, vote) {
   $.ajax({
     url: "http://localhost:3000/votes/",
