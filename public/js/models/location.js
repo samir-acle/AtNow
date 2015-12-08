@@ -76,6 +76,11 @@ Location.fetchAll = function() {
     var request = Location.addCount.then(function(res){
       console.log('res fetch all', res);
       Location.restaurants = res;
+      var sortedList = Location.restaurants.sort(function(a,b){
+        return b.count - a.count;
+      });
+      console.log('sortedList',sortedList);
+
       return res;
     });
     return request;
@@ -86,6 +91,10 @@ Location.fetchAll = function() {
     var request = Location.addCount.then(function(res){
       console.log('res fetch all', res);
       Location.stores = res;
+      var sortedList = Location.stores.sort(function(a,b){
+        return b.count - a.count;
+      });
+      console.log('sortedList',sortedList);
       return res;
     });
     return request;
