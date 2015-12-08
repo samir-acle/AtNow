@@ -10,6 +10,7 @@ $(document).ready(function(){
   });
 
 
+
   $('.restaurants').on('click', function(){
     showLocations(Location.restaurants);
   });

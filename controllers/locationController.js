@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var request = require("request");
 var env = require("../env");
+var Location = require("../models/location");
 
 function error(response, message){
   response.status(500);
@@ -17,13 +18,13 @@ router.get("/", function(req, res){
   //TODO: use next page token at scroll bottom to load more results
   var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
   var options = [
+    // ["rankby", "distance"],
     ["types", req.query.type],
     ["opennow", ""],
     ["location", latlong],
     ["radius", 1600],
     ["key", env.googleKey],
     ["pagetoken", req.query.nextPage || ""]
-    // ["rankby", "distance"]
   ];
   console.log(options);
 
@@ -38,13 +39,19 @@ router.get("/", function(req, res){
   });
 });
 
-// router.get("/:id", function(req, res){
-//   var locID = req.params.id;
-//   var base = "https://api.foursquare.com/v2/venues/" + locID + "/hours";
-//   var url = base + "?client_id=" + env.clientID + "&client_secret=" + env.clientSecret + "&v=20151203";
-//   request(url, function(err, response, body){
-//     res.send(body);
-//   });
-// });
+router.get("/:id", function(req, res){
+  var locID = req.params.id;
+  console.log('licid', locID);
+  console.log('params', req.params);
+  Location.findOne({"location_id": locID}, function(err, location){
+    console.log('location',location);
+    var voteCount = location ? location.count : 0;
+    res.json(voteCount);
+  });
+});
 
 module.exports = router;
+
+//TODO:function(error, response, body) {
+//         var data = JSON.parse(body);
+// …}
