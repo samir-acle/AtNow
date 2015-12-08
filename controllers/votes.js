@@ -14,29 +14,42 @@ router.get("/", function(req, res){
   });
 });
 
+//TODO: modularize
 router.post("/", function(req, res){
   var voteInfo = req.body;
+  var match;
   // var currentUser = global.currentUser;
-  voteInfo.votes = true;
   User.findOne({"local.email": "sammehta88@gmail.com"}, function(err, currentUser){
-    currentUser.votes.push(new Vote(voteInfo));
-    currentUser.save().then(function(){
-      //TODO: refactor, separate out code into different function
-      Location.findOne({"location_id": req.body.location_id}, function(err, loc){
-        if (loc){
-          console.log('in exists');
-          loc.count = req.body.vote ? loc.count + 1 : loc.count - 1;
-        } else {
-          console.log('in doesnt exist');
-          loc = new Location({
-            "location_id": req.body.location_id,
-            "count": req.body.vote ? 1 : 0  //TODO: -1 or 0? can they have negative votes?
-          });
-        }
-        loc.save();
-        res.json(loc);
+    var votesArray = currentUser.votes;
+    for (var i = 0; i < votesArray.length; i++) {
+      if (votesArray[i].location_id === req.body.location_id){
+        match = true;
+        // return match;
+      }  //should use voteInfo or req.body?
+    }
+    console.log('match', match);
+    if (!match) {
+      console.log('no match');
+      currentUser.votes.push(new Vote(voteInfo));
+      currentUser.save().then(function(){
+        //TODO: refactor, separate out code into different function
+        Location.findOne({"location_id": req.body.location_id}, function(err, loc){
+          if (loc){
+            loc.count = req.body.vote ? loc.count + 1 : loc.count - 1;
+          } else {
+            loc = new Location({
+              "location_id": req.body.location_id,
+              "count": req.body.vote ? 1 : 0  //TODO: -1 or 0? can they have negative votes?
+            });
+          }
+          loc.save();
+          res.json(loc);
+        });
       });
-    });
+    } else {
+      console.log('match');
+      res.json({});
+    }
   });
 });
 
