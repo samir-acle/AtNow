@@ -79,6 +79,29 @@ var usersController = {
       failureRedirect: '/login'
     });
     return loginProperty(req, res);
+  },
+
+  getFacebook: function(req, res){
+    var loginProperty = passport.authenticate('facebook');
+    return loginProperty(req, res);
+  },
+  getUserFacebook: function(req, res){
+    var loginProperty = passport.authenticate('facebook', {
+      successRedirect: '/',
+      failureRedirect: '/login'
+    });
+    return loginProperty(req, res);
+  },
+  getGoogle: function(req, res){
+    var loginProperty = passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/plus.login' });
+    return loginProperty(req, res);
+  },
+  getUserGoogle: function(req, res){
+    var loginProperty = passport.authenticate('google', {
+      successRedirect: '/',
+      failureRedirect: '/login'
+    });
+    return loginProperty(req, res);
   }
 };
 

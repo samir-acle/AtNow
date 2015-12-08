@@ -34,4 +34,28 @@ router.route('/auth/twitter')
 router.route('/auth/twitter/callback')
 .get(usersController.getUserTwitter);
 
+
+router.route('/auth/facebook')
+.get(usersController.getFacebook);
+
+router.route('/auth/facebook/callback')
+.get(usersController.getUserFacebook);
+
+// router.route('/auth/google')
+// .get(usersController.getGoogle);
+//
+// router.route('/auth/google/callback')
+// .get(usersController.getUserGoogle);
+
+router.route('/auth/google')
+  .get(passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/plus.login' }));
+
+router.route('/auth/google/callback')
+  .get(passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+
 module.exports = router;
