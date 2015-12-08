@@ -15,7 +15,6 @@ router.get("/", function(req, res){
 });
 
 //TODO: modularize
-//TODO: fix downvote - can downvote multiple times
 router.post("/", function(req, res){
   var voteInfo = {
     location_id: req.body.location_id,
@@ -70,8 +69,9 @@ router.post("/", function(req, res){
       console.log(voteInfo.vote === votesArray[match].vote);
       console.log(votesArray[match].vote);
       console.log('match - different');
-      currentUser.votes.vote = voteInfo.vote;
-      currentUser.save().then(function(){ //or !currentUser.votes.vote?
+      currentUser.votes[match].vote = voteInfo.vote;
+      console.log('this should be false', currentUser.votes.vote);
+      currentUser.save().then(function(){
         Location.findOne({"location_id": voteInfo.location_id}, function(err, loc){
           loc.count = prevVote ? loc.count - 2 : loc.count + 2;
           loc.save();
