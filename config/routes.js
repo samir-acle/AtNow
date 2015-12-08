@@ -36,6 +36,13 @@ router.route('/auth/twitter')
 router.route('/auth/twitter/callback')
 .get(usersController.getUserTwitter);
 
+
+router.route('/auth/facebook')
+.get(usersController.getFacebook);
+
+router.route('/auth/facebook/callback')
+.get(usersController.getUserFacebook);
+
 // router.route('/auth/google')
 // .get(usersController.getGoogle);
 //
@@ -51,5 +58,6 @@ router.route('/auth/google/callback')
     // Successful authentication, redirect home.
     res.redirect('/');
   });
+
 
 module.exports = router;

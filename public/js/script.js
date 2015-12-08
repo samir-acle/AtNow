@@ -6,9 +6,9 @@ $(document).ready(function(){
     console.log(err);
   })
   .then(function(locations){
-    console.log('should show location');
     showLocations(locations);
   });
+
 
 
   $('.restaurants').on('click', function(){
@@ -19,9 +19,9 @@ $(document).ready(function(){
     showLocations(Location.stores);
   });
 
-  // $('.bars').on('click', function(){
-  //   showLocations(Location.bars);
-  // });
+  $('.bars').on('click', function(){
+    showLocations(Location.bars);
+  });
 });
 
 function showLocations(locations) {

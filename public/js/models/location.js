@@ -4,6 +4,7 @@ var Location = function(info){
   this.icon = info.icon;
   this.address = info.vicinity;
   this.types = info.types;
+  this.rating = info.rating;
 };
 
 Location.prototype.getVoteCount = function(){

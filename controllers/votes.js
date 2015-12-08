@@ -82,29 +82,5 @@ router.post("/", function(req, res){
   // });
 });
 
-// module.exports = (function() {
-// 	return {
-//           update: function(req, res){
-//           			User.findOne({id: req.body.user})
-//           				.populate('votes')
-//           				.exec(function(err, post){
-//           				if(err){
-//           					console.log(err);
-//           				} else {
-//           					if(req.vote > 0){
-//           						post.upvotes += 1;
-//           					} else {
-//           						post.downvotes += 1;
-//           					}
-//           					post.save(function(err){
-//           						if(err){
-//           							console.log(err);
-//           						} else {
-//           							res.json({message: 'Vote updated'});
-//           						}
-//           					});
-//           				}
-//           			});
-//           		}
-//             }
+
 module.exports = router;
