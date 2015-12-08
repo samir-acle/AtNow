@@ -24,8 +24,8 @@ router.post("/", function(req, res){
   console.log('body vote',req.body.vote);
   console.log('voteInfo', voteInfo);
   var match, prevVote;
-  // var currentUser = global.currentUser;
-  User.findOne({"local.email": "sammehta88@gmail.com"}, function(err, currentUser){
+  var currentUser = global.currentUser;
+  // User.findOne({"local.email": "sammehta88@gmail.com"}, function(err, currentUser){
     var votesArray = currentUser.votes;
     console.log(votesArray);
 
@@ -79,7 +79,8 @@ router.post("/", function(req, res){
         }); //do i need these in promises??
       });
     }
-  });
+  // });
+  // });
 });
 
 // module.exports = (function() {
