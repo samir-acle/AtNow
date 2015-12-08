@@ -10,7 +10,8 @@ LocationView.prototype = {
   render: function(){
     var self = this;
     self.$el.append("<h3>" + self.loc.name + "</h3>");
-    self.$el.append('<input type="button" value="Upvote">');
+    self.$el.append('<input type="button" value="upvote" class="upvote">');
+    self.$el.append('<input type="button" value="downvote" class="downvote">');
     self.click();
     $('.loc-container').append(self.$el);
   },
@@ -19,9 +20,11 @@ LocationView.prototype = {
     self.$el.find('h3').on('click', function(){
       console.log(self.loc);
     });
-    self.$el.find('input').on('click', function(){
-      console.log(self.loc.id);
-      self.loc.postVote(self.loc.id);
+    self.$el.find('.upvote').on('click', function(){
+      self.loc.postVote(self.loc.id, true);
+    });
+    self.$el.find('.downvote').on('click', function(){
+      self.loc.postVote(self.loc.id, false);
     });
   }
 };

@@ -6,14 +6,14 @@ var Location = function(info){
   this.types = info.types;
 };
 
-Location.prototype.postVote = function(id) {
+Location.prototype.postVote = function(id, vote) {
   $.ajax({
     url: "http://localhost:3000/votes/",
     type: "POST",
     dataType: "json",
     data: {
       location_id: id,
-      vote: true
+      vote: vote
     }
   }).then(function(res){
     console.log(res);
