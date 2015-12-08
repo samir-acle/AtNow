@@ -25,13 +25,13 @@ router.get("/", function(req, res){
     ["pagetoken", req.query.nextPage || ""]
     // ["rankby", "distance"]
   ];
-  console.log(options);
+  // console.log(options);
 
   options.forEach(function(option){
     url = url + "&"+ option[0] + "=" + option[1];
   });
 
-  console.log(url);
+  // console.log(url);
 
   request(url, function(err, response, body) {
     res.send(body);

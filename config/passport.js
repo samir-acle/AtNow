@@ -45,35 +45,35 @@ module.exports = function(passport){
     });
   }));
 
-
-  passport.use('twitter', new TwitterStrategy({
-  consumerKey: env.twitter.consumerKey,
-  consumerSecret: env.twitter.consumerSecret,
-  callbackUrl: env.twitter.callbackUrl
-}, function(token, secret, profile, done){
-  process.nextTick(function(){
-    User.findOne({'twitter.id': profile.id}, function(err, user){
-      if(err) return done(err);
-      // If the user already exists, just return that user.
-      if(user){
-        return done(null, user);
-      } else {
-        // Otherwise, create a brand new user using information passed from Twitter.
-        var newUser = new User();
-        // Here we're saving information passed to us from Twitter.
-        newUser.twitter.id = profile.id;
-        newUser.twitter.token = token;
-        newUser.twitter.username = profile.username;
-        newUser.twitter.displayName = profile.displayName;
-
-        newUser.save(function(err){
-          if(err) throw err;
-          return done(null, newUser);
-        });
-      }
-    });
-  });
-}));
+//
+//   passport.use('twitter', new TwitterStrategy({
+//   consumerKey: env.twitter.consumerKey,
+//   consumerSecret: env.twitter.consumerSecret,
+//   callbackUrl: env.twitter.callbackUrl
+// }, function(token, secret, profile, done){
+//   process.nextTick(function(){
+//     User.findOne({'twitter.id': profile.id}, function(err, user){
+//       if(err) return done(err);
+//       // If the user already exists, just return that user.
+//       if(user){
+//         return done(null, user);
+//       } else {
+//         // Otherwise, create a brand new user using information passed from Twitter.
+//         var newUser = new User();
+//         // Here we're saving information passed to us from Twitter.
+//         newUser.twitter.id = profile.id;
+//         newUser.twitter.token = token;
+//         newUser.twitter.username = profile.username;
+//         newUser.twitter.displayName = profile.displayName;
+//
+//         newUser.save(function(err){
+//           if(err) throw err;
+//           return done(null, newUser);
+//         });
+//       }
+//     });
+//   });
+// }));
 
 
   passport.use('local-login', new LocalStrategy({
@@ -83,17 +83,20 @@ module.exports = function(passport){
   }, function(req, email, password, callback) {
     User.findOne({ 'local.email' :  email }, function(err, user) {
       if (err) {
+        console.log("This is passport middleware error: " + err);
         return callback(err);
       }
       // If no user is found
       if (!user) {
+        console.log("This is passport middleware error no User found");
         return callback(null, false, req.flash('loginMessage', 'No user found.'));
       }
       // Wrong password
       if (!user.validPassword(password)) {
+        console.log("This is passport middleware, wrong password!");
         return callback(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
       }
-
+        console.log("This is being returned from passport:" + user);
       return callback(null, user, req.flash('loginMessage', "You have signed in sucessfully!"));
     });
   }));

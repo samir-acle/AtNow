@@ -1,4 +1,11 @@
 $(document).ready(function(){
+
+  userView.showLogin();
+  userView.showSignup();
+  userView.submitForm();
+  userView.logOut();
+
+
   Location.getLocation.then(function(res){
     console.log(res);
     return Location.fetchAll();
@@ -8,7 +15,6 @@ $(document).ready(function(){
   .then(function(locations){
     showLocations(locations);
   });
-
 
   $('.restaurants').on('click', function(){
     showLocations(Location.restaurants);
