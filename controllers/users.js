@@ -49,7 +49,11 @@ var usersController = {
   },
   postLogin: function(req, res) {
     console.log("Route being hit");
-    var loginProperty = passport.authenticate('local-login', {});
+    var loginProperty = passport.authenticate('local-login', {
+      successRedirect: '/',
+      failureRedirect: '/',
+      failureFlash: true
+    });
     console.log(global.currentUser);
     return loginProperty(req, res);
   },
