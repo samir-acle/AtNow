@@ -1,55 +1,82 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>@Now</title>
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-    <!-- If we want this for mobile at some point we need it ^  -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="/js/models/session.js"></script>
-    <script src="/js/models/location.js"></script>
-    <script src="/js/models/user.js"></script>
-    <script src="/js/views/locationView.js"></script>
-    <script src="/js/script.js"></script>
-  </head>
-  <body>
-    <header class="navbar navbar-custom" role="navigation">
+<head>
+  <title>@Now</title>
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <!-- If we want this for mobile at some point we need it ^  -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="/js/models/session.js"></script>
+  <script src="/js/models/location.js"></script>
+  <script src="/js/views/userView.js"></script>
+  <script src="/js/models/user.js"></script>
+  <script src="/js/views/locationView.js"></script>
+  <script src="/js/script.js"></script>
+</head>
+<body>
+  <header class="navbar navbar-custom" role="navigation">
     <div class="navbar-inner">
       <div class="container">
         <div id="" class="navbar-brand">@Now</div>
         <nav class="collapse navbar-collapse navbar-ex1-collapse">
           <!-- If user signed in etc. -->
-            <ul id="custom" class="nav navbar-nav navbar-right">
-              <li><a href="/">Home</a></li>
-              <li>Account</li>
-              <li>Contact Us</li>
-              <li><a href="/logout">Logout </a></li>
-              <li><a href="/login">Login</a></li>
-              <li><a href="/signup">Signup</a></li>
-            </ul>
-            <!-- if use signed in else etc. -->
-            <ul class="nav navbar-nav pull-right">
-              <!-- <li>Sign Up</li>
-              <li>Sign In</li> -->
-            </ul>
+          <ul id="custom" class="nav navbar-nav navbar-right">
+            <li><a href="/">Home</a></li>
+            <li>Account</li>
+            <li>Contact Us</li>
+            <li id="logout"><a href="#">Logout </a></li>
+            <li class= "login"><a href="#">Login</a></li>
+            <li class= "signup"><a href="#">Signup</a></li>
+          </ul>
+          <!-- if use signed in else etc. -->
+          <ul class="nav navbar-nav pull-right">
+            <!-- <li>Sign Up</li>
+            <li>Sign In</li> -->
+          </ul>
+        </div>
+        <div class="main-body-test">
+        </div>
       </div>
-      <div class="main-body-test">
+    </header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <button class="restaurants">Restaurants</button>
+          <button class="stores">Stores</button>
+          <button class="bars">Bars</button>
+          <ul class="loc-container"></ul>
+        </div>
+        <div class="col-md-4">
+          <form method="post" action="/login">
+            <h2>Login</h2>
+            <div class="form-group">
+              <label for="firstname">First Name</label>
+              <input class="form-control" type="text" name="firstname" id="firstname">
+            </div>
+
+            <div class="form-group">
+              <label for="lastname">Last Name</label>
+              <input class="form-control" type="text" name="lastname" id="lastname">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input class="form-control" type="text" name="email" id="email">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Password</label>
+              <input class="form-control" type="password" name="password" id="password">
+            </div>
+
+            <input class="btn btn-default" type="submit">
+          </form>
+        </div>
       </div>
     </div>
-  </header>
-  <div class="container">
-  <div class="mid-test">
-    <button class="restaurants">Restaurants</button>
-    <button class="stores">Stores</button>
-    <button class="bars">Bars</button>
-    <ul class="loc-container"></ul>
-  </div>
-  <div class="side">
-    <h1> Other stuff can go here</h1>
-  </div>
-<div id="container" class="col-md-9 center-block">
-  </nav>
+    <div id="container" class="col-md-9 center-block">
+    </nav>
   </body>
-</html>
+  </html>

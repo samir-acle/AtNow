@@ -17,10 +17,10 @@ LocationView.prototype = {
   click: function(){
     var self = this;
     self.$el.find('h3').on('click', function(){
-      console.log(self.loc);
+      // console.log(self.loc);
     });
     self.$el.find('input').on('click', function(){
-      console.log(self.loc.id);
+      // console.log(self.loc.id);
       self.loc.postVote(self.loc.id);
     });
   }
