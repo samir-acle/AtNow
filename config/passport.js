@@ -78,64 +78,64 @@ module.exports = function(passport){
 //   });
 // }));
 
-  passport.use(new FacebookStrategy({
-
-          clientID        : env.facebookAuth.clientID,
-          clientSecret    : env.facebookAuth.clientSecret,
-          callbackURL     : env.facebookAuth.callbackURL
-      },
-
-      function(token, refreshToken, profile, done) {
-          process.nextTick(function() {
-              User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
-                  if (err)
-                      return done(err);
-                  if (user) {
-                      return done(null, user);
-                  } else {
-                      var newUser            = new User();
-                      newUser.facebook.id    = profile.id;
-                      newUser.facebook.token = token;
-                      newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
-                      newUser.facebook.email = profile.emails[0].value;
-                      newUser.save(function(err) {
-                          if (err)
-                              throw err;
-                          return done(null, newUser);
-                      });
-                  }
-              });
-          });
-      }));
-
-  passport.use('twitter', new TwitterStrategy({
-    consumerKey: env.twitter.consumerKey,
-    consumerSecret: env.twitter.consumerSecret,
-    callbackUrl: env.twitter.callbackUrl
-  }, function(token, secret, profile, done){
-    process.nextTick(function(){
-      User.findOne({'twitter.id': profile.id}, function(err, user){
-        if(err) return done(err);
-        // If the user already exists, just return that user.
-        if(user){
-          return done(null, user);
-        } else {
-          // Otherwise, create a brand new user using information passed from Twitter.
-          var newUser = new User();
-          // Here we're saving information passed to us from Twitter.
-          newUser.twitter.id = profile.id;
-          newUser.twitter.token = token;
-          newUser.twitter.username = profile.username;
-          newUser.twitter.displayName = profile.displayName;
-
-          newUser.save(function(err){
-            if(err) throw err;
-            return done(null, newUser);
-          });
-        }
-      });
-    });
-  }));
+  // passport.use(new FacebookStrategy({
+  //
+  //         clientID        : env.facebookAuth.clientID,
+  //         clientSecret    : env.facebookAuth.clientSecret,
+  //         callbackURL     : env.facebookAuth.callbackURL
+  //     },
+  //
+  //     function(token, refreshToken, profile, done) {
+  //         process.nextTick(function() {
+  //             User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
+  //                 if (err)
+  //                     return done(err);
+  //                 if (user) {
+  //                     return done(null, user);
+  //                 } else {
+  //                     var newUser            = new User();
+  //                     newUser.facebook.id    = profile.id;
+  //                     newUser.facebook.token = token;
+  //                     newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
+  //                     newUser.facebook.email = profile.emails[0].value;
+  //                     newUser.save(function(err) {
+  //                         if (err)
+  //                             throw err;
+  //                         return done(null, newUser);
+  //                     });
+  //                 }
+  //             });
+  //         });
+  //     }));
+  //
+  // passport.use('twitter', new TwitterStrategy({
+  //   consumerKey: env.twitter.consumerKey,
+  //   consumerSecret: env.twitter.consumerSecret,
+  //   callbackUrl: env.twitter.callbackUrl
+  // }, function(token, secret, profile, done){
+  //   process.nextTick(function(){
+  //     User.findOne({'twitter.id': profile.id}, function(err, user){
+  //       if(err) return done(err);
+  //       // If the user already exists, just return that user.
+  //       if(user){
+  //         return done(null, user);
+  //       } else {
+  //         // Otherwise, create a brand new user using information passed from Twitter.
+  //         var newUser = new User();
+  //         // Here we're saving information passed to us from Twitter.
+  //         newUser.twitter.id = profile.id;
+  //         newUser.twitter.token = token;
+  //         newUser.twitter.username = profile.username;
+  //         newUser.twitter.displayName = profile.displayName;
+  //
+  //         newUser.save(function(err){
+  //           if(err) throw err;
+  //           return done(null, newUser);
+  //         });
+  //       }
+  //     });
+  //   });
+  // }));
 
   // passport.use('google', new GoogleStrategy({
   //   clientID: env.google.clientID,

@@ -9,7 +9,7 @@ var Location = require("../models/location");
 // var VoteCount = require("../models/voteCount");
 
 router.get("/", function(req, res){
-  console.log("THIS IS THE CURRENT USER VOTES::: " + global.currentUser.votes );
+  // console.log("THIS IS THE CURRENT USER VOTES::: " + global.currentUser.votes );
     res.json(global.currentUser.votes);
 });
 
@@ -32,7 +32,7 @@ router.post("/", function(req, res){
         if (votesArray[i].location_id === voteInfo.location_id){
           match = i;
           prevVote = votesArray[i].vote;
-          console.log('match found');
+          // console.log('match found');
           return;
         }
       }
@@ -54,13 +54,13 @@ router.post("/", function(req, res){
               });
             }
             loc.save();
-            console.log('in create',currentUser.votes.length);
+            // console.log('in create',currentUser.votes.length);
             res.json(loc);
           // });
         });
       } else if (voteInfo.vote === prevVote){
-        console.log('in match same');
-        console.log(currentUser.votes[match]);
+        // console.log('in match same');
+        // console.log(currentUser.votes[match]);
         currentUser.votes[match].remove();
         currentUser.save(function(err){
           if(err) throw err;
@@ -74,7 +74,7 @@ router.post("/", function(req, res){
         currentUser.save(function(){
             loc.count = prevVote ? loc.count - 2 : loc.count + 2;
             loc.save();
-            console.log('in match diff',currentUser.votes.length);
+            // console.log('in match diff',currentUser.votes.length);
             res.json(loc);
         });
       }

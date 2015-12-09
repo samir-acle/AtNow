@@ -23,22 +23,31 @@ session.getLocation = new Promise(function(resolve, reject) {
   }
 });
 
-session.loadLocations = function(){
-  Location.fetchAll().then(function(res){
-    session.showLocations(res);
+session.loadLocations = function(type){
+  type = type || history.state.type;
+  var request = Location.fetch(type).then(function(data){
+    data.sort(function(a,b){
+      return b.count - a.count;
+    });
+    session.saveLocations(data,type);
   });
+  return request;
 };
 
-session.showLocations = function(locations) {
-  locations.then(function(res){
-    session.createViews(res);
-  });
+session.setState = function(type){
+  history.pushState({'type' : type}, type, '#' + type);
 };
 
-session.createViews = function(array) {
+session.createLocationViews = function(type){
+  type = type || history.state.type;
+  var array = session[type.split('|')[0]];
   $('.loc-container').empty();
   array.forEach(function(location){
     var view = new LocationView(location); //store in model for future access
     view.render();
   });
+};
+
+session.saveLocations = function(data, type) {
+  session[type.split('|')[0]] = data;
 };
