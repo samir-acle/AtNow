@@ -1,9 +1,9 @@
 // code is not DRY, need to refactor methods in this object
 var userView = {
 
-// need function where if upvoted clicked or downvote, object is added to user
+  // need function where if upvoted clicked or downvote, object is added to user
   currentUser: {},
-// maybe something that toggles login
+  // maybe something that toggles login
   showLogin: function(){
     $(".login").on("click", function(){
       $("form").css("display", "inline");
@@ -26,6 +26,7 @@ var userView = {
     });
   },
   submitForm: function(){
+    var self = this;
     $("form").submit(function(evt){
       if($('form').attr('action') == '/signup'){
         User.post();
@@ -35,7 +36,7 @@ var userView = {
       }
       console.log("PREVENT EVENT DEFAULT");
       evt.preventDefault();
-      userView.userVotes();
+      self.userVotes();
       $("form").css("display", "none");
     });
   },
@@ -43,42 +44,55 @@ var userView = {
     $(".login").toggle();
     $(".signup").toggle();
   },
+  toggleLogoutDisplays: function(){
+    $(".logout").toggle();
+  },
   userVotes: function(){
     var self = this;
-    var uservotes = $("<button class='uservotes'>See All Votes</button>");
-    console.log(uservotes);
-    $(".userdiv").append(uservotes);
+    var user = User.fetch().then(function(user){
+      self.currentUser = user;
+      console.log(self.currentUser);
+    });
+  },
+  clickAccountInfo: function(){
+    var self = this;
+    var uservotes = $(".account");
+    var allvotesdiv = $(".allvotesdiv");
     uservotes.on("click", function(){
-      var user = User.fetch().then(function(user){
-        self.currentUser = user;
-        console.log(self.currentUser);
-        userView.allVotesdiv();
-      });
+      if(allvotesdiv.children().length > 0){
+        $(".allvotesdiv").empty();
+        allvotesdiv.toggle();
+      }
+      else{
+        self.allVotesdiv();
+      }
     });
   },
   allVotesdiv: function(){
+    console.log("showing all votes div function call");
     var self = this;
     if(!jQuery.isEmptyObject(self.currentUser)){
       var userDiv = $(".userdiv");
-      var allvotesdiv = $("<div class = 'allvotesdiv'></div>");
-      userDiv.append(allvotesdiv);
       var email = self.currentUser.local.email;
       var votesTotal = self.currentUser.votes.length;
       var votes = [];
       votes = self.currentUser.votes;
       var sortedVotes = votes.sort(self.sortFunction);
-      self.appendUserInformation(allvotesdiv, votesTotal, email);
-      self.addVotesToUserInfo(sortedVotes, allvotesdiv);
+      self.appendUserInformation(votesTotal, email);
+      self.addVotesToUserInfo(sortedVotes);
     }
   },
-  appendUserInformation: function(allvotesdiv, votesTotal, email){
+  appendUserInformation: function(votesTotal, email){
+    var allvotesdiv = $(".allvotesdiv");
+    allvotesdiv.css("display", "inline");
     var showEmail = $("<h3>" + email + "</h3>");
     var showVotes = $("<h4>" + votesTotal +"</h4>");
     allvotesdiv.append(showEmail);
     showEmail.append(showVotes);
     allvotesdiv.append("<h4>UpVotes:</h4>");
   },
-  addVotesToUserInfo: function(sortedVotes, allvotesdiv){
+  addVotesToUserInfo: function(sortedVotes){
+    var allvotesdiv = $(".allvotesdiv");
     for(var i = 0; i < 10; i++){
       if(sortedVotes[i].vote){
         var dates = $("<p>" + sortedVotes[i].createdAt + ", " + sortedVotes[i].location_id + "</p>");
@@ -87,10 +101,10 @@ var userView = {
     }
   },
   sortFunction: function(a,b){
-      var dateA = new Date(a.createdAt).getTime();
-      var dateB = new Date(b.createdAt).getTime();
-      return dateA < dateB ? 1 : -1;
-    },
+    var dateA = new Date(a.createdAt).getTime();
+    var dateB = new Date(b.createdAt).getTime();
+    return dateA < dateB ? 1 : -1;
+  },
 };
 
 

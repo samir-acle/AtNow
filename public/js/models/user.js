@@ -19,22 +19,6 @@ User.fetch = function() {
   return request;
 };
 
-Location.prototype.getVoteCount = function(){
-  var self = this; //cahnge back to id
-  var request = $.ajax({
-    url: "http://localhost:3000/locations/" + self.id,
-    type: "GET",
-    dataType: "json"
-  }).then(function(res){
-    // console.log('res',res);
-    return res;
-  }).fail(function(){
-    alert('FAILRUE');
-  });
-
-  return request;
-};
-
 // User.prototype = {
 //   fetchVotes: function(){
 //     var user = this;
@@ -51,8 +35,10 @@ User.logOut = function(){
     // console.log(response);
   }).then(function(res){
     console.log("LOGOUT!");
-    // if its a sucess, toggle view for logining:
-    userView.toggleLoginDisplays();
+    $(".allvotesdiv").empty();
+    userView.currentUser = {};
+    // userView.toggleLoginDisplays();
+    // userView.toggleLogoutDisplays();
   }).fail(function(res){
     console.log("FAILED LOGOUTTTT");
     alert("failure from user post");
@@ -76,6 +62,8 @@ User.post = function(){
     }
   }).then(function(res){
     console.log("sucess user signup! " + res);
+    userView.userVotes();
+    // userView.toggleLoginDisplays();
     return res;
   }).fail(function(res){
     console.log(res);
@@ -97,8 +85,9 @@ User.postLogin = function(){
       password: $("#password").val()
     }
   }).then(function(res){
+    userView.userVotes();
     // IF its a sucess, hide login displays
-    userView.toggleLoginDisplays();
+    // userView.toggleLoginDisplays();
   }).fail(function(res){
     console("failure from user post to login");
   });
