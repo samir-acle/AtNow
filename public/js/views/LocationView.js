@@ -1,10 +1,6 @@
-
 var LocationView = function(location) {
   this.loc = location;
   this.$el = $("<div class='location loc-style'></div>");
-//   $(this).append('<input type="button" value="Upvote">').on("click", "button", function(){
-//
-// });
 };
 
 LocationView.prototype = {
@@ -15,9 +11,16 @@ LocationView.prototype = {
     var locationsDiv = self.$el.find("div.location");
 
     this.$el.on("click", function(){
-      console.log("setup click on click");
+      console.log(locationsDiv.children());
+    if(self.$el.find('.test').children(':visible').length === 0){
         self.toggleLocations(locationsDiv);
-      });
+      }
+      else {
+        console.log("click consoleloggylog");
+        self.toggleLocations.hide(locationsDiv);
+      }
+    });
+
 
     self.$el.append("<h3>" + self.loc.name + "</h3>");
     self.$el.append("<h4>" + self.loc.count + "</h4>");
@@ -39,35 +42,40 @@ LocationView.prototype = {
          self.loc.postVote(self.loc.id, false);
        });
      },
-   toggleDiv: function(locationsDiv){
-     console.log("test");
-     if(this.$el.is(":visible")){
-       console.log("Hide/Show");
-       locationsDiv.siblings("div.location").text("Hide Details");
-     } else {
-       console.log("second statement");
-       locationsDiv.siblings("div.location").text("Show Details");
-     }
-   },
+  //  toggleDiv: function(locationsDiv){
+  //    console.log("test");
+  //    if(this.$el.is(":visible")){
+  //      console.log("Hide/Show");
+  //      ("#hide").locationsDiv.children("div.location");
+  //    } else {
+  //      console.log("second statement");
+  //      ("#show").locationsDiv.children("div.location");
+  //    }
+  //  },
   toggleLocations: function(locationsDiv){
     console.log("Locations Div on Click");
-    // var self = this;
-    if(locationsDiv.children().length === 0){
-      // this.Location.fetch().then(function(locations){
-        this.$el.append("<div>" + this.loc.icon + "</div>");
-        this.$el.append("<div>" + this.loc.address + "</div>");
-        this.$el.append("<div>" + this.loc.types + "</div>");
-        this.$el.append("<div>" + this.loc.rating + "</div>");
-      // });
-    }
-    locationsDiv.toggle();
-    this.toggleDiv(locationsDiv);
-        // $('.loc-container').append(self.$el);
+    // self.appendLocations(locationsDiv);
+    var self = this;
+        console.log("children-test");
+        var subDiv = $('<div class="test"></div>');
+        subDiv.append('<div><img src="' + this.loc.icon + '" height="32px" width="32px"></div>');
+        subDiv.append("<div class='location-toggle'>" + "<span class='list-items'>Address: </span>" + this.loc.address + "</div>");
+        subDiv.append("<div class='location-toggle'>"  + "<span class='list-items'>Types: </span>" + this.loc.types + "</div>");
+        subDiv.append("<div class='location-toggle'>"  + "<span class='list-items'>Rating: </span>" + this.loc.rating + "</div>");
+        this.$el.append(subDiv);
+    console.log("sup bruh");
+    this.$el.find('.test').toggle();
+    // this.toggleDiv(locationsDiv);
   },
-  // appendLocations: function(locations, locationsDiv){
-  // locations.forEach(function(location){
-  //   var toggleLocationView = new toggleLocationView(location);
-  //   locationsDiv.append(toggleLocationView.render());
-  // });
-// },
+  // appendLocations: function(locationsDiv){
+  //   var self = this;
+  //   if(locationsDiv.children().length === 0){
+  //       this.$el.append('<div><img src="' + this.loc.icon + '" height="32px" width="32px"></div>');
+  //       this.$el.append("<div class='location-toggle'>" + "<span class='list-items'>Address: </span>" + this.loc.address + "</div>");
+  //       this.$el.append("<div class='location-toggle'>"  + "<span class='list-items'>Types: </span>" + this.loc.types + "</div>");
+  //       this.$el.append("<div class='location-toggle'>"  + "<span class='list-items'>Rating: </span>" + this.loc.rating + "</div>");
+  //   }
+  //   this.$el.toggle();
+  // this.toggleDiv(locationsDiv);
+  // }
 };

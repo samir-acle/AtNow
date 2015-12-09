@@ -40,5 +40,15 @@ form {
 }
 
 #logo-atnow {
-  background-image: 
+  background-image:
+}
+
+h3 {
+  cursor: pointer;
+}
+
+.list-items {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  color: white;
 }
