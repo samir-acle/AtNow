@@ -1,7 +1,7 @@
 // code is not DRY, need to refactor methods in this object
 var userView = {
 
-// need function where if upvoted clicked or downvote, object is added to user 
+// need function where if upvoted clicked or downvote, object is added to user
   currentUser: {},
 // maybe something that toggles login
   showLogin: function(){
@@ -10,7 +10,6 @@ var userView = {
       $(".form-names").css("display", "none");
       $('form').attr('action', '/login');
       $("h2").html("Log In");
-      console.log("jquery working");
     });
   },
   showSignup: function(){
@@ -24,7 +23,6 @@ var userView = {
   logOut: function(){
     $(".logout").on("click", function(){
       User.logOut();
-      console.log("logout jquery working");
     });
   },
   submitForm: function(){
@@ -40,6 +38,10 @@ var userView = {
       userView.userVotes();
       $("form").css("display", "none");
     });
+  },
+  toggleLoginDisplays: function(){
+    $(".login").toggle();
+    $(".signup").toggle();
   },
   userVotes: function(){
     var self = this;
