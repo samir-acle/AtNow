@@ -32,15 +32,16 @@ Location.prototype.postVote = function(vote) {
 };
 
 Location.fetch = function(type){
-  var lat;
-  var long;
   type = type || "food|store|bar"; //change defaults - make it preference?
-  console.log('type', type);
 
-  if (session.currentLat) { //TODO: add option to choose location, remove this check
-    lat = session.currentLat;
-    long = session.currentLong;
+  var lat = session.currentLat ? session.currentLat : map.lat;
+  var long = session.currentLong ? session.currentLong : map.lng;
+
+  if (!lat) {
+    alert('please set a location');
+    return;
   }
+
   var request = $.getJSON("http://localhost:3000/locations/", {
     lat: lat,
     long: long,
