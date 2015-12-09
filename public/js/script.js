@@ -16,17 +16,23 @@ $(document).ready(function(){
   session.getLocation.then(function(res){
     session.currentLat = res.lat;
     session.currentLong = res.long;
-    session.loadLocations();
+    session.setState('restaurant|bar');
+    session.loadLocations().then(function(data){
+      session.createLocationViews();
+    session.loadLocations('store');
+    });
   }, function(err) {
     console.log(err);
   });
 
   $('.restaurants').on('click', function(){
-    session.createViews(Location.restaurants);
+    session.setState('restaurant|bar');
+    session.createLocationViews();
   });
 
   $('.stores').on('click', function(){
-    session.createViews(Location.stores);
+    session.setState('store');
+    session.createLocationViews();
   });
 });
 
