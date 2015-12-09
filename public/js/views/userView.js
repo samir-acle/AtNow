@@ -1,20 +1,20 @@
 // code is not DRY, need to refactor methods in this object
 var userView = {
 
+  // need function where if upvoted clicked or downvote, object is added to user
   currentUser: {},
-
+  // maybe something that toggles login
   showLogin: function(){
     $(".login").on("click", function(){
-      $("form").css("visibility", "visible");
+      $("form").css("display", "inline");
       $(".form-names").css("display", "none");
       $('form').attr('action', '/login');
       $("h2").html("Log In");
-      console.log("jquery working");
     });
   },
   showSignup: function(){
     $(".signup").on("click", function(){
-      $("form").css("visibility", "visible");
+      $("form").css("display", "inline");
       $(".form-names").css("display", "inline");
       $("h2").html("Sign Up");
       $('form').attr('action', '/signup');
@@ -23,10 +23,10 @@ var userView = {
   logOut: function(){
     $(".logout").on("click", function(){
       User.logOut();
-      console.log("logout jquery working");
     });
   },
   submitForm: function(){
+    var self = this;
     $("form").submit(function(evt){
       if($('form').attr('action') == '/signup'){
         User.post();
@@ -36,38 +36,75 @@ var userView = {
       }
       console.log("PREVENT EVENT DEFAULT");
       evt.preventDefault();
-      userView.userVotes();
-      $("form").css("visibility", "hidden");
+      self.userVotes();
+      $("form").css("display", "none");
     });
+  },
+  toggleLoginDisplays: function(){
+    $(".login").toggle();
+    $(".signup").toggle();
+  },
+  toggleLogoutDisplays: function(){
+    $(".logout").toggle();
   },
   userVotes: function(){
     var self = this;
-    var uservotes = $("<button class='uservotes'>See All Votes</button>");
-    console.log(uservotes);
-    $(".userdiv").append(uservotes);
+    var user = User.fetch().then(function(user){
+      self.currentUser = user;
+      console.log(self.currentUser);
+    });
+  },
+  clickAccountInfo: function(){
+    var self = this;
+    var uservotes = $(".account");
+    var allvotesdiv = $(".allvotesdiv");
     uservotes.on("click", function(){
-      var user = User.fetch().then(function(user){
-        self.currentUser = user;
-        console.log(self.currentUser);
-        userView.allVotesdiv();
-      });
+      if(allvotesdiv.children().length > 0){
+        $(".allvotesdiv").empty();
+        allvotesdiv.toggle();
+      }
+      else{
+        self.allVotesdiv();
+      }
     });
   },
   allVotesdiv: function(){
+    console.log("showing all votes div function call");
     var self = this;
     if(!jQuery.isEmptyObject(self.currentUser)){
-      // var allvotesdiv = $("<div class = 'allvotesdiv'></div>");
       var userDiv = $(".userdiv");
-      // $(".userdiv").append(allvotesdiv);
-      console.log("This is the all votes div");
       var email = self.currentUser.local.email;
       var votesTotal = self.currentUser.votes.length;
-      var showEmail = $("<h2>" + email + "</h2>");
-      var showVotes = $("<h3>" + votesTotal +"</h3>");
-      userDiv.append(showEmail);
-      showEmail.append(showVotes);
+      var votes = [];
+      votes = self.currentUser.votes;
+      var sortedVotes = votes.sort(self.sortFunction);
+      self.appendUserInformation(votesTotal, email);
+      self.addVotesToUserInfo(sortedVotes);
     }
-  }
+  },
+  appendUserInformation: function(votesTotal, email){
+    var allvotesdiv = $(".allvotesdiv");
+    allvotesdiv.css("display", "inline");
+    var showEmail = $("<h3>" + email + "</h3>");
+    var showVotes = $("<h4>" + votesTotal +"</h4>");
+    allvotesdiv.append(showEmail);
+    showEmail.append(showVotes);
+    allvotesdiv.append("<h4>UpVotes:</h4>");
+  },
+  addVotesToUserInfo: function(sortedVotes){
+    var allvotesdiv = $(".allvotesdiv");
+    for(var i = 0; i < 10; i++){
+      if(sortedVotes[i].vote){
+        var dates = $("<p>" + sortedVotes[i].createdAt + ", " + sortedVotes[i].location_id + "</p>");
+        allvotesdiv.append(dates);
+      }
+    }
+  },
+  sortFunction: function(a,b){
+    var dateA = new Date(a.createdAt).getTime();
+    var dateB = new Date(b.createdAt).getTime();
+    return dateA < dateB ? 1 : -1;
+  },
 };
 
 
