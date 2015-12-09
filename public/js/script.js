@@ -34,6 +34,11 @@ $(document).ready(function(){
     session.setState('store');
     session.createLocationViews();
   });
+
+  $('.set-location').on('click', function(){
+    var location = $('input.location').val();
+    session.setLocation(location);
+  });
 });
 
 
