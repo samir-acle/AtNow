@@ -14,10 +14,11 @@ LocationView.prototype = {
       console.log(locationsDiv.children());
     if(self.$el.find('.test').children(':visible').length === 0){
         self.toggleLocations(locationsDiv);
+
       }
       else {
         console.log("click consoleloggylog");
-        self.toggleLocations.hide(locationsDiv);
+        // self.hide.toggleLocations(locationsDiv);
       }
     });
 
@@ -63,8 +64,8 @@ LocationView.prototype = {
         subDiv.append("<div class='location-toggle'>"  + "<span class='list-items'>Types: </span>" + this.loc.types + "</div>");
         subDiv.append("<div class='location-toggle'>"  + "<span class='list-items'>Rating: </span>" + this.loc.rating + "</div>");
         this.$el.append(subDiv);
-    console.log("sup bruh");
-    this.$el.find('.test').toggle();
+        console.log("sup bruh");
+        this.$el.subDiv.toggle();
     // this.toggleDiv(locationsDiv);
   },
   // appendLocations: function(locationsDiv){
