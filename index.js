@@ -2,7 +2,7 @@ var express = require("express");
 var path = require("path");
 var mongoose = require("mongoose");
 var passport = require("passport");
-var env = require("./env");
+// var env = require("./env");
 var LocalStrategy = require("passport-local").Strategy;
 var hbs = require("hbs");
 var morgan = require("morgan");
@@ -13,7 +13,7 @@ var flash = require("connect-flash");
 var port = process.env.PORT || 3000;
 
 
-mongoose.connect(env.mongolab.MONGOLAB_URI || "mongodb://localhost/test");
+mongoose.connect(process.env.MONGOLAB_URI || "mongodb://localhost/test");
 var app = express();
 
 app.set('view engine', 'hbs');
