@@ -11,33 +11,24 @@ $(document).ready(function(){
     return currentUser;
   });
 
-  Location.getLocation.then(function(res){
-    console.log(res);
-    return Location.fetchAll();
+//TODO: put in function so can call again (dont include location call
+//TODO: make so can choose location
+  session.getLocation.then(function(res){
+    session.currentLat = res.lat;
+    session.currentLong = res.long;
+    session.loadLocations();
   }, function(err) {
     console.log(err);
-  })
-  .then(function(locations){
-    showLocations(locations);
   });
 
   $('.restaurants').on('click', function(){
-    showLocations(Location.restaurants);
+    session.createViews(Location.restaurants);
   });
 
   $('.stores').on('click', function(){
-    showLocations(Location.stores);
-  });
-
-  $('.bars').on('click', function(){
-    showLocations(Location.bars);
+    session.createViews(Location.stores);
   });
 });
 
-function showLocations(locations) {
-  $('.loc-container').empty();
-  locations.forEach(function(location){
-    var view = new LocationView(location); //store in model for future access
-    view.render();
-  });
-}
+
+//TODO: change so reloads currrent tab
