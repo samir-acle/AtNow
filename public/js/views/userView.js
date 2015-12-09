@@ -1,11 +1,12 @@
 // code is not DRY, need to refactor methods in this object
 var userView = {
 
+// need function where if upvoted clicked or downvote, object is added to user 
   currentUser: {},
-
+// maybe something that toggles login
   showLogin: function(){
     $(".login").on("click", function(){
-      $("form").css("visibility", "visible");
+      $("form").css("display", "inline");
       $(".form-names").css("display", "none");
       $('form').attr('action', '/login');
       $("h2").html("Log In");
@@ -14,7 +15,7 @@ var userView = {
   },
   showSignup: function(){
     $(".signup").on("click", function(){
-      $("form").css("visibility", "visible");
+      $("form").css("display", "inline");
       $(".form-names").css("display", "inline");
       $("h2").html("Sign Up");
       $('form').attr('action', '/signup');
@@ -37,7 +38,7 @@ var userView = {
       console.log("PREVENT EVENT DEFAULT");
       evt.preventDefault();
       userView.userVotes();
-      $("form").css("visibility", "hidden");
+      $("form").css("display", "none");
     });
   },
   userVotes: function(){
@@ -56,18 +57,38 @@ var userView = {
   allVotesdiv: function(){
     var self = this;
     if(!jQuery.isEmptyObject(self.currentUser)){
-      // var allvotesdiv = $("<div class = 'allvotesdiv'></div>");
       var userDiv = $(".userdiv");
-      // $(".userdiv").append(allvotesdiv);
-      console.log("This is the all votes div");
+      var allvotesdiv = $("<div class = 'allvotesdiv'></div>");
+      userDiv.append(allvotesdiv);
       var email = self.currentUser.local.email;
       var votesTotal = self.currentUser.votes.length;
-      var showEmail = $("<h2>" + email + "</h2>");
-      var showVotes = $("<h3>" + votesTotal +"</h3>");
-      userDiv.append(showEmail);
-      showEmail.append(showVotes);
+      var votes = [];
+      votes = self.currentUser.votes;
+      var sortedVotes = votes.sort(self.sortFunction);
+      self.appendUserInformation(allvotesdiv, votesTotal, email);
+      self.addVotesToUserInfo(sortedVotes, allvotesdiv);
     }
-  }
+  },
+  appendUserInformation: function(allvotesdiv, votesTotal, email){
+    var showEmail = $("<h3>" + email + "</h3>");
+    var showVotes = $("<h4>" + votesTotal +"</h4>");
+    allvotesdiv.append(showEmail);
+    showEmail.append(showVotes);
+    allvotesdiv.append("<h4>UpVotes:</h4>");
+  },
+  addVotesToUserInfo: function(sortedVotes, allvotesdiv){
+    for(var i = 0; i < 10; i++){
+      if(sortedVotes[i].vote){
+        var dates = $("<p>" + sortedVotes[i].createdAt + ", " + sortedVotes[i].location_id + "</p>");
+        allvotesdiv.append(dates);
+      }
+    }
+  },
+  sortFunction: function(a,b){
+      var dateA = new Date(a.createdAt).getTime();
+      var dateB = new Date(b.createdAt).getTime();
+      return dateA < dateB ? 1 : -1;
+    },
 };
 
 
