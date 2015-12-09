@@ -5,6 +5,11 @@ $(document).ready(function(){
   userView.submitForm();
   userView.logOut();
 
+  $("body").on("click", function(){
+    var currentUser = User.fetch();
+    console.log("THIS IS THE CURRENT USER!: " + currentUser);
+    return currentUser;
+  });
 
   Location.getLocation.then(function(res){
     console.log(res);

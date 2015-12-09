@@ -9,6 +9,7 @@ var Location = require("../models/location");
 // var VoteCount = require("../models/voteCount");
 
 router.get("/", function(req, res){
+  console.log("THIS IS THE CURRENT USER VOTES::: " + global.currentUser.votes );
     res.json(global.currentUser.votes);
 });
 
@@ -25,6 +26,7 @@ router.post("/", function(req, res){
   // console.log('voteInfo', voteInfo);
   var match, prevVote;
   var currentUser = global.currentUser;
+  console.log("This is the current user: " + currentUser);
   // User.findOne({"local.email": "sammehta88@gmail.com"}, function(err, currentUser){
     var votesArray = currentUser.votes;
     // console.log(votesArray);

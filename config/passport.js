@@ -137,39 +137,39 @@ module.exports = function(passport){
     });
   }));
 
-  passport.use('google', new GoogleStrategy({
-    clientID: env.google.clientID,
-    clientSecret: env.google.clientSecret,
-    callbackURL: env.google.callbackURL
-  },
-    function(accessToken, refreshToken, profile, done) {
-      // asynchronous verification, for effect...
-      process.nextTick(function () {
-        User.findOne({'google.id': profile.id}, function(err, user){
-          if(err) return done(err);
-          // If the user already exists, just return that user.
-          if(user){
-            return done(null, user);
-          } else {
-            // Otherwise, create a brand new user using information passed from Twitter.
-            var newUser = new User();
-            // Here we're saving information passed to us from Twitter.
-            console.log('A token', accessToken);
-            console.log('R token', refreshToken);
-            console.log('profiel', profile);
-            newUser.google.id = profile.id;
-            // newUser.google.token = token;
-            // newUser.google.username = profile.username;
-            // newUser.google.displayName = profile.displayName;
-
-            newUser.save(function(err){
-              if(err) throw err;
-              return done(null, newUser);
-            });
-          }
-        });
-      });
-  }));
+  // passport.use('google', new GoogleStrategy({
+  //   clientID: env.google.clientID,
+  //   clientSecret: env.google.clientSecret,
+  //   callbackURL: env.google.callbackURL
+  // },
+  //   function(accessToken, refreshToken, profile, done) {
+  //     // asynchronous verification, for effect...
+  //     process.nextTick(function () {
+  //       User.findOne({'google.id': profile.id}, function(err, user){
+  //         if(err) return done(err);
+  //         // If the user already exists, just return that user.
+  //         if(user){
+  //           return done(null, user);
+  //         } else {
+  //           // Otherwise, create a brand new user using information passed from Twitter.
+  //           var newUser = new User();
+  //           // Here we're saving information passed to us from Twitter.
+  //           console.log('A token', accessToken);
+  //           console.log('R token', refreshToken);
+  //           console.log('profiel', profile);
+  //           newUser.google.id = profile.id;
+  //           // newUser.google.token = token;
+  //           // newUser.google.username = profile.username;
+  //           // newUser.google.displayName = profile.displayName;
+  //
+  //           newUser.save(function(err){
+  //             if(err) throw err;
+  //             return done(null, newUser);
+  //           });
+  //         }
+  //       });
+  //     });
+  // }));
 
   passport.use('local-login', new LocalStrategy({
     usernameField : 'email',
