@@ -33,7 +33,7 @@ LocationView.prototype = {
          console.log(self.loc);
        });
        self.$el.find('.upvote').on('click', function(){
-         self.loc.postVote(self.loc.id, true);
+         self.loc.postVote(true);
        });
        self.$el.find('.downvote').on('click', function(){
          self.loc.postVote(self.loc.id, false);

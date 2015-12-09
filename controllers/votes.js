@@ -20,9 +20,7 @@ router.post("/", function(req, res){
     location_id: req.body.location_id,
     vote: req.body.vote === 'true' ? true : false //converts string to boolean
   };
-  // console.log('body', req.body);
-  // console.log('body vote',req.body.vote);
-  // console.log('voteInfo', voteInfo);
+
   var match, prevVote;
   var currentUser = global.currentUser;
   var votesArray = currentUser.votes;
@@ -80,7 +78,6 @@ router.post("/", function(req, res){
         });
       }
   });
-  // });
 });
 
 module.exports = router;
