@@ -1,7 +1,7 @@
 
 var LocationView = function(location) {
   this.loc = location;
-  this.$el = $("<div class='location'></div>");
+  this.$el = $("<div class='location loc-style'></div>");
 //   $(this).append('<input type="button" value="Upvote">').on("click", "button", function(){
 //
 // });
@@ -11,12 +11,11 @@ LocationView.prototype = {
   render: function(){
     var self = this;
 
-    var showLocations = self.$el.find(".showLocations");
+    var showLocations = self.$el.find("");
     var locationsDiv = self.$el.find("div.location");
 
-
-    showLocations.on("click", function(){
-      console.log("setup click");
+    this.$el.on("click", function(){
+      console.log("setup click on click");
         self.toggleLocations(locationsDiv);
       });
 
@@ -24,6 +23,7 @@ LocationView.prototype = {
     self.$el.append("<h4>" + self.loc.count + "</h4>");
     self.$el.append('<input type="button" value="upvote" class="upvote">');
     self.$el.append('<input type="button" value="downvote" class="downvote">');
+
     self.click();
     $('.loc-container').append(self.$el);
   },
@@ -39,18 +39,35 @@ LocationView.prototype = {
          self.loc.postVote(self.loc.id, false);
        });
      },
+   toggleDiv: function(locationsDiv){
+     console.log("test");
+     if(this.$el.is(":visible")){
+       console.log("Hide/Show");
+       locationsDiv.siblings("div.location").text("Hide Details");
+     } else {
+       console.log("second statement");
+       locationsDiv.siblings("div.location").text("Show Details");
+     }
+   },
   toggleLocations: function(locationsDiv){
-    console.log("test");
-    var self = this;
-    if(locationDiv.children().length === 0){
-      this.Location.fetch().then(function(locations){
-        self.$el.append("<div>" + this.loc.icon + "</div>");
-        self.$el.append("<div>" + this.loc.address + "</div>");
-        self.$el.append("<div>" + this.loc.types + "</div>");
-        self.$el.append("<div>" + this.loc.rating + "</div>");
-      });
+    console.log("Locations Div on Click");
+    // var self = this;
+    if(locationsDiv.children().length === 0){
+      // this.Location.fetch().then(function(locations){
+        this.$el.append("<div>" + this.loc.icon + "</div>");
+        this.$el.append("<div>" + this.loc.address + "</div>");
+        this.$el.append("<div>" + this.loc.types + "</div>");
+        this.$el.append("<div>" + this.loc.rating + "</div>");
+      // });
     }
     locationsDiv.toggle();
     this.toggleDiv(locationsDiv);
-  }
+        // $('.loc-container').append(self.$el);
+  },
+  // appendLocations: function(locations, locationsDiv){
+  // locations.forEach(function(location){
+  //   var toggleLocationView = new toggleLocationView(location);
+  //   locationsDiv.append(toggleLocationView.render());
+  // });
+// },
 };
