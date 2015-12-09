@@ -34,11 +34,10 @@ var User = require("../models/user");
 
 
 var usersController = {
-
   postRedirect: function(req, res){
     var user = global.currentUser;
     console.log("In this route, I am sending json!!!!" + user);
-    res.json(global.currentUser);
+    res.json(user);
   },
   postSignup: function(req, res){
     var signUpStrategy = passport.authenticate('local-signup', {
@@ -67,7 +66,16 @@ var usersController = {
     res.render("secret.hbs");
   },
   getUser: function(req, res) {
-    res.json(global.currentUser);
+    var currentUser = req.user;
+    User.findOne({"local.email": currentUser.local.email}, function(err, user){
+      if(user){
+        res.json(user);
+      }
+      else{
+        console.log(err);
+        res.json({message: "No user could be found, please login again"});
+      }
+    });
   },
   getTwitter: function(req, res){
     var loginProperty = passport.authenticate('twitter');
@@ -75,6 +83,29 @@ var usersController = {
   },
   getUserTwitter: function(req, res){
     var loginProperty = passport.authenticate('twitter', {
+      successRedirect: '/',
+      failureRedirect: '/login'
+    });
+    return loginProperty(req, res);
+  },
+
+  getFacebook: function(req, res){
+    var loginProperty = passport.authenticate('facebook');
+    return loginProperty(req, res);
+  },
+  getUserFacebook: function(req, res){
+    var loginProperty = passport.authenticate('facebook', {
+      successRedirect: '/',
+      failureRedirect: '/login'
+    });
+    return loginProperty(req, res);
+  },
+  getGoogle: function(req, res){
+    var loginProperty = passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/plus.login' });
+    return loginProperty(req, res);
+  },
+  getUserGoogle: function(req, res){
+    var loginProperty = passport.authenticate('google', {
       successRedirect: '/',
       failureRedirect: '/login'
     });

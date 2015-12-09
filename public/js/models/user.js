@@ -6,14 +6,45 @@ var User = function(info) {
   this.id = info.id;
 };
 
+
 User.fetch = function() {
-  var request = $.getJSON("http://localhost:3000/")
-  .then(function(res){
-    var user = new User(response);
-    console.log(user);
-    return user;
+  var self = this;
+  var url = "http://localhost:3000/user";
+  var request = $.getJSON(url).then(function(req, res){
+    console.log(req.local.email);
+    console.log("THIS IS FETCHING THE USER and response!!! " + res + "ANNNND" + req);
+    return req;
+  }).fail(function(response){
+    console.log("JS FAILED TO GET USER");
   });
+  console.log(request);
+  return request;
 };
+
+Location.prototype.getVoteCount = function(){
+  var self = this; //cahnge back to id
+  var request = $.ajax({
+    url: "http://localhost:3000/locations/" + self.id,
+    type: "GET",
+    dataType: "json"
+  }).then(function(res){
+    console.log('res',res);
+    return res;
+  }).fail(function(){
+    alert('FAILRUE');
+  });
+
+  return request;
+};
+
+// User.prototype = {
+//   fetchVotes: function(){
+//     var user = this;
+//     var url = "http://localhost:3000/currentuser"
+//     user.votes = [];
+//     var
+//   }
+// }
 
 User.logOut = function(){
   var self = this;
@@ -21,7 +52,7 @@ User.logOut = function(){
   $.getJSON(url, function(response){
     console.log(response);
   }).then(function(res){
-    alert("LOGOUT!");
+    console.log("LOGOUT!");
   }).fail(function(res){
     console.log("FAILED LOGOUTTTT");
     alert("failure from user post");
@@ -44,7 +75,7 @@ User.post = function(){
       password: $("#password").val()
     }
   }).then(function(res){
-    alert("sucess user!");
+    console.log("sucess user!");
   }).fail(function(res){
     console.log(res);
     alert("failure from user post");
