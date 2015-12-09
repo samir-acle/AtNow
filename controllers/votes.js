@@ -9,6 +9,7 @@ var Location = require("../models/location");
 // var VoteCount = require("../models/voteCount");
 
 router.get("/", function(req, res){
+  console.log("THIS IS THE CURRENT USER VOTES::: " + global.currentUser.votes );
     res.json(global.currentUser.votes);
 });
 
@@ -20,67 +21,66 @@ router.post("/", function(req, res){
     location_id: req.body.location_id,
     vote: req.body.vote === 'true' ? true : false //converts string to boolean
   };
-  // console.log('body', req.body);
-  // console.log('body vote',req.body.vote);
-  // console.log('voteInfo', voteInfo);
+
   var match, prevVote;
   var currentUser = global.currentUser;
-  // User.findOne({"local.email": "sammehta88@gmail.com"}, function(err, currentUser){
-    var votesArray = currentUser.votes;
-    // console.log(votesArray);
+  var votesArray = currentUser.votes;
 
+    //TODO: use findOne?
     function findMatch() {
       for (var i = 0; i < votesArray.length; i++) {
         if (votesArray[i].location_id === voteInfo.location_id){
           match = i;
           prevVote = votesArray[i].vote;
+          console.log('match found');
           return;
-          // return match;
         }
       }
     }
     findMatch();
     // console.log('match', match);
     // console.log('prevvote', prevVote);
+    Location.findOne({"location_id": voteInfo.location_id}, function(err, loc){
+      if (!match) {
+        currentUser.votes.push(new Vote(voteInfo));
+        currentUser.save().then(function(){
+          //TODO: refactor, separate out code into different function
+            if (loc){
+              loc.count = voteInfo.vote ? loc.count + 1 : loc.count - 1;
+            } else {
+              loc = new Location({
+                "location_id": voteInfo.location_id,
+                "count": voteInfo.vote ? 1 : -1  //TODO: -1 or 0? can they have negative votes?
+              });
+            }
+            loc.save();
+            console.log('in create',currentUser.votes.length);
+            res.json(loc);
+          // });
+        });
+      } else if (voteInfo.vote === prevVote){
+        console.log('in match same');
+        console.log(currentUser.votes[match]);
+        currentUser.votes[match].remove();
+        currentUser.save(function(err){
+          if(err) throw err;
 
-    if (!match) {
-      // console.log('no match');
-      currentUser.votes.push(new Vote(voteInfo));
-      currentUser.save().then(function(){
-        //TODO: refactor, separate out code into different function
-        Location.findOne({"location_id": voteInfo.location_id}, function(err, loc){
-          if (loc){
-            loc.count = voteInfo.vote ? loc.count + 1 : loc.count - 1;
-          } else {
-            loc = new Location({
-              "location_id": voteInfo.location_id,
-              "count": voteInfo.vote ? 1 : 0  //TODO: -1 or 0? can they have negative votes?
-            });
-          }
+          loc.count = prevVote ? loc.count - 1 : loc.count + 1;
           loc.save();
           res.json(loc);
         });
-      });
-    } else if (voteInfo.vote === prevVote){
-      // console.log('match - same');
-      res.json(currentUser.votes.length);
-    } else {
-      // console.log(voteInfo.vote === votesArray[match].vote);
-      // console.log(votesArray[match].vote);
-      // console.log('match - different');
-      currentUser.votes[match].vote = voteInfo.vote;
-      // console.log('this should be false', currentUser.votes.vote);
-      currentUser.save().then(function(){
-        Location.findOne({"location_id": voteInfo.location_id}, function(err, loc){
-          loc.count = prevVote ? loc.count - 2 : loc.count + 2;
-          loc.save();
-          res.json(loc);
-        }); //do i need these in promises??
-      });
-    }
-  // });
-  // });
+      } else {
+        currentUser.votes[match].vote = voteInfo.vote;
+        currentUser.save(function(){
+            loc.count = prevVote ? loc.count - 2 : loc.count + 2;
+            loc.save();
+            console.log('in match diff',currentUser.votes.length);
+            res.json(loc);
+        });
+      }
+  });
 });
 
-
 module.exports = router;
+
+//TODO: change to use better mongoose methods - findbyandupdate
