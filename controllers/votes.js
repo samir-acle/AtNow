@@ -29,6 +29,7 @@ router.post("/", function(req, res){
     var votesArray = currentUser.votes;
     // console.log(votesArray);
 
+    //TODO: use findOne?
     function findMatch() {
       for (var i = 0; i < votesArray.length; i++) {
         if (votesArray[i].location_id === voteInfo.location_id){
@@ -42,45 +43,44 @@ router.post("/", function(req, res){
     findMatch();
     // console.log('match', match);
     // console.log('prevvote', prevVote);
-
-    if (!match) {
-      // console.log('no match');
-      currentUser.votes.push(new Vote(voteInfo));
-      currentUser.save().then(function(){
-        //TODO: refactor, separate out code into different function
-        Location.findOne({"location_id": voteInfo.location_id}, function(err, loc){
-          if (loc){
-            loc.count = voteInfo.vote ? loc.count + 1 : loc.count - 1;
-          } else {
-            loc = new Location({
-              "location_id": voteInfo.location_id,
-              "count": voteInfo.vote ? 1 : 0  //TODO: -1 or 0? can they have negative votes?
-            });
-          }
-          loc.save();
-          res.json(loc);
+    Location.findOne({"location_id": voteInfo.location_id}, function(err, loc){
+      if (!match) {
+        // console.log('no match');
+        currentUser.votes.push(new Vote(voteInfo));
+        currentUser.save().then(function(){
+          //TODO: refactor, separate out code into different function
+          // Location.findOne({"location_id": voteInfo.location_id}, function(err, loc){
+            if (loc){
+              loc.count = voteInfo.vote ? loc.count + 1 : loc.count - 1;
+            } else {
+              loc = new Location({
+                "location_id": voteInfo.location_id,
+                "count": voteInfo.vote ? 1 : 0  //TODO: -1 or 0? can they have negative votes?
+              });
+            }
+            loc.save();
+            res.json(loc);
+          // });
         });
-      });
-    } else if (voteInfo.vote === prevVote){
-      // console.log('match - same');
-      res.json(currentUser.votes.length);
-    } else {
-      // console.log(voteInfo.vote === votesArray[match].vote);
-      // console.log(votesArray[match].vote);
-      // console.log('match - different');
-      currentUser.votes[match].vote = voteInfo.vote;
-      // console.log('this should be false', currentUser.votes.vote);
-      currentUser.save().then(function(){
-        Location.findOne({"location_id": voteInfo.location_id}, function(err, loc){
-          loc.count = prevVote ? loc.count - 2 : loc.count + 2;
-          loc.save();
-          res.json(loc);
-        }); //do i need these in promises??
-      });
-    }
-  // });
+      } else if (voteInfo.vote === prevVote){
+        currentUser.votes.pull({"location_id": voteInfo.location_id});
+        res.json(currentUser.votes.length);
+      } else {
+        // console.log(voteInfo.vote === votesArray[match].vote);
+        // console.log(votesArray[match].vote);
+        // console.log('match - different');
+        currentUser.votes[match].vote = voteInfo.vote;
+        // console.log('this should be false', currentUser.votes.vote);
+        currentUser.save().then(function(){
+          // Location.findOne({"location_id": voteInfo.location_id}, function(err, loc){
+            loc.count = prevVote ? loc.count - 2 : loc.count + 2;
+            loc.save();
+            res.json(loc);
+          // }); //do i need these in promises??
+        });
+      }
+  });
   // });
 });
-
 
 module.exports = router;
