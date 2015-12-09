@@ -35,6 +35,7 @@ Location.prototype.postVote = function(id, vote) {
     }
   }).then(function(res){
     console.log(res);
+    // console.log(res);
   }).fail(function(){
     alert('FAILRUE');
   });
@@ -108,7 +109,7 @@ Location.fetch = function(type){
   var lat;
   var long;
   type = type || "food|store|bar"; //change defaults - make it preference?
-  console.log(type);
+  // console.log(type);
   if (this.currentLat) {
     lat = this.currentLat;
     long = this.currentLong;
@@ -120,7 +121,7 @@ Location.fetch = function(type){
   })
   .then(function(res){
     var venues = res.results;
-    console.log(venues);
+    // console.log(venues);
     var locations = [];
     for (var i = 0; i < venues.length; i++) {
       locations.push(new Location(venues[i]));
@@ -128,7 +129,7 @@ Location.fetch = function(type){
     return locations;
   })
   .fail(function(){
-    console.log('location fetch fail');
+    // console.log('location fetch fail');
   });
 
   return request;
@@ -139,12 +140,12 @@ Location.getLocation = new Promise(function(resolve, reject) {
     startPos = position;
     var lat = startPos.coords.latitude;
     var long = startPos.coords.longitude;
-    console.log('what what');
+    // console.log('what what');
     Location.currentLat = lat;
     Location.currentLong = long;
 
     if (Location.currentLat){
-      console.log(Location.currentLat + ',' + Location.currentLong);
+      // console.log(Location.currentLat + ',' + Location.currentLong);
       resolve("Stuff worked!");
     }
     else {

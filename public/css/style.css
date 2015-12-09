@@ -20,21 +20,21 @@ li {
   font-size: 22px;
 }
 
-.mid-test {
-    display:inline-block;
+.container {
+  margin: 0 auto;
+}
+.row {
     min-height: 600px;
-    width: 65%;
     background-color: #e88f7e;
     border-radius: 10px 10px 10px 10px;
 }
 
-.side {
-  display:inline-block;
+.col-md-4 {
   min-height: 600px;
-  padding-left: 10px;
-  width:32%;
   background-color: #ffcb87;
   border-radius: 10px 10px 10px 10px;
-  margin-left: 20px;
+}
 
+form {
+  visibility: hidden;
 }

@@ -26,13 +26,13 @@ router.get("/", function(req, res){
     ["key", env.googleKey],
     ["pagetoken", req.query.nextPage || ""]
   ];
-  console.log(options);
+  // console.log(options);
 
   options.forEach(function(option){
     url = url + "&"+ option[0] + "=" + option[1];
   });
 
-  console.log(url);
+  // console.log(url);
 
   request(url, function(err, response, body) {
     res.send(body);

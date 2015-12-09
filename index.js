@@ -52,6 +52,7 @@ app.use(function(req, res, next) {
 app.use("/locations", require("./controllers/locationController"));
 app.use("/votes", require("./controllers/votes"));
 
+
 var routes = require("./config/routes");
 app.use(routes);
 
