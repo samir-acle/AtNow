@@ -11,29 +11,11 @@ User.fetch = function() {
   var self = this;
   var url = "http://localhost:3000/user";
   var request = $.getJSON(url).then(function(req, res){
-    console.log(req.local.email);
-    console.log("THIS IS FETCHING THE USER and response!!! " + res + "ANNNND" + req);
+    console.log("THIS IS FETCHING THE USER");
     return req;
   }).fail(function(response){
     console.log("JS FAILED TO GET USER");
   });
-  console.log(request);
-  return request;
-};
-
-Location.prototype.getVoteCount = function(){
-  var self = this; //cahnge back to id
-  var request = $.ajax({
-    url: "http://localhost:3000/locations/" + self.id,
-    type: "GET",
-    dataType: "json"
-  }).then(function(res){
-    console.log('res',res);
-    return res;
-  }).fail(function(){
-    alert('FAILRUE');
-  });
-
   return request;
 };
 
@@ -50,9 +32,13 @@ User.logOut = function(){
   var self = this;
   var url = "http://localhost:3000/logout";
   $.getJSON(url, function(response){
-    console.log(response);
+    // console.log(response);
   }).then(function(res){
     console.log("LOGOUT!");
+    $(".allvotesdiv").empty();
+    userView.currentUser = {};
+    // userView.toggleLoginDisplays();
+    // userView.toggleLogoutDisplays();
   }).fail(function(res){
     console.log("FAILED LOGOUTTTT");
     alert("failure from user post");
@@ -75,7 +61,10 @@ User.post = function(){
       password: $("#password").val()
     }
   }).then(function(res){
-    console.log("sucess user!");
+    console.log("sucess user signup! " + res);
+    userView.userVotes();
+    // userView.toggleLoginDisplays();
+    return res;
   }).fail(function(res){
     console.log(res);
     alert("failure from user post");
@@ -96,9 +85,10 @@ User.postLogin = function(){
       password: $("#password").val()
     }
   }).then(function(res){
-    alert("sucess user!");
+    userView.userVotes();
+    // IF its a sucess, hide login displays
+    // userView.toggleLoginDisplays();
   }).fail(function(res){
-    console.log(res);
-    alert("failure from user post");
+    console("failure from user post to login");
   });
 };

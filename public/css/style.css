@@ -36,7 +36,14 @@ li {
 }
 
 form {
-  visibility: hidden;
+  display: none;
+}
+
+.allvotesdiv{
+  width: 100%;
+  margin: 0 auto;
+  font-size: 12px;
+  display: none;
 }
 
 #logo-atnow {
