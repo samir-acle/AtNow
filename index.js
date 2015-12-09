@@ -49,7 +49,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use("/locations", require("./controllers/ajaxController"));
+app.use("/locations", require("./controllers/locationController"));
 app.use("/votes", require("./controllers/votes"));
 
 

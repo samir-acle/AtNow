@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>@Now</title>
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- If we want this for mobile at some point we need it ^  -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -25,10 +25,9 @@
           <ul id="custom" class="nav navbar-nav navbar-right">
             <li><a href="/">Home</a></li>
             <li>Account</li>
-            <li>Contact Us</li>
-            <li class="logout"><a href="#">Logout </a></li>
-            <li class= "login"><a href="#">Login</a></li>
-            <li class= "signup"><a href="#">Signup</a></li>
+            <li class="logout">Logout</li>
+            <li class= "login">Login</li>
+            <li class= "signup">Signup</li>
           </ul>
           <!-- if use signed in else etc. -->
           <ul class="nav navbar-nav pull-right">
@@ -45,10 +44,9 @@
         <div class="col-md-8">
           <button class="restaurants">Restaurants</button>
           <button class="stores">Stores</button>
-          <button class="bars">Bars</button>
           <ul class="loc-container"></ul>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 userdiv">
           <form method="post" action="/login">
             <h2>Login</h2>
             <div class="form-group form-names">
@@ -76,7 +74,8 @@
         </div>
       </div>
     </div>
-    <div id="container" class="col-md-9 center-block">
-    </nav>
+    <div class="side">
+      <h1> Other stuff can go here</h1>
+    </div>
   </body>
   </html>
