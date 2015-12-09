@@ -42,7 +42,7 @@ Location.prototype.postVote = function(id, vote) {
 };
 
 function createPromise(array) {
-  Location.addCount = new Promise(function(resolve, reject){
+  Location.addCount = new Promise(function(resolve, reject){ //TODO: add reject
       var oldArray = array;
       var newArray = [];
       console.log('old array',oldArray);
@@ -67,7 +67,6 @@ function createPromise(array) {
 
       return newArray;
   });
-  console.log(Location.addCount);
 }
 
 //TODO: refactor - move storing of location arrays and coords to a new model?
