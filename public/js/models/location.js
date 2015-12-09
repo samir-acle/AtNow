@@ -17,7 +17,8 @@ Location.prototype.postVote = function(vote) {
     dataType: "json",
     data: {
       location_id: self.id,
-      vote: vote
+      vote: vote,
+      name: self.name
     }
   }).then(function(res){
     //TODO: refactor out below since in code in script.js
