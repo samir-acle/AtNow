@@ -1,12 +1,9 @@
 var express = require("express");
 var router = express.Router();
-// var Vote = mongoose.model('Vote');
-// var User = mongoose.model('User');
 var Preference = require("../models/preference");
 var Vote = require("../models/vote");
 var User = require("../models/user");
 var Location = require("../models/location");
-// var VoteCount = require("../models/voteCount");
 
 router.get("/", function(req, res){
   // console.log("THIS IS THE CURRENT USER VOTES::: " + global.currentUser.votes );
@@ -18,6 +15,7 @@ router.get("/", function(req, res){
 //TODO: add route to delete user vote
 router.post("/", function(req, res){
   var voteInfo = {
+    name: req.body.name,
     location_id: req.body.location_id,
     vote: req.body.vote === 'true' ? true : false //converts string to boolean
   };
