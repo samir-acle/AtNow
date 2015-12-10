@@ -8,15 +8,13 @@ body {
   background-color: #f7f7f7;
 }
 
-div.location.loc-style {
-  margin-bottom: 5px;
-  padding: 5px;
-}
+
+/** Custom Buttons **/
 
 .btn-custom {
-  color: #3ABEC7;
-  background: rgba(0,0,0,0);
-  border: solid 3px #3ABEC7;
+  color: #28AADC;
+  background: #fff;
+  border: solid 3px #28AADC;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", sans-serif;
   font-weight: 400;
   padding: 20px;
@@ -26,9 +24,9 @@ div.location.loc-style {
 }
 
 .btn-custom:hover {
-  border-color: #3ABEC7;
+  border-color: #28AADC;
   color: #fff;
-  background-color: #3ABEC7;
+  background-color: #28AADC;
 
 }
 
@@ -36,6 +34,37 @@ div.location.loc-style {
   border-color: #27496d;
   color: #27496d;
 }
+
+.btn-custom-set {
+  color: #28AADC;
+  background: #fff;
+  border: solid 2px #28AADC;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", sans-serif;
+  font-weight: 400;
+  padding: 4px 10px 4px 10px;
+  line-height: 18px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  display: inline-block;
+}
+
+.btn-custom-set:hover {
+  border-color: #28AADC;
+  color: #fff;
+  background-color: #28AADC;
+
+}
+
+.btn-custom-set:active {
+  border-color: #27496d;
+  color: #27496d;
+}
+
+.input-div {
+  margin-top: -25px;
+}
+
+/** Form **/
 
 li {
   padding-left: 20px;
@@ -83,7 +112,15 @@ form {
 /** logo and nav **/
 
 #logo-atnow {
-  background-image:
+    font-family: 'Open Sans', sans-serif;
+    font-size: 50px;
+    /*letter-spacing: 3px;*/
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.navbar-brand {
+  margin-top: 7px;
 }
 
 .navbar-custom {
