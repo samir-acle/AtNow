@@ -104,7 +104,6 @@ User.postLogin = function(){
   }).then(function(res, req){
     User.fetch();
     session.reload();
-    MovieView.toggle();
     // IF its a sucess, hide login displays
     // userView.toggleLoginDisplays();
   }).fail(function(res){
