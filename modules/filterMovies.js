@@ -9,7 +9,8 @@ module.exports = function(theaters, callback){
       var movieTitle = movie.title;
       var showtimes = [];
       movie.showtimes.forEach(function(showtime){
-        if (showtime - currentTime > 0) {
+        var timeDiff = showtime - currentTime;
+        if (timeDiff > 0 && timeDiff < 1) { //TODO: determine if time good
           showtimes.push(showtime);
         }
       });
