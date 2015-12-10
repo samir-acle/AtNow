@@ -9,7 +9,7 @@ var User = function(info) {
 // need to create object for user new Object()
 User.fetch = function() {
   var self = this;
-  var url = "http://localhost:3000/user";
+  var url = "http://127.0.0.1:3000/user";
   var request = $.getJSON(url).then(function(req, res){
     console.log("THIS IS FETCHING THE USER");
     return req;
@@ -28,7 +28,7 @@ User.fetch = function() {
 // User.prototype = {
 //   fetchVotes: function(){
 //     var user = this;
-//     var url = "http://localhost:3000/currentuser"
+//     var url = "http://127.0.0.1:3000/currentuser"
 //     user.votes = [];
 //     var
 //   }
@@ -36,7 +36,7 @@ User.fetch = function() {
 
 User.logOut = function(){
   var self = this;
-  var url = "http://localhost:3000/logout";
+  var url = "http://127.0.0.1:3000/logout";
   $.getJSON(url, function(response){
     // console.log(response);
   }).then(function(res){
@@ -58,7 +58,7 @@ User.logOut = function(){
 // explaining options???
 User.post = function(){
   var self = this;
-  var url = "http://localhost:3000/signup";
+  var url = "http://127.0.0.1:3000/signup";
   var request = $.ajax({
     url: url,
     type: "POST",
@@ -70,7 +70,6 @@ User.post = function(){
       password: $("#password").val()
     }
   }).then(function(res){
-    userView.userVotes();
     // userView.toggleLoginDisplays();
     return res;
   }).fail(function(res){
@@ -81,7 +80,7 @@ User.post = function(){
 
 User.postLogin = function(){
   var self = this;
-  var url = "http://localhost:3000/login";
+  var url = "http://127.0.0.1:3000/login";
   var request = $.ajax({
     url: url,
     type: "POST",
@@ -93,7 +92,6 @@ User.postLogin = function(){
       password: $("#password").val()
     }
   }).then(function(res, req){
-    userView.userVotes();
     // IF its a sucess, hide login displays
     // userView.toggleLoginDisplays();
   }).fail(function(res){

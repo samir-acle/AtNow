@@ -58,7 +58,7 @@ session.error = {};
 
 session.grabLoginErrors = function() {
   var self = this;
-  var url = "http://localhost:3000/failedlogin";
+  var url = "http://127.0.0.1:3000/failedlogin";
   var request = $.getJSON(url).then(function(req, res){
     console.log("THIS IS FETCHING THE Failed message");
     session.error = req;
@@ -72,7 +72,7 @@ session.grabLoginErrors = function() {
 
 session.grabSignUpErros = function(){
   var self = this;
-  var url = "http://localhost:3000/failedsignup";
+  var url = "http://127.0.0.1:3000/failedsignup";
   var request = $.getJSON(url).then(function(req, res){
     console.log("THIS IS FETCHING THE Failed signmessage");
     session.error = req;

@@ -14,7 +14,7 @@ Location.prototype.postVote = function(vote) {
   var self = this;
   console.log(self);
   $.ajax({
-    url: "http://localhost:3000/votes/",
+    url: "http://127.0.0.1:3000/votes/",
     type: "POST",
     dataType: "json",
     data: {
@@ -46,7 +46,7 @@ Location.fetch = function(type){
     return;
   }
 
-  var request = $.getJSON("http://localhost:3000/locations/", {
+  var request = $.getJSON("http://127.0.0.1:3000/locations/", {
     lat: lat,
     long: long,
     type: type
