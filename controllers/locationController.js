@@ -34,14 +34,10 @@ router.get("/", function(req, res){
     url = url + "&"+ option[0] + "=" + option[1];
   });
 
-  console.log(url);
-
   request(url, function(err, response, body) {
-    console.log(response);
     var locations = JSON.parse(body).results;
     getVoteCount(locations, function(err, data){
       if (err) throw err;
-      console.log(data);
       res.json(data);
     });
   });
@@ -55,7 +51,7 @@ router.get("/", function(req, res){
 //     ["key", env.googleKey]
 //   ];
 //   // console.log(options);
-
+//
 //   options.forEach(function(option){
 //     url = url + "&"+ option[0] + "=" + option[1];
 //   });

@@ -62,7 +62,7 @@ Location.fetch = function(type){
     var locations = [];
     for (var i = 0; i < venues.length; i++) {
       var newLoc = new Location(venues[i]);
-      newLoc.getDetails();
+      // newLoc.getDetails();
       locations.push(newLoc);
     }
     return locations;

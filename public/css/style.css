@@ -103,9 +103,6 @@ form {
   display: none;
 }
 
-.upvote {
-
-}
 
 
 
@@ -118,8 +115,13 @@ form {
 
 .navbar-custom {
   min-height: 65px;
-  background-color: #A0C2EE;
-  border-bottom: 2px solid #8BA8CF;
+  background-color: #444;
+  border-bottom: 2px solid #333;
+}
+
+ul li {
+  color: white;
+  cursor: pointer;
 }
 
 /** Toggle Locations **/
@@ -222,22 +224,20 @@ h3,
 @media only screen {
 
 
-.logo-atnow {
+#logo-atnow {
       font-family: 'Open Sans', sans-serif;
       /*letter-spacing: 3px;*/
       text-transform: uppercase;
       font-weight: 600;
-      font-size: 8rem;
+      font-size: 4rem;
       text-align: center;
-      background: -webkit-linear-gradient(left, #33235B, #D62229, #E97639, #792042, #33235B);
-      background: linear-gradient(left, #33235B, #D62229, #E97639, #792042, #33235B);
-      background-size: 3200px 200px;
-      margin-top: 20vh;
+      background: -webkit-linear-gradient(left, #a0d4e8, #28aadc, #3997bb, #28aadc, #b1d8e6);
+      background: linear-gradient(left, #a0d4e8, #28aadc, #3997bb, #28aadc, #b1d8e6);
       color: transparent;
       -webkit-background-clip: text;
       -webkit-animation: animate-logo;
       -webkit-animation-delay: 0;
-      -webkit-animation-duration: 7s;
+      -webkit-animation-duration: 50s;
       -webkit-animation-timing-function: linear;
       -webkit-animation-iteration-count: infinite;
       -webkit-animation-fill-mode: forwards;
