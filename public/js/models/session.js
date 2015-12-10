@@ -117,4 +117,11 @@ session.changeType = function(){
   session.needReload = false;
 };
 
+session.reload = function(){
+  session.needReload = true;
+  session.loadLocations().then(function(data){
+    session.createLocationViews();
+  });
+};
+
 //TODO: change sessions to this where applicable

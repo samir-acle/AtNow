@@ -46,6 +46,7 @@ User.logOut = function(){
       userView.currentUser = {};
       session.showLogout();
     }
+    session.reload();
     // userView.toggleLoginDisplays();
     // userView.toggleLogoutDisplays();
   }).fail(function(res){
@@ -93,6 +94,7 @@ User.postLogin = function(){
       password: $("#password").val()
     }
   }).then(function(res, req){
+    session.reload();
     userView.userVotes();
     // IF its a sucess, hide login displays
     // userView.toggleLoginDisplays();
