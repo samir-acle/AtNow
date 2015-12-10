@@ -1,6 +1,6 @@
 $(document).ready(function($){
 
-  var animationDelay = 3000;
+  var animationDelay = 2500;
 
   animateHeadline($('.cta'));
 
