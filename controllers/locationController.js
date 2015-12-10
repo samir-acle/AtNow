@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var request = require("request");
-// var env = require("../env");
+var env = require("../env");
 var Location = require("../models/location");
 var getVoteCount = require("../modules/getVoteCount");
 
@@ -24,7 +24,7 @@ router.get("/", function(req, res){
     ["opennow", ""],
     ["location", latlong],
     ["radius", 1600],
-    ["key", process.env.googleKey],
+    ["key", env.googleKey],
     ["pagetoken", req.query.nextPage || ""]
   ];
   // console.log(options);
