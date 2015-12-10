@@ -4,7 +4,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var User = require("../models/user");
-var env = require("../env");
+// var env = require("../env");
 
 module.exports = function(passport){
 

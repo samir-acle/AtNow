@@ -13,6 +13,12 @@ function authenticatedUser(req, res, next) {
 router.route("/currentuser")
 .get(usersController.postRedirect);
 
+router.route("/failedlogin")
+.get(usersController.failureRedirectLogin);
+
+router.route("/failedsignup")
+.get(usersController.failureRedirectSignup);
+
 router.route('/signup')
 .post(usersController.postSignup);
 

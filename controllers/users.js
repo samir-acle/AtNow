@@ -32,17 +32,22 @@ var User = require("../models/user");
 //   })
 // })
 
-
 var usersController = {
   postRedirect: function(req, res){
     var user = global.currentUser;
     console.log("In this route, I am sending json!!!!" + user);
     res.json(user);
   },
+  failureRedirectLogin: function(req, res){
+    res.json({message: "Incorrect Username or Password"});
+  },
+  failureRedirectSignup: function(req, res){
+    res.json({message: "This User Already Exists"});
+  },
   postSignup: function(req, res){
     var signUpStrategy = passport.authenticate('local-signup', {
       successRedirect: '/currentUser',
-      failureRedirect: '/',
+      failureRedirect: '/failedsignup',
       failureFlash: true
     });
     return signUpStrategy(req, res);
@@ -51,7 +56,7 @@ var usersController = {
     console.log("Route being hit");
     var loginProperty = passport.authenticate('local-login', {
       successRedirect: '/currentUser',
-      failureRedirect: '/',
+      failureRedirect: '/failedlogin',
       failureFlash: true
     });
     console.log(global.currentUser);

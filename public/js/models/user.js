@@ -6,7 +6,7 @@ var User = function(info) {
   this.id = info.id;
 };
 
-
+// need to create object for user new Object()
 User.fetch = function() {
   var self = this;
   var url = "http://localhost:3000/user";
@@ -14,6 +14,12 @@ User.fetch = function() {
     console.log("THIS IS FETCHING THE USER");
     return req;
   }).fail(function(response){
+    if($('form').attr('action') == '/signup'){
+      session.grabSignUpErros();
+    }
+    else{
+      session.grabLoginErrors();
+    }
     console.log("JS FAILED TO GET USER");
   });
   return request;
@@ -36,7 +42,10 @@ User.logOut = function(){
   }).then(function(res){
     console.log("LOGOUT!");
     $(".allvotesdiv").empty();
-    userView.currentUser = {};
+    if(!jQuery.isEmptyObject(userView.currentUser)){
+      userView.currentUser = {};
+      session.showLogout();
+    }
     // userView.toggleLoginDisplays();
     // userView.toggleLogoutDisplays();
   }).fail(function(res){
@@ -61,7 +70,6 @@ User.post = function(){
       password: $("#password").val()
     }
   }).then(function(res){
-    console.log("sucess user signup! " + res);
     userView.userVotes();
     // userView.toggleLoginDisplays();
     return res;
@@ -84,7 +92,7 @@ User.postLogin = function(){
       email: $("#email").val(),
       password: $("#password").val()
     }
-  }).then(function(res){
+  }).then(function(res, req){
     userView.userVotes();
     // IF its a sucess, hide login displays
     // userView.toggleLoginDisplays();
