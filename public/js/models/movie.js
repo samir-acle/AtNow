@@ -1,8 +1,18 @@
-var Movie = function(theater, movie, time){
-  this.theaterName = theater;
-  this.movieTitle = movie;
-  this.showtime = time;
-}; //gamble on movies?
+// for all showtimes
+// var Movie = function(theater, movie, time){
+//   this.theaterName = theater;
+//   this.movieTitle = movie;
+//   this.showtime = time;
+//   // this.url =
+// }; //gamble on movies?
+
+//for most recent
+var Movie = function(info) {
+  this.time = info.time;
+  this.title = info.title;
+  this.theater = info.theater;
+  this.url = "https://www.google.com/maps/search/" + info.theater;
+};
 
 Movie.fetch = function(){
   var lat = session.currentLat ? session.currentLat : map.lat;
@@ -15,18 +25,37 @@ Movie.fetch = function(){
     console.log('movies', data);
     var movies = [];
     for (var i = 0; i < data.length; i++) {
-      var theater = data[i];
-      var theaterName = theater.theater;
-      for (var j = 0; j < theater.movies.length; j++) {
-        var movie = theater.movie[j];
-        var movieTitle = theater.movie[j].title;
-        for (var k = 0; k < movie.showtimes.length; k++) {
-          var showtime = movie.showtimes[k];
-          movies.push(new Movie(theaterName, movieTitle, showtime));
-        }
-      }
+
+      // for all showtimes
+      // var theater = data[i];
+      // var theaterName = theater.theater;
+      // for (var j = 0; j < theater.movies.length; j++) {
+      //   var movie = theater.movie[j];
+      //   var movieTitle = theater.movie[j].title;
+      //   for (var k = 0; k < movie.showtimes.length; k++) {
+      //     var showtime = movie.showtimes[k];
+      //     movies.push(new Movie(theaterName, movieTitle, showtime));
+      //   }
+      // }
+
+      // for most recent 10
+      movies.push(new Movie(data[i]));
     }
     return movies;
   });
   return request;
+};
+
+Movie.loadMovies = function(){
+  Movie.fetch().then(function(movies){
+    createMovieViews(movies);
+  });
+};
+
+Movie.createMovieViews = function(movies){
+  $('.movie-container').empty();
+  movies.forEach(function(movie){
+    var view = new MovieView(movie); //store in model for future access
+    view.render();
+  });
 };
