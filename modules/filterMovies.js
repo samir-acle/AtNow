@@ -51,6 +51,8 @@ module.exports = function(theaters, callback){
       var showtimes = [];
       movie.showtimes.forEach(function(showtime){
         var timeDiff = showtime - currentTime;
+        console.log('diff',timeDiff);
+        console.log('showtime', showtime);
         if (timeDiff > 0 && timeDiff < 3600000) { //TODO: determine if time good
           showtimes.push({
             time: showtime,
@@ -70,7 +72,7 @@ module.exports = function(theaters, callback){
     var limitedShowtimes = sortedShowtimes.slice(0,limit);
   }
 
-  callback(null, limiteShowtimes);
+  callback(null, limitedShowtimes);
 
   // if (data.length !== 0 ) {
   //   callback(null,data);
