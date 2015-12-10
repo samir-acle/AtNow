@@ -1,4 +1,6 @@
-var session = {};
+var session = {
+  needReload: false
+};
 
 session.getLocation = new Promise(function(resolve, reject) {
   var geoSuccess = function(position) {
@@ -51,3 +53,17 @@ session.createLocationViews = function(type){
 session.saveLocations = function(data, type) {
   session[type.split('|')[0]] = data;
 };
+
+session.changeType = function(){
+  if(session.needReload){
+    session.loadLocations().then(function(data){
+      session.createLocationViews();
+    });
+  } else {
+    session.createLocationViews();
+  }
+
+  session.needReload = false;
+};
+
+//TODO: change sessions to this where applicable
