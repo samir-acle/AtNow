@@ -30,4 +30,9 @@ $(document).ready(function(){
     session.setState('store');
     session.changeType();
   });
+
+  var movieIntervalID = window.setInterval(function(){
+    Movie.loadMovies();
+  }, 60000);
+
 });
