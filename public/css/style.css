@@ -109,22 +109,15 @@ form {
 
 
 
-/** logo and nav **/
-
-#logo-atnow {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 50px;
-    /*letter-spacing: 3px;*/
-    text-transform: uppercase;
-    font-weight: 600;
-}
+/** nav **/
 
 .navbar-brand {
-  margin-top: 7px;
+  margin-top: 5px;
 }
 
 
 .navbar-custom {
+  min-height: 65px;
   background-color: #A0C2EE;
   border-bottom: 2px solid #8BA8CF;
 }
@@ -224,6 +217,69 @@ h3,
   }
 }
 
+/** Logo Animation **/
+
+@media only screen {
+
+
+.logo-atnow {
+      font-family: 'Open Sans', sans-serif;
+      /*letter-spacing: 3px;*/
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 8rem;
+      text-align: center;
+      background: -webkit-linear-gradient(left, #33235B, #D62229, #E97639, #792042, #33235B);
+      background: linear-gradient(left, #33235B, #D62229, #E97639, #792042, #33235B);
+      background-size: 3200px 200px;
+      margin-top: 20vh;
+      color: transparent;
+      -webkit-background-clip: text;
+      -webkit-animation: animate-logo;
+      -webkit-animation-delay: 0;
+      -webkit-animation-duration: 7s;
+      -webkit-animation-timing-function: linear;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-fill-mode: forwards;
+      transition: font-size 500ms ease-in-out;
+    }
+  }
+  }
+
+@media only screen and (min-width: 40.063em) {
+  .logo {
+    margin-top: 30vh;
+    font-size: 13rem;
+  }
+}
+@media only screen and (min-width: 64.063em) {
+  .logo {
+    margin-top: 25vh;
+    font-size: 20rem;
+  }
+}
+@media only screen and (min-width: 90.063em) {
+  .logo {
+    margin-top: 20vh;
+    font-size: 30rem;
+  }
+}
+@media only screen and (min-width: 120.063em) {
+  .logo {
+    margin-top: 15vh;
+    font-size: 40rem;
+  }
+}
+@-webkit-keyframes animate-logo {
+  0% {
+    background-position: 0 3200px;
+  }
+  100% {
+    background-position: 3200px 0;
+  }
+}
+
+/** Other Stuff **/
 
 .red {
   color: red;
