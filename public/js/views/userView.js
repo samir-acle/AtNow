@@ -95,7 +95,7 @@ var userView = {
     var allvotesdiv = $(".allvotesdiv");
     for(var i = 0; i < 10; i++){
       if(sortedVotes[i].vote){
-        var dates = $("<p>" + sortedVotes[i].createdAt + ", " + sortedVotes[i].location_id + "</p>");
+        var dates = $("<p>" + sortedVotes[i].createdAt + ", " + sortedVotes[i].name + "</p>");
         allvotesdiv.append(dates);
       }
     }

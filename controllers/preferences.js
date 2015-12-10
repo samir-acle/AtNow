@@ -6,7 +6,7 @@ var VoteCount = require("../models/voteCount");
 
 function error(response, message){
   response.status(500);
-  response.json({error: message})
+  response.json({error: message});
 }
 
 // var preferencesController = {

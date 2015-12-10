@@ -59,3 +59,20 @@ h3 {
   font-size: 20px;
   color: white;
 }
+.sessionmessage{
+  display: none;
+  margin: 0 auto;
+  width: 100%;
+  font-size: 18.5px;
+  height: 80px;
+  margin-top: 10px;
+}
+
+.logoutmessage{
+  display: none;
+  margin: 0 auto;
+  width: 100%;
+  font-size: 18.5px;
+  height: 80px;
+  margin-top: 10px;
+}
