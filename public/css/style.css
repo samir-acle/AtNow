@@ -149,3 +149,13 @@ h3,
 .green {
   color: green;
 }
+
+/*style for if user has already voted*/
+.true {
+  color: blue;
+}
+
+/*style if user has not alredy chosen this vote*/
+.false {
+  opacity: 0.5;
+}
