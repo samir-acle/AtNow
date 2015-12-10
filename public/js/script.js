@@ -6,7 +6,6 @@ $(document).ready(function(){
   userView.logOut();
   userView.clickAccountInfo();
 
-
 //TODO: put in function so can call again (dont include location call
 //TODO: make so can choose location
   session.getLocation.then(function(res){
@@ -23,19 +22,11 @@ $(document).ready(function(){
 
   $('.restaurants').on('click', function(){
     session.setState('restaurant|bar');
-    session.createLocationViews();
+    session.changeType();
   });
 
   $('.stores').on('click', function(){
     session.setState('store');
-    session.createLocationViews();
-  });
-
-  $('.set-location').on('click', function(){
-    var location = $('input.location').val();
-    session.setLocation(location);
+    session.changeType();
   });
 });
-
-
-//TODO: change so reloads currrent tab

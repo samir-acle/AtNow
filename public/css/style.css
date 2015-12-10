@@ -60,6 +60,7 @@ h3 {
   color: white;
 }
 
+
 /** Rotating Words **/
 
 .cta {
@@ -121,4 +122,21 @@ h3 {
     transform: rotateX(180deg);
     opacity: 0;
   }
+
+.sessionmessage{
+  display: none;
+  margin: 0 auto;
+  width: 100%;
+  font-size: 18.5px;
+  height: 80px;
+  margin-top: 10px;
+}
+
+.logoutmessage{
+  display: none;
+  margin: 0 auto;
+  width: 100%;
+  font-size: 18.5px;
+  height: 80px;
+  margin-top: 10px;
 }

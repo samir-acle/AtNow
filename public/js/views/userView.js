@@ -6,16 +6,16 @@ var userView = {
   // maybe something that toggles login
   showLogin: function(){
     $(".login").on("click", function(){
-      $("form").css("display", "inline");
       $(".form-names").css("display", "none");
+      $("form").toggle();
       $('form').attr('action', '/login');
       $("h2").html("Log In");
     });
   },
   showSignup: function(){
     $(".signup").on("click", function(){
-      $("form").css("display", "inline");
       $(".form-names").css("display", "inline");
+      $("form").toggle();
       $("h2").html("Sign Up");
       $('form').attr('action', '/signup');
     });
@@ -95,7 +95,7 @@ var userView = {
     var allvotesdiv = $(".allvotesdiv");
     for(var i = 0; i < 10; i++){
       if(sortedVotes[i].vote){
-        var dates = $("<p>" + sortedVotes[i].createdAt + ", " + sortedVotes[i].location_id + "</p>");
+        var dates = $("<p>" + sortedVotes[i].createdAt + ", " + sortedVotes[i].name + "</p>");
         allvotesdiv.append(dates);
       }
     }

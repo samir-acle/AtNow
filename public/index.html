@@ -27,10 +27,10 @@
           <!-- If user signed in etc. -->
           <ul id="custom" class="nav navbar-nav navbar-right">
             <li><a href="/">Home</a></li>
-            <li class="account">Account</li>
-            <li class="logout">Logout</li>
-            <li class= "login">Login</li>
-            <li class= "signup">Signup</li>
+            <li class="account"><a href="#">Account</a></li>
+            <li class="logout"><a href="#">Logout</a></li>
+            <li class= "login"><a href="#">Login</a></li>
+            <li class= "signup"><a href="#">Signup</a></li>
           </ul>
           <!-- if use signed in else etc. -->
           <ul class="nav navbar-nav pull-right">
@@ -55,49 +55,55 @@
     		</span>
     	</h1>
     </section>
-      <div class="row">
-        <div class="col-md-8">
-          <button class="restaurants">Restaurants</button>
-          <button class="stores">Stores</button>
-          <ul class="loc-container"></ul>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <button class="restaurants">Restaurants</button>
+        <button class="stores">Stores</button>
+        <ul class="loc-container"></ul>
+      </div>
+      <div class="col-md-4 userdiv">
+        <div class="alert alert-danger alert-dismissable sessionmessage">
+          <strong>Failed!</strong>
         </div>
-        <div class="col-md-4 userdiv">
-          <form method="post" action="/login">
-            <h2>Login</h2>
-            <div class="form-group form-names">
-              <label for="firstname">First Name</label>
-              <input class="form-control" type="text" name="firstname" id="firstname">
-            </div>
-
-            <div class="form-group form-names">
-              <label for="lastname">Last Name</label>
-              <input class="form-control" type="text" name="lastname" id="lastname">
-            </div>
-
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input class="form-control" type="text" name="email" id="email">
-            </div>
-
-            <div class="form-group">
-              <label for="email">Password</label>
-              <input class="form-control" type="password" name="password" id="password">
-            </div>
-
-            <input class="btn btn-default" type="submit">
-          </form>
-          <div class= 'allvotesdiv'></div>
+        <div class="alert alert-success alert-dismissable logoutmessage">
+          <strong>Success: </strong>You are now logged out.
         </div>
+        <form method="post" action="/login">
+          <h2>Login</h2>
+          <div class="form-group form-names">
+            <label for="firstname">First Name</label>
+            <input class="form-control" type="text" name="firstname" id="firstname">
+          </div>
+
+          <div class="form-group form-names">
+            <label for="lastname">Last Name</label>
+            <input class="form-control" type="text" name="lastname" id="lastname">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input class="form-control" type="text" name="email" id="email">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Password</label>
+            <input class="form-control" type="password" name="password" id="password">
+          </div>
+
+          <input class="btn btn-default" type="submit">
+        </form>
+        <div class= 'allvotesdiv'></div>
       </div>
     </div>
 <footer>
   <div class="footer-style">
-
   </div>
 </footer>
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzKpNRyX1TvArCR_ZHz06J-wu1CqM6Niw&callback=map.initMap">
     </script>
     <script src="/js/animations-transitions/rotateAnimation.js"></script>
-  </body>
-  </html>
+</body>
+</html>

@@ -6,6 +6,8 @@ var Location = function(info){
   this.types = info.types;
   this.rating = info.rating;
   this.count = info.count;
+  this.userUpvote = info.userUpvote;
+  this.userDownvote = info.userDownvote;
 };
 
 Location.prototype.postVote = function(vote) {
@@ -17,11 +19,13 @@ Location.prototype.postVote = function(vote) {
     dataType: "json",
     data: {
       location_id: self.id,
-      vote: vote
+      vote: vote,
+      name: self.name
     }
   }).then(function(res){
     //TODO: refactor out below since in code in script.js
     //TODO: fix so will update both categories
+    session.needReload = true;
     session.loadLocations().then(function(data){
       session.createLocationViews();
     });
