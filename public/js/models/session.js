@@ -26,6 +26,7 @@ session.getLocation = new Promise(function(resolve, reject) {
 });
 
 session.loadLocations = function(type){
+  console.log('loading locations');
   type = type || history.state.type;
   var request = Location.fetch(type).then(function(data){
     data.sort(function(a,b){
@@ -41,6 +42,7 @@ session.setState = function(type){
 };
 
 session.createLocationViews = function(type){
+  console.log('creating views');
   type = type || history.state.type;
   var array = session[type.split('|')[0]];
   $('.loc-container').empty();
@@ -120,6 +122,13 @@ session.changeType = function(){
   }
 
   session.needReload = false;
+};
+
+session.reload = function(){
+  session.needReload = true;
+  session.loadLocations().then(function(data){
+    session.createLocationViews();
+  });
 };
 
 //TODO: change sessions to this where applicable

@@ -4,6 +4,7 @@ $(document).ready(function(){
   userView.showSignup();
   userView.submitForm();
   userView.logOut();
+  // need a function when this
   userView.clickAccountInfo();
 
 //TODO: put in function so can call again (dont include location call

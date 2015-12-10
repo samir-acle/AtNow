@@ -11,6 +11,7 @@ var userView = {
       $("form").toggle();
       $('form').attr('action', '/login');
       $("h2").html("Log In");
+      MovieView.toggle();
     });
   },
   showSignup: function(){
@@ -18,6 +19,7 @@ var userView = {
       $("form").toggle();
       $("h2").html("Sign Up");
       $('form').attr('action', '/signup');
+      MovieView.toggle();
     });
   },
   logOut: function(){
@@ -66,6 +68,7 @@ var userView = {
         userView.userVotes();
         self.allVotesdiv();
       }
+      MovieView.toggle();
     });
   },
   allVotesdiv: function(){
@@ -112,11 +115,13 @@ var userView = {
   },
   addVotesToUserInfo: function(sortedVotes){
     var allvotesdiv = $(".allvotesdiv");
-    for(var i = 0; i < 10; i++){
-      if(sortedVotes[i].vote){
-        var dates = $("<p>" + sortedVotes[i].createdAt + ", " + sortedVotes[i].name + "</p>");
+    for(var i = 0; i < sortedVotes.length; i++){
+      // if(sortedVotes[i].vote){
+        var formattedTime = moment(sortedVotes[i].createdAt).format("MMM Do YYYY");
+        var voteType = sortedVotes[i].vote ? 'upvote' : 'downvote';
+        var dates = $("<p>" + formattedTime + " - " + sortedVotes[i].name + ' - ' + voteType + "</p>");
         allvotesdiv.append(dates);
-      }
+      // }
     }
   },
   sortFunction: function(a,b){

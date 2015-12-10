@@ -1,9 +1,10 @@
 var express = require("express");
 var router = express.Router();
 var request = require("request");
-// var env = require("../env");
+var env = require("../env");
 var Location = require("../models/location");
 var getVoteCount = require("../modules/getVoteCount");
+
 
 function error(response, message){
   response.status(500);
@@ -19,12 +20,12 @@ router.get("/", function(req, res){
   //TODO: use next page token at scroll bottom to load more results
   var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
   var options = [
-    // ["rankby", "distance"],
+    ["rankby", "distance"],
     ["types", req.query.type],
     ["opennow", ""],
     ["location", latlong],
-    ["radius", 1600],
-    ["key", process.env.googleKey],
+    // ["radius", 1600],
+    ["key", env.googleKey],
     ["pagetoken", req.query.nextPage || ""]
   ];
   // console.log(options);
@@ -36,27 +37,36 @@ router.get("/", function(req, res){
   console.log(url);
 
   request(url, function(err, response, body) {
+    console.log(response);
     var locations = JSON.parse(body).results;
     getVoteCount(locations, function(err, data){
       if (err) throw err;
+      console.log(data);
       res.json(data);
     });
   });
 });
 
-// router.get("/:id", function(req, res){
-//   var locID = req.params.id;
-//   // console.log('licid', locID);
-//   // console.log('params', req.params);
-//   Location.findOne({"location_id": locID}, function(err, location){
-//     // console.log('location',location);
-//     var voteCount = location ? location.count : 0;
-//     res.json(voteCount);
-//   });
-// });
+router.get("/:id", function(req, res){
+  var url = "https://maps.googleapis.com/maps/api/place/details/json?";
+  var options = [
+    ["placeid", req.params.id],
+    ["opennow", ""],
+    ["key", env.googleKey]
+  ];
+  // console.log(options);
+
+  options.forEach(function(option){
+    url = url + "&"+ option[0] + "=" + option[1];
+  });
+
+  console.log(url);
+
+  request(url, function(err, response, body) {
+    console.log(response);
+    if (err) throw err;
+    res.json(response);
+  });
+});
 
 module.exports = router;
-
-//TODO:function(error, response, body) {
-//         var data = JSON.parse(body);
-// …}
