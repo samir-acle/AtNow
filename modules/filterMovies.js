@@ -1,3 +1,5 @@
+var moment = require('moment');
+
 module.exports = function(theaters, callback){
   var data = [];
   var currentTime = Date.now();
@@ -40,20 +42,24 @@ module.exports = function(theaters, callback){
 
 
   // to return only soonest 10 sorted by soonest
-  var limit = 10;
+  // var limit = 10;
   var showtimes = [];
 
   theaters.forEach(function(theater){
     var theaterName = theater.name;
-    var movies = [];
     theater.movies.forEach(function(movie){
       var movieTitle = movie.title;
-      var showtimes = [];
       movie.showtimes.forEach(function(showtime){
         var timeDiff = showtime - currentTime;
-        console.log('diff',timeDiff);
-        console.log('showtime', showtime);
-        if (timeDiff > 0 && timeDiff < 3600000) { //TODO: determine if time good
+        var momentDiff = moment().diff(showtime,'hours', true);
+        // var momentDiff = moment().diff(showtime,'minutes');
+        // console.log('diff',timeDiff);
+        // console.log('showtime', showtime);
+        // console.log('moment', moment().diff(showtime,'hours'));
+        // console.log('moment', moment(showtime).diff(moment(),'hours',true));
+        // console.log('moment', moment().diff(showtime,'minutes'));
+        if (momentDiff >= -1 && momentDiff < 0) { //TODO: determine if time good
+          console.log('pushing into showtimes', momentDiff);
           showtimes.push({
             time: showtime,
             title: movieTitle,
@@ -64,15 +70,18 @@ module.exports = function(theaters, callback){
     });
   });
 
+  console.log('showtimes', showtimes);
+  // var limitedShowtimes = [];
+
   var sortedShowtimes = showtimes.sort(function(a,b){
-    return a.time < b.time ? 1 : -1;
+    return b.time < a.time ? 1 : -1;
   });
 
-  if (limit > showtimes.length){
-    var limitedShowtimes = sortedShowtimes.slice(0,limit);
-  }
+  // if (limit > showtimes.length){
+  //   limitedShowtimes = sortedShowtimes.slice(0,limit);
+  // }
 
-  callback(null, limitedShowtimes);
+  callback(null, sortedShowtimes);
 
   // if (data.length !== 0 ) {
   //   callback(null,data);

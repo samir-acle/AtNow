@@ -48,12 +48,13 @@ Movie.fetch = function(){
 
 Movie.loadMovies = function(){
   Movie.fetch().then(function(movies){
-    createMovieViews(movies);
+    Movie.createMovieViews(movies);
   });
 };
 
 Movie.createMovieViews = function(movies){
   $('.movie-container').empty();
+  $('.movie-container').text('Movie Times');
   movies.forEach(function(movie){
     var view = new MovieView(movie); //store in model for future access
     view.render();
