@@ -1,12 +1,12 @@
 body {
   font-size: 18px;
-  background-color: #424242;
+  background-color: #F1F1F1;
 
 }
 
 .navbar-custom {
-  background-color: #d8f2bc;
-  border-bottom: thick solid #b2b8ab;
+  background-color: #A0C2EE;
+  border-bottom: 2px solid #8BA8CF;
 }
 
 li {
@@ -77,11 +77,12 @@ h3,
   font-size: 18.5px;
   height: 80px;
   margin-top: 10px;
+}
 
 /** Rotating Words **/
 
 .cta {
-  color: white;
+  color: black;
 }
 .cta.rotate b {
   opacity: 0;
