@@ -25,10 +25,7 @@ Location.prototype.postVote = function(vote) {
   }).then(function(res){
     //TODO: refactor out below since in code in script.js
     //TODO: fix so will update both categories
-    session.needReload = true;
-    session.loadLocations().then(function(data){
-      session.createLocationViews();
-    });
+    session.reload();
   })
   .fail(function(){
     alert('FAILRUE');
