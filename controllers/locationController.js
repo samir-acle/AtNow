@@ -20,11 +20,11 @@ router.get("/", function(req, res){
   //TODO: use next page token at scroll bottom to load more results
   var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
   var options = [
-    // ["rankby", "distance"],
+    ["rankby", "distance"],
     ["types", req.query.type],
     ["opennow", ""],
     ["location", latlong],
-    ["radius", 1600],
+    // ["radius", 1600],
     ["key", env.googleKey],
     ["pagetoken", req.query.nextPage || ""]
   ];
@@ -34,10 +34,13 @@ router.get("/", function(req, res){
     url = url + "&"+ option[0] + "=" + option[1];
   });
 
+  console.log(url);
+
   request(url, function(err, response, body) {
     var locations = JSON.parse(body).results;
     getVoteCount(locations, function(err, data){
       if (err) throw err;
+      console.log(data);
       res.json(data);
     });
   });

@@ -59,7 +59,6 @@ module.exports = function(theaters, callback){
         // console.log('moment', moment(showtime).diff(moment(),'hours',true));
         // console.log('moment', moment().diff(showtime,'minutes'));
         if (momentDiff >= -1 && momentDiff < 0) { //TODO: determine if time good
-          console.log('pushing into showtimes', momentDiff);
           showtimes.push({
             time: showtime,
             title: movieTitle,
@@ -70,7 +69,6 @@ module.exports = function(theaters, callback){
     });
   });
 
-  console.log('showtimes', showtimes);
   // var limitedShowtimes = [];
 
   var sortedShowtimes = showtimes.sort(function(a,b){
