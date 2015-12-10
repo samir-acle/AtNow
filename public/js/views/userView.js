@@ -11,7 +11,6 @@ var userView = {
       $("form").toggle();
       $('form').attr('action', '/login');
       $("h2").html("Log In");
-      MovieView.toggle();
     });
   },
   showSignup: function(){
@@ -19,7 +18,6 @@ var userView = {
       $("form").toggle();
       $("h2").html("Sign Up");
       $('form').attr('action', '/signup');
-      MovieView.toggle();
     });
   },
   logOut: function(){
@@ -68,7 +66,6 @@ var userView = {
         userView.userVotes();
         self.allVotesdiv();
       }
-      MovieView.toggle();
     });
   },
   allVotesdiv: function(){
