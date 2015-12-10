@@ -39,7 +39,7 @@ LocationView.prototype = {
          self.loc.postVote(true);
        });
        self.$el.find('.downvote').on('click', function(){
-         self.loc.postVote(self.loc.id, false);
+         self.loc.postVote(false);
        });
      },
   //  toggleDiv: function(locationsDiv){
