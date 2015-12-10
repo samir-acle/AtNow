@@ -25,8 +25,9 @@ LocationView.prototype = {
 
     self.$el.append("<h3>" + self.loc.name + "</h3>");
     self.$el.append("<h4>" + self.loc.count + "</h4>");
-    self.$el.append('<input type="button" value="upvote" class="upvote">');
-    self.$el.append('<input type="button" value="downvote" class="downvote">');
+    self.$el.append('<span class="upvote glyphicon glyphicon-thumbs-up"></span>');
+    self.$el.append('<span class="downvote glyphicon glyphicon-thumbs-down"></span>');
+
 
     self.click();
     $('.loc-container').append(self.$el);
