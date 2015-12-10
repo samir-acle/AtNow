@@ -49,7 +49,7 @@ LocationView.prototype = {
   click: function(){
     var self = this;
     self.$el.find('h3').on('click', function(){
-      self.$el.find('.toggle').toggle();
+      self.$el.find('.toggle').slideToggle();
       });
     self.$el.find('.upvote').on('click', function(){
       self.loc.postVote(true);
