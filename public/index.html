@@ -75,16 +75,7 @@
 
         <form method="post" action="/login">
           <h2>Login</h2>
-          <div class="form-group form-names">
-            <label for="firstname">First Name</label>
-            <input class="form-control" type="text" name="firstname" id="firstname">
-          </div>
-
-          <div class="form-group form-names">
-            <label for="lastname">Last Name</label>
-            <input class="form-control" type="text" name="lastname" id="lastname">
-          </div>
-
+          
           <div class="form-group">
             <label for="email">Email</label>
             <input class="form-control" type="text" name="email" id="email">
@@ -96,6 +87,8 @@
           </div>
 
           <input class="btn btn-default" type="submit">
+
+          <a href="/auth/twitter"><img id="twitter-login" src="http://i.imgur.com/3kYcO3Y.png"></a>
         </form>
         <div class= 'allvotesdiv'></div>
         <div class="movie-container">Movie Times</div>

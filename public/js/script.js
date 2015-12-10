@@ -4,19 +4,19 @@ $(document).ready(function(){
   userView.showSignup();
   userView.submitForm();
   userView.logOut();
+  // need a function when this
   userView.clickAccountInfo();
 
 //TODO: put in function so can call again (dont include location call
 //TODO: make so can choose location
-  session.setState('restaurant|bar');
   session.getLocation.then(function(res){
     session.currentLat = res.lat;
     session.currentLong = res.long;
+    session.setState('restaurant|bar');
     session.loadLocations().then(function(data){
       session.createLocationViews();
-    });
     session.loadLocations('store');
-    Movie.loadMovies();
+    });
   }, function(err) {
     console.log(err);
   });
@@ -30,9 +30,4 @@ $(document).ready(function(){
     session.setState('store');
     session.changeType();
   });
-
-  var movieIntervalID = window.setInterval(function(){
-    Movie.loadMovies();
-  }, 60000);
-
 });

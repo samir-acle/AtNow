@@ -3,10 +3,11 @@ var userView = {
 
   // need function where if upvoted clicked or downvote, object is added to user
   currentUser: {},
+
+  currentUserVotesArray: [],
   // maybe something that toggles login
   showLogin: function(){
     $(".login").on("click", function(){
-      $(".form-names").css("display", "none");
       $("form").toggle();
       $('form').attr('action', '/login');
       $("h2").html("Log In");
@@ -15,7 +16,6 @@ var userView = {
   },
   showSignup: function(){
     $(".signup").on("click", function(){
-      $(".form-names").css("display", "inline");
       $("form").toggle();
       $("h2").html("Sign Up");
       $('form').attr('action', '/signup');
@@ -24,6 +24,7 @@ var userView = {
   },
   logOut: function(){
     $(".logout").on("click", function(){
+      $('form').attr('action', '#');
       User.logOut();
     });
   },
@@ -33,10 +34,9 @@ var userView = {
       if($('form').attr('action') == '/signup'){
         User.post();
       }
-      else{
+      else if($('form').attr('action') == '/login'){
         User.postLogin();
       }
-      console.log("PREVENT EVENT DEFAULT");
       evt.preventDefault();
       self.userVotes();
       $("form").css("display", "none");
@@ -53,7 +53,6 @@ var userView = {
     var self = this;
     var user = User.fetch().then(function(user){
       self.currentUser = user;
-      console.log(self.currentUser);
     });
   },
   clickAccountInfo: function(){
@@ -66,33 +65,53 @@ var userView = {
         allvotesdiv.toggle();
       }
       else{
+        userView.userVotes();
         self.allVotesdiv();
       }
       MovieView.toggle();
     });
   },
   allVotesdiv: function(){
-    console.log("showing all votes div function call");
     var self = this;
     if(!jQuery.isEmptyObject(self.currentUser)){
-      var userDiv = $(".userdiv");
-      var email = self.currentUser.local.email;
-      var votesTotal = self.currentUser.votes.length;
-      var votes = [];
-      votes = self.currentUser.votes;
-      var sortedVotes = votes.sort(self.sortFunction);
-      self.appendUserInformation(votesTotal, email);
-      self.addVotesToUserInfo(sortedVotes);
+      if(self.currentUser.hasOwnProperty("twitter")){
+        self.grabTwitterUserVotesInfo();
+      }
+      else{
+        self.grabLocalUserVotesInfo();
+      }
     }
   },
-  appendUserInformation: function(votesTotal, email){
+  grabTwitterUserVotesInfo: function(){
+    var self = this;
+    var userDiv = $(".userdiv");
+    var username = self.currentUser.twitter.displayName;
+    self.grabUserVotes(username);
+  },
+  grabUserVotes:function(emailOrUserName){
+    var self = this;
+    self.currentUserVotesArray = self.currentUser.votes;
+    var votesTotal = self.currentUserVotesArray.length;
+    self.appendUserInformation(votesTotal, emailOrUserName);
+    if(votesTotal > 0){
+      var sortedVotes = userView.currentUserVotesArray.sort(userView.sortFunction);
+      userView.addVotesToUserInfo(sortedVotes);
+    }
+  },
+  grabLocalUserVotesInfo: function(){
+    var self = this;
+    var userDiv = $(".userdiv");
+    var email = self.currentUser.local.email;
+    self.grabUserVotes(email);
+  },
+  appendUserInformation: function(votesTotal, emailOrUserName){
     var allvotesdiv = $(".allvotesdiv");
     allvotesdiv.css("display", "inline");
-    var showEmail = $("<h3>" + email + "</h3>");
-    var showVotes = $("<h4>" + votesTotal +"</h4>");
-    allvotesdiv.append(showEmail);
-    showEmail.append(showVotes);
-    allvotesdiv.append("<h4>Votes:</h4>");
+    var showEmailOrUsername = $("<h3>Account: " + emailOrUserName + "</h3>");
+    var showVotes = $("<h4>Total Votes: " + votesTotal +"</h4>");
+    allvotesdiv.append(showEmailOrUsername);
+    showEmailOrUsername.append(showVotes);
+    allvotesdiv.append("<h4>UpVotes:</h4>");
   },
   addVotesToUserInfo: function(sortedVotes){
     var allvotesdiv = $(".allvotesdiv");
@@ -109,8 +128,9 @@ var userView = {
     var dateA = new Date(a.createdAt).getTime();
     var dateB = new Date(b.createdAt).getTime();
     return dateA < dateB ? 1 : -1;
-  },
+  }
 };
+
 
 
 
