@@ -17,7 +17,7 @@ $(document).ready(function(){
       session.createLocationViews();
     });
     session.loadLocations('store');
-    Movie.loadMovies();
+    Movie.fetch();
   }, function(err) {
     console.log(err);
   });
@@ -32,7 +32,8 @@ $(document).ready(function(){
     session.changeType();
   });
 
-  var movieIntervalID = window.setInterval(function(){
-     Movie.loadMovies();
-  }, 60000);
+  $('.movies').on('click', function(){
+    session.setState('movies');
+    Movie.loadMovies();
+  });
 });
