@@ -4,8 +4,12 @@ $(document).ready(function(){
   userView.showSignup();
   userView.submitForm();
   userView.logOut();
-  userView.clickAccountInfo();
 
+  $("body").on("click", function(){
+    var currentUser = User.fetch();
+    console.log("THIS IS THE CURRENT USER!: " + currentUser);
+    return currentUser;
+  });
 
 //TODO: put in function so can call again (dont include location call
 //TODO: make so can choose location
@@ -23,19 +27,11 @@ $(document).ready(function(){
 
   $('.restaurants').on('click', function(){
     session.setState('restaurant|bar');
-    session.createLocationViews();
+    session.changeType();
   });
 
   $('.stores').on('click', function(){
     session.setState('store');
-    session.createLocationViews();
-  });
-
-  $('.set-location').on('click', function(){
-    var location = $('input.location').val();
-    session.setLocation(location);
+    session.changeType();
   });
 });
-
-
-//TODO: change so reloads currrent tab
