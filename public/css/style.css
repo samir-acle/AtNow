@@ -120,6 +120,7 @@ form {
 }
 
 ul li {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", sans-serif;
   color: white;
   cursor: pointer;
 }
