@@ -14,8 +14,9 @@ $(document).ready(function(){
     session.currentLong = res.long;
     session.loadLocations().then(function(data){
       session.createLocationViews();
-    session.loadLocations('store');
     });
+    session.loadLocations('store');
+    Movie.loadMovies();
   }, function(err) {
     console.log(err);
   });

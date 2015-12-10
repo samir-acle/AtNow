@@ -5,6 +5,7 @@ var env = require("../env");
 var Location = require("../models/location");
 var getVoteCount = require("../modules/getVoteCount");
 
+
 function error(response, message){
   response.status(500);
   response.json({error: message});
@@ -33,8 +34,6 @@ router.get("/", function(req, res){
     url = url + "&"+ option[0] + "=" + option[1];
   });
 
-  console.log(url);
-
   request(url, function(err, response, body) {
     var locations = JSON.parse(body).results;
     getVoteCount(locations, function(err, data){
@@ -56,7 +55,3 @@ router.get("/", function(req, res){
 // });
 
 module.exports = router;
-
-//TODO:function(error, response, body) {
-//         var data = JSON.parse(body);
-// …}

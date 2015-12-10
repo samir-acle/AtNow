@@ -54,6 +54,7 @@ app.use(function(req, res, next) {
 
 app.use("/locations", require("./controllers/locationController"));
 app.use("/votes", require("./controllers/votes"));
+app.use("/movies", require("./controllers/moviesController"));
 var staticsController = require("./controllers/staticsController");
 
 
