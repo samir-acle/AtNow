@@ -8,7 +8,6 @@ var userView = {
   // maybe something that toggles login
   showLogin: function(){
     $(".login").on("click", function(){
-      $(".form-names").css("display", "none");
       $("form").toggle();
       $('form').attr('action', '/login');
       $("h2").html("Log In");
@@ -16,7 +15,6 @@ var userView = {
   },
   showSignup: function(){
     $(".signup").on("click", function(){
-      $(".form-names").css("display", "inline");
       $("form").toggle();
       $("h2").html("Sign Up");
       $('form').attr('action', '/signup');
@@ -24,6 +22,7 @@ var userView = {
   },
   logOut: function(){
     $(".logout").on("click", function(){
+      $('form').attr('action', '#');
       User.logOut();
     });
   },
@@ -33,7 +32,7 @@ var userView = {
       if($('form').attr('action') == '/signup'){
         User.post();
       }
-      else{
+      else if($('form').attr('action') == '/login'){
         User.postLogin();
       }
       evt.preventDefault();
@@ -112,7 +111,6 @@ var userView = {
     allvotesdiv.append("<h4>UpVotes:</h4>");
   },
   addVotesToUserInfo: function(sortedVotes){
-    console.log("FUNCTION BEING CALLEDDDDD");
     var allvotesdiv = $(".allvotesdiv");
     for(var i = 0; i < 10; i++){
       if(sortedVotes[i].vote){
@@ -122,7 +120,6 @@ var userView = {
     }
   },
   sortFunction: function(a,b){
-    console.log("SORT BEING CALLED")
     var dateA = new Date(a.createdAt).getTime();
     var dateB = new Date(b.createdAt).getTime();
     return dateA < dateB ? 1 : -1;

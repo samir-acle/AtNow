@@ -70,7 +70,7 @@ session.grabLoginErrors = function() {
   return request;
 };
 
-session.grabSignUpErros = function(){
+session.grabSignUpErrors = function(){
   var self = this;
   var url = "http://127.0.0.1:3000/failedsignup";
   var request = $.getJSON(url).then(function(req, res){
@@ -79,10 +79,9 @@ session.grabSignUpErros = function(){
     session.showErrors();
     return req;
   }).fail(function(response){
-    console.log("JS failed to get message");
   });
   return request;
-  };
+};
 // this needs to go to session view:
 // showing session errors for signup and login
 session.showErrors = function(){
@@ -102,6 +101,14 @@ session.showLogout = function(){
     logoutMessage.fadeOut(1000);
   });
 };
+
+// function to hide and show buttons:
+// session.toggleButtons = function(){
+//   if(userSession){
+//     $(".login").css("display", "none");
+//     $(".signup").css("display", "none");
+//   }
+// };
 
 session.changeType = function(){
   if(session.needReload){
