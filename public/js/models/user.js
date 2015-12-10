@@ -95,6 +95,7 @@ User.postLogin = function(){
     }
   }).then(function(res, req){
     session.reload();
+    MovieView.toggle();
     userView.userVotes();
     // IF its a sucess, hide login displays
     // userView.toggleLoginDisplays();

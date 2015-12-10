@@ -6,17 +6,18 @@ var LocationView = function(location) {
 LocationView.prototype = {
   render: function(){
     var self = this;
+    var upvote = self.loc.userUpvote.toString();
+    var downvote = self.loc.userDownvote.toString();
 
     self.$el.append("<h3>" + self.loc.name + "</h3>");
     self.$el.append("<h4>" + self.loc.count + "</h4>");
-    self.$el.append('<span class="upvote glyphicon glyphicon-thumbs-up"></span>');
-    self.$el.append('<span class="downvote glyphicon glyphicon-thumbs-down"></span>');
+    self.$el.append('<span class="upvote glyphicon glyphicon-thumbs-up ' + upvote + '"></span>');
+    self.$el.append('<span class="downvote glyphicon glyphicon-thumbs-down ' + downvote + '"></span>');
     self.$el.append('<div class="toggle"></div>');
     self.addInfo();
 
 
     self.click();
-    console.log('appending', self.loc);
     $('.loc-container').append(self.$el);
   },
   click: function(){
