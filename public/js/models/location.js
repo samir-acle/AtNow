@@ -6,6 +6,8 @@ var Location = function(info){
   this.types = info.types;
   this.rating = info.rating;
   this.count = info.count;
+  this.userUpvote = info.userUpvote;
+  this.userDownvote = info.userDownvote;
 };
 
 Location.prototype.postVote = function(vote) {
