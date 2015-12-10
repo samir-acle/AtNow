@@ -2,7 +2,7 @@ var express = require("express");
 var path = require("path");
 var mongoose = require("mongoose");
 var passport = require("passport");
-// var env = require("./env");
+var env = require("./env");
 var LocalStrategy = require("passport-local").Strategy;
 var hbs = require("hbs");
 var morgan = require("morgan");
@@ -54,10 +54,11 @@ app.use(function(req, res, next) {
 
 app.use("/locations", require("./controllers/locationController"));
 app.use("/votes", require("./controllers/votes"));
+app.use("/movies", require("./controllers/moviesController"));
 var staticsController = require("./controllers/staticsController");
 
 
 var routes = require("./config/routes");
 app.use(routes);
 
-app.listen(port);
+app.listen(3000);

@@ -2,6 +2,7 @@ var LocalStrategy = require("passport-local").Strategy;
 var TwitterStrategy = require("passport-twitter").Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var env = require("../env");
 
 var User = require("../models/user");
 // var env = require("../env");
@@ -48,35 +49,35 @@ module.exports = function(passport){
     });
   }));
 
-//
-//   passport.use('twitter', new TwitterStrategy({
-//   consumerKey: env.twitter.consumerKey,
-//   consumerSecret: env.twitter.consumerSecret,
-//   callbackUrl: env.twitter.callbackUrl
-// }, function(token, secret, profile, done){
-//   process.nextTick(function(){
-//     User.findOne({'twitter.id': profile.id}, function(err, user){
-//       if(err) return done(err);
-//       // If the user already exists, just return that user.
-//       if(user){
-//         return done(null, user);
-//       } else {
-//         // Otherwise, create a brand new user using information passed from Twitter.
-//         var newUser = new User();
-//         // Here we're saving information passed to us from Twitter.
-//         newUser.twitter.id = profile.id;
-//         newUser.twitter.token = token;
-//         newUser.twitter.username = profile.username;
-//         newUser.twitter.displayName = profile.displayName;
-//
-//         newUser.save(function(err){
-//           if(err) throw err;
-//           return done(null, newUser);
-//         });
-//       }
-//     });
-//   });
-// }));
+
+  passport.use('twitter', new TwitterStrategy({
+  consumerKey: env.twitter.consumerKey,
+  consumerSecret: env.twitter.consumerSecret,
+  callbackUrl: env.twitter.callbackUrl
+}, function(token, secret, profile, done){
+  process.nextTick(function(){
+    User.findOne({'twitter.id': profile.id}, function(err, user){
+      if(err) return done(err);
+      // If the user already exists, just return that user.
+      if(user){
+        return done(null, user);
+      } else {
+        // Otherwise, create a brand new user using information passed from Twitter.
+        var newUser = new User();
+        // Here we're saving information passed to us from Twitter.
+        newUser.twitter.id = profile.id;
+        newUser.twitter.token = token;
+        newUser.twitter.username = profile.username;
+        newUser.twitter.displayName = profile.displayName;
+
+        newUser.save(function(err){
+          if(err) throw err;
+          return done(null, newUser);
+        });
+      }
+    });
+  });
+}));
 
   // passport.use(new FacebookStrategy({
   //

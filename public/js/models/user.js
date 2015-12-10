@@ -6,29 +6,35 @@ var User = function(info) {
   this.id = info.id;
 };
 
+var UserSession = false;
+
+// globalCurrentUser = {};
 // need to create object for user new Object()
 User.fetch = function() {
   var self = this;
-  var url = "http://localhost:3000/user";
+  var url = "http://127.0.0.1:3000/user";
   var request = $.getJSON(url).then(function(req, res){
     console.log("THIS IS FETCHING THE USER");
+    console.log("req: " + req);
+    console.log("res: " + res);
+    // globalCurrentUser = new User(req);
     return req;
-  }).fail(function(response){
+  }).fail(function(res){
     if($('form').attr('action') == '/signup'){
-      session.grabSignUpErros();
+      session.grabSignUpErrors();
     }
-    else{
+    else if($('form').attr('action') == '/login'){
       session.grabLoginErrors();
     }
-    console.log("JS FAILED TO GET USER");
   });
+  console.log("full get request: " + request);
   return request;
 };
 
 // User.prototype = {
 //   fetchVotes: function(){
 //     var user = this;
-//     var url = "http://localhost:3000/currentuser"
+//     var url = "http://127.0.0.1:3000/currentuser"
 //     user.votes = [];
 //     var
 //   }
@@ -36,7 +42,7 @@ User.fetch = function() {
 
 User.logOut = function(){
   var self = this;
-  var url = "http://localhost:3000/logout";
+  var url = "http://127.0.0.1:3000/logout";
   $.getJSON(url, function(response){
     // console.log(response);
   }).then(function(res){
@@ -46,6 +52,7 @@ User.logOut = function(){
       userView.currentUser = {};
       session.showLogout();
     }
+    session.reload();
     // userView.toggleLoginDisplays();
     // userView.toggleLogoutDisplays();
   }).fail(function(res){
@@ -57,8 +64,9 @@ User.logOut = function(){
 
 // explaining options???
 User.post = function(){
+  // resetting form:
   var self = this;
-  var url = "http://localhost:3000/signup";
+  var url = "http://127.0.0.1:3000/signup";
   var request = $.ajax({
     url: url,
     type: "POST",
@@ -70,7 +78,7 @@ User.post = function(){
       password: $("#password").val()
     }
   }).then(function(res){
-    userView.userVotes();
+    User.fetch();
     // userView.toggleLoginDisplays();
     return res;
   }).fail(function(res){
@@ -80,8 +88,9 @@ User.post = function(){
 };
 
 User.postLogin = function(){
+  // resetting form
   var self = this;
-  var url = "http://localhost:3000/login";
+  var url = "http://127.0.0.1:3000/login";
   var request = $.ajax({
     url: url,
     type: "POST",
@@ -93,7 +102,9 @@ User.postLogin = function(){
       password: $("#password").val()
     }
   }).then(function(res, req){
-    userView.userVotes();
+    User.fetch();
+    session.reload();
+    MovieView.toggle();
     // IF its a sucess, hide login displays
     // userView.toggleLoginDisplays();
   }).fail(function(res){

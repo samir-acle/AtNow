@@ -26,6 +26,7 @@ session.getLocation = new Promise(function(resolve, reject) {
 });
 
 session.loadLocations = function(type){
+  console.log('loading locations');
   type = type || history.state.type;
   var request = Location.fetch(type).then(function(data){
     data.sort(function(a,b){
@@ -41,6 +42,7 @@ session.setState = function(type){
 };
 
 session.createLocationViews = function(type){
+  console.log('creating views');
   type = type || history.state.type;
   var array = session[type.split('|')[0]];
   $('.loc-container').empty();
@@ -58,7 +60,7 @@ session.error = {};
 
 session.grabLoginErrors = function() {
   var self = this;
-  var url = "http://localhost:3000/failedlogin";
+  var url = "http://127.0.0.1:3000/failedlogin";
   var request = $.getJSON(url).then(function(req, res){
     console.log("THIS IS FETCHING THE Failed message");
     session.error = req;
@@ -70,19 +72,18 @@ session.grabLoginErrors = function() {
   return request;
 };
 
-session.grabSignUpErros = function(){
+session.grabSignUpErrors = function(){
   var self = this;
-  var url = "http://localhost:3000/failedsignup";
+  var url = "http://127.0.0.1:3000/failedsignup";
   var request = $.getJSON(url).then(function(req, res){
     console.log("THIS IS FETCHING THE Failed signmessage");
     session.error = req;
     session.showErrors();
     return req;
   }).fail(function(response){
-    console.log("JS failed to get message");
   });
   return request;
-  };
+};
 // this needs to go to session view:
 // showing session errors for signup and login
 session.showErrors = function(){
@@ -103,6 +104,14 @@ session.showLogout = function(){
   });
 };
 
+// function to hide and show buttons:
+// session.toggleButtons = function(){
+//   if(userSession){
+//     $(".login").css("display", "none");
+//     $(".signup").css("display", "none");
+//   }
+// };
+
 session.changeType = function(){
   if(session.needReload){
     session.loadLocations().then(function(data){
@@ -113,6 +122,13 @@ session.changeType = function(){
   }
 
   session.needReload = false;
+};
+
+session.reload = function(){
+  session.needReload = true;
+  session.loadLocations().then(function(data){
+    session.createLocationViews();
+  });
 };
 
 //TODO: change sessions to this where applicable

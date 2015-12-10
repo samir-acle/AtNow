@@ -6,39 +6,13 @@ var LocationView = function(location) {
 LocationView.prototype = {
   render: function(){
     var self = this;
+    var upvote = self.loc.userUpvote.toString();
+    var downvote = self.loc.userDownvote.toString();
 
-    var showLocations = self.$el.find("");
-    var locationsDiv = self.$el.find("div.location");
-
-    this.$el.on("click", function(){
-      console.log(locationsDiv.children());
-    if(self.$el.find('.test').children(':visible').length === 0){
-        self.toggleLocations(locationsDiv);
-
-      }
-      else {
-        console.log("click consoleloggylog");
-        // self.hide.toggleLocations(locationsDiv);
-      }
-    });
-
-    // var showLocations = self.$el.find("");
-    // var locationsDiv = self.$el.find("div.location");
-    //
-    // this.$el.on("click", function(){
-    //   console.log(locationsDiv.children());
-    // if(self.$el.find('.test').children(':visible').length === 0){
-    //     self.toggleLocations(locationsDiv);
-    //   }
-    //   else {
-    //     console.log("click consoleloggylog");
-    //     self.toggleLocations.hide(locationsDiv);
-    //   }
-    // });
     self.$el.append("<h3>" + self.loc.name + "</h3>");
     self.$el.append("<h4>" + self.loc.count + "</h4>");
-    self.$el.append('<span class="upvote glyphicon glyphicon-thumbs-up"></span>');
-    self.$el.append('<span class="downvote glyphicon glyphicon-thumbs-down"></span>');
+    self.$el.append('<span class="upvote glyphicon glyphicon-thumbs-up ' + upvote + '"></span>');
+    self.$el.append('<span class="downvote glyphicon glyphicon-thumbs-down ' + downvote + '"></span>');
     self.$el.append('<div class="toggle"></div>');
     self.addInfo();
 
@@ -78,21 +52,7 @@ LocationView.prototype = {
     subDiv.hide();
   }
 
-  // toggleLocations: function(locationsDiv){
-  //   console.log("Locations Div on Click");
-  //   // self.appendLocations(locationsDiv);
-  //   var self = this;
-  //       console.log("children-test");
-  //       var subDiv = $('<div class="test"></div>');
-  //       subDiv.append('<div><img src="' + this.loc.icon + '" height="32px" width="32px"></div>');
-  //       subDiv.append("<div class='location-toggle'>" + "<span class='list-items'>Address: </span>" + this.loc.address + "</div>");
-  //       subDiv.append("<div class='location-toggle'>"  + "<span class='list-items'>Types: </span>" + this.loc.types + "</div>");
-  //       subDiv.append("<div class='location-toggle'>"  + "<span class='list-items'>Rating: </span>" + this.loc.rating + "</div>");
-  //       this.$el.append(subDiv);
-  //   console.log("sup bruh");
-  //   this.$el.find('.test').toggle();
-  //   // this.toggleDiv(locationsDiv);
-  // },
+
   // appendLocations: function(locationsDiv){
   //   var self = this;
   //   if(locationsDiv.children().length === 0){

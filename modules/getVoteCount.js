@@ -4,12 +4,13 @@ var Location = require("../models/location");
 var checkUserVotes = require("./checkUserVotes");
 
 module.exports = function(array, callback){
-  console.log('in getvotecount');
+  // console.log('in getvotecount');
   var oldArray = array;
   var newArray = [];
 
   function getCount() {
     if (oldArray.length === 0) {
+      // console.log('get vote count done');
       return callback(null, newArray);
     }
 
