@@ -49,7 +49,7 @@ LocationView.prototype = {
   click: function(){
     var self = this;
     self.$el.find('h3').on('click', function(){
-      self.$el.find('.toggle').slideToggle();
+      self.$el.find('.toggle').slideToggle("400");
       });
     self.$el.find('.upvote').on('click', function(){
       self.loc.postVote(true);
@@ -71,7 +71,7 @@ LocationView.prototype = {
   addInfo: function(){
     var self = this;
     var subDiv = self.$el.find('.toggle');
-    subDiv.append('<div><img src="' + this.loc.icon + '" height="32px" width="32px"></div>');
+    // subDiv.append('<div><img src="' + this.loc.icon + '" height="32px" width="32px"></div>');
     subDiv.append("<div class='location-toggle'>" + "<span class='list-items'>Address: </span>" + this.loc.address + "</div>");
     subDiv.append("<div class='location-toggle'>"  + "<span class='list-items'>Types: </span>" + this.loc.types + "</div>");
     subDiv.append("<div class='location-toggle'>"  + "<span class='list-items'>Rating: </span>" + this.loc.rating + "</div>");

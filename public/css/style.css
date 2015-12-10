@@ -4,9 +4,21 @@ body {
 
 }
 
-.navbar-custom {
-  background-color: #A0C2EE;
-  border-bottom: 2px solid #8BA8CF;
+.loc-container {
+  background-color: #f7f7f7;
+}
+
+div.location.loc-style {
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+.btn-custom {
+  color: #fff;
+  background-color: #6496c8;
+  text-shadow: -1px 1px #417cb8;
+  border: none;
+  font-family: 'Open Sans', sans-serif;
 }
 
 li {
@@ -29,10 +41,10 @@ li {
     border-radius: 10px 10px 10px 10px;
 }
 
-.col-md-4 {
+.loc-space {
   min-height: 600px;
-  background-color: #ffcb87;
-  border-radius: 10px 10px 10px 10px;
+  background-color: #fff;
+
 }
 
 form {
@@ -46,9 +58,24 @@ form {
   display: none;
 }
 
+.upvote {
+
+}
+
+
+
+/** logo and nav **/
+
 #logo-atnow {
   background-image:
 }
+
+.navbar-custom {
+  background-color: #A0C2EE;
+  border-bottom: 2px solid #8BA8CF;
+}
+
+/** Toggle Locations **/
 
 h3 {
   cursor: pointer;
@@ -57,11 +84,12 @@ h3 {
 .list-items {
   font-family: 'Open Sans', sans-serif;
   font-size: 20px;
-  color: white;
+  color: black;
 }
 
 
 /** Rotating Words **/
+
 
 .cta {
   color: black;
@@ -72,23 +100,23 @@ h3 {
   transform: rotateX(180deg);
   display: inline-block;
   position: absolute;
-  left: 0;
-  top: 0;
+  left: auto;
+  top: auto;
 }
 
 .cta.rotate b.is-visible {
   position: relative;
   opacity: 1;
   transform: rotateX(0deg);
-  animation: cd-rotate-in 1.2s;
+  animation: cta-rotate-in 1.2s;
 }
 
 .cta.rotate b.is-hidden {
   transform: rotateX(180deg);
-  animation: cd-rotate-out 1.2s;
+  animation: cta-rotate-out 1.2s;
 }
 
-@keyframes cd-rotate-in {
+@keyframes cta-rotate-in {
   0% {
     transform: rotateX(180deg);
     opacity: 0;
@@ -106,7 +134,7 @@ h3 {
   }
 }
 
-@keyframes cd-rotate-out {
+@keyframes cta-rotate-out {
   0% {
     transform: rotateX(0deg);
     opacity: 1;
@@ -122,6 +150,12 @@ h3 {
     transform: rotateX(180deg);
     opacity: 0;
   }
+
+
+h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+}
 
 .sessionmessage{
   display: none;

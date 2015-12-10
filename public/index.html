@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- If we want this for mobile at some point we need it ^  -->
   <link type="text/css" rel="stylesheet" href="css/normalize.css">
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
@@ -44,23 +44,21 @@
         <button class="set-location">set</button>
       </div>
     </header>
-    <div class="container">
-    <section class="cta">
-    	<h1 class="cta rotate">
-    		<span class="style-banner">I want to go</span>
-    		<span class="word-wrapper">
-    			<b class="is-visible">to the bar.</b>
-    			<b>to the movies.</b>
-    			<b>out to eat.</b>
-    		</span>
-    	</h1>
-    </section>
-  </div>
   <div class="container">
+    <section class="cta container">
+      <h1 class="cta rotate">
+        <span>I want to go</span>
+        <span class="words-wrapper">
+          <b class="is-visible">to the bar.</b>
+          <b>to the movies.</b>
+          <b>out to eat.</b>
+        </span>
+      </h1>
+    </section>
     <div class="row">
-      <div class="col-md-8">
-        <button class="restaurants">Restaurants</button>
-        <button class="stores">Stores</button>
+      <div class="loc-space col-md-8">
+        <button class="btn-custom restaurants">Restaurants</button>
+        <button class="btn-custom stores">Stores</button>
         <ul class="loc-container"></ul>
       </div>
       <div class="col-md-4 userdiv">
