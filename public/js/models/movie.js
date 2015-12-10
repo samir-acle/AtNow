@@ -18,7 +18,7 @@ Movie.fetch = function(){
   var lat = session.currentLat ? session.currentLat : map.lat;
   var long = session.currentLong ? session.currentLong : map.lng;
 
-  var request = $.getJSON("http://localhost:3000/movies/", {
+  var request = $.getJSON("http://127.0.0.1:3000/movies/", {
     lat: lat,
     long: long
   }).then(function(data){

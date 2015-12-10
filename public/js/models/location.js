@@ -34,7 +34,7 @@ Location.prototype.postVote = function(vote) {
 
 Location.prototype.getDetails = function(){
   var self = this;
-  var request = $.getJSON("http://localhost:3000/locations/" + self.id).then(function(err,data){
+  var request = $.getJSON("http://127.0.0.1:3000/locations/" + self.id).then(function(err,data){
     console.log('details', data);
   });
   return request;
