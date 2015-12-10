@@ -14,11 +14,27 @@ div.location.loc-style {
 }
 
 .btn-custom {
+  color: #3ABEC7;
+  background: rgba(0,0,0,0);
+  border: solid 3px #3ABEC7;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", sans-serif;
+  font-weight: 400;
+  padding: 20px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin: 10px;
+}
+
+.btn-custom:hover {
+  border-color: #3ABEC7;
   color: #fff;
-  background-color: #6496c8;
-  text-shadow: -1px 1px #417cb8;
-  border: none;
-  font-family: 'Open Sans', sans-serif;
+  background-color: #3ABEC7;
+
+}
+
+.btn-custom:active {
+  border-color: #27496d;
+  color: #27496d;
 }
 
 li {
