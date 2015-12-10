@@ -20,6 +20,7 @@
     "jasmine": "^2.4.1",
     "kerberos": "0.0.17",
     "method-override": "^2.3.5",
+    "moment": "^2.10.6",
     "mongo": "^0.1.0",
     "mongoose": "^4.2.9",
     "morgan": "~1.0.0",

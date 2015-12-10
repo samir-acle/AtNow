@@ -30,6 +30,7 @@ LocationView.prototype = {
     self.addInfo();
 
     self.click();
+    console.log('appending', self.loc);
     $('.loc-container').append(self.$el);
   },
   click: function(){

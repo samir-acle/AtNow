@@ -10,6 +10,7 @@ module.exports = function(array, callback){
 
   function getCount() {
     if (oldArray.length === 0) {
+      console.log('get vote count done');
       return callback(null, newArray);
     }
 
