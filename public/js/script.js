@@ -4,12 +4,7 @@ $(document).ready(function(){
   userView.showSignup();
   userView.submitForm();
   userView.logOut();
-
-  $("body").on("click", function(){
-    var currentUser = User.fetch();
-    console.log("THIS IS THE CURRENT USER!: " + currentUser);
-    return currentUser;
-  });
+  userView.clickAccountInfo();
 
 //TODO: put in function so can call again (dont include location call
 //TODO: make so can choose location
