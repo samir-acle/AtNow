@@ -92,17 +92,17 @@ var userView = {
     var showVotes = $("<h4>" + votesTotal +"</h4>");
     allvotesdiv.append(showEmail);
     showEmail.append(showVotes);
-    allvotesdiv.append("<h4>Upvotes:</h4>");
+    allvotesdiv.append("<h4>Votes:</h4>");
   },
   addVotesToUserInfo: function(sortedVotes){
     var allvotesdiv = $(".allvotesdiv");
-    for(var i = 0; i < 10; i++){
-      if(sortedVotes[i].vote){
+    for(var i = 0; i < sortedVotes.length; i++){
+      // if(sortedVotes[i].vote){
         var formattedTime = moment(sortedVotes[i].createdAt).format("MMM Do YYYY");
-        // var voteType = sortedVotes[i].vote ? 'upvote' : 'downvote';
-        var dates = $("<p>" + formattedTime + " - " + sortedVotes[i].name + "</p>");
+        var voteType = sortedVotes[i].vote ? 'upvote' : 'downvote';
+        var dates = $("<p>" + formattedTime + " - " + sortedVotes[i].name + ' - ' + voteType + "</p>");
         allvotesdiv.append(dates);
-      }
+      // }
     }
   },
   sortFunction: function(a,b){
