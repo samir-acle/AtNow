@@ -53,8 +53,7 @@ Movie.loadMovies = function(){
 };
 
 Movie.createMovieViews = function(movies){
-  $('.movie-container').empty();
-  $('.movie-container').text('Movie Times');
+  $('.loc-container').empty();
   movies.forEach(function(movie){
     var view = new MovieView(movie); //store in model for future access
     view.render();
