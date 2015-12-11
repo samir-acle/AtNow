@@ -87,9 +87,9 @@ li {
     /*border-radius: 10px 10px 10px 10px;*/
     box-shadow: inset 1px 1px 2px #c0c5cc;
 
-  min-height: 600px;
-  background-color: #e88f7e;
-  border-radius: 10px 10px 10px 10px;
+    min-height: 600px;
+    background-color: #e88f7e;
+    border-radius: 10px 10px 10px 10px;
 }
 
 .loc-space {
@@ -217,7 +217,7 @@ h3:first-of-type {
   left: 0;
   top: auto;
   white-space: nowrap;
-  padding-left: 5px;
+  padding-left: 6px;
 }
 
 .cta.rotate b.is-visible {
