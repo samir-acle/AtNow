@@ -415,3 +415,8 @@ div.location-toggle:nth-child(even) {
 .downvote {
   margin-left: 5px;
 }
+
+.twitter img {
+  width: 50%;
+  height: 40px;
+}
