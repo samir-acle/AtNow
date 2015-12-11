@@ -7,38 +7,22 @@ var User = function(info) {
 };
 
 var UserSession = false;
-
+var userResponse = {};
 // globalCurrentUser = {};
 // need to create object for user new Object()
 User.fetch = function() {
   var self = this;
   var url = "http://127.0.0.1:3000/user";
   var request = $.getJSON(url).then(function(req, res){
-    console.log("THIS IS FETCHING THE USER");
-    console.log("req: " + req);
-    console.log("res: " + res);
-    // globalCurrentUser = new User(req);
     return req;
   }).fail(function(res){
-    if($('form').attr('action') == '/signup'){
-      session.grabSignUpErrors();
-    }
-    else if($('form').attr('action') == '/login'){
-      session.grabLoginErrors();
-    }
+    session.message = res;
+    session.showErrors();
   });
   console.log("full get request: " + request);
   return request;
 };
 
-// User.prototype = {
-//   fetchVotes: function(){
-//     var user = this;
-//     var url = "http://127.0.0.1:3000/currentuser"
-//     user.votes = [];
-//     var
-//   }
-// }
 
 User.logOut = function(){
   var self = this;
@@ -78,7 +62,12 @@ User.post = function(){
       password: $("#password").val()
     }
   }).then(function(res){
+    $(".allvotesdiv").empty();
     User.fetch();
+    var sessionmessage = res;
+    var message = sessionmessage.message;
+    var type = sessionmessage.success;
+    session.showErrors(message, type);
     // userView.toggleLoginDisplays();
     return res;
   }).fail(function(res){
@@ -102,7 +91,13 @@ User.postLogin = function(){
       password: $("#password").val()
     }
   }).then(function(res, req){
+    $(".allvotesdiv").empty();
     User.fetch();
+    console.log("returning  " + res + " or " + req);
+    var sessionmessage = res;
+    var message = sessionmessage.message;
+    var type = sessionmessage.success;
+    session.showErrors(message, type);
     session.reload();
     // IF its a sucess, hide login displays
     // userView.toggleLoginDisplays();
