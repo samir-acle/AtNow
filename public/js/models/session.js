@@ -55,7 +55,7 @@ session.createLocationViews = function(type){
       var view = new LocationView(location); //store in model for future access
       view.render();
     });
-  } 
+  }
 };
 
 session.saveLocations = function(data, type) {
@@ -125,6 +125,10 @@ session.reload = function(){
   session.loadLocations().then(function(data){
     session.createLocationViews();
   });
+  if($('.allvotesdiv').is(':visible')){
+    $(".allvotesdiv").empty();
+    userView.userVotes();
+  }
 };
 
 session.mainMessage = function(message, warning){
