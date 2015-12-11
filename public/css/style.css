@@ -163,7 +163,7 @@ form {
 }
 
 .nav-custom span:hover {
-  color: #0b0b0b;
+  color: #4b4b4b;
   border-bottom: 2px solid #73d8ff;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
@@ -472,7 +472,7 @@ div.location-toggle:nth-child(even) {
 }
 
 .nav--footer span:hover {
-  color: #0b0b0b;
+  color: #4b4b4b;
   padding-bottom: 2px;
   border-bottom: 2px solid #73d8ff;
   -webkit-transition: all 0.5s ease-in-out;
