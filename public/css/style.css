@@ -366,6 +366,8 @@ h1 {
   border: 1px solid #f2f2f2;
 }
 
+/** Boxes on Toggle **/
+
 div.location-toggle:nth-child(odd) {
     /*border-radius:4px;*/
   box-shadow:inset 1px 1px 1px #55bde4;
@@ -395,6 +397,7 @@ div.location-toggle:nth-child(even) {
   font-size: 50px;
 }
 
+
 /** footer **/
 
 .nav--footer span {
@@ -408,4 +411,24 @@ div.location-toggle:nth-child(even) {
   color: #0b0b0b;
   padding-bottom: 2px;
   border-bottom: 2px solid #73d8ff;
+
+
+.inline {
+  display: inline-block;
+}
+
+.vote-count {
+  border: solid #73d8ff 2px;
+  border-radius: 10px;
+  padding: 5px;
+  background: white;
+}
+
+.loc-name {
+  padding: 10px;
+}
+
+.upvote,
+.downvote {
+margin-left: 5px;
 }
