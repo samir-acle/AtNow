@@ -33,6 +33,10 @@ h2 {
   border-color: #28AADC;
   color: #fff;
   background-color: #28AADC;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
 }
 
@@ -85,6 +89,11 @@ h2 {
   border-color: #28AADC;
   color: #fff;
   background-color: #28AADC;
+  background-color: #28AADC;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
 }
 
@@ -108,7 +117,7 @@ li {
     min-height: 600px;
     background-color: #61cdf6;
     /*border-radius: 10px 10px 10px 10px;*/
-    box-shadow: inset 1px 1px 2px #c0c5cc;
+    box-shadow: inset -1px 1px 2px #c76a58;
 
     min-height: 600px;
     background-color: #e88f7e;
@@ -153,13 +162,17 @@ form {
   color: #0b0b0b;
   font-size: 16px;
   cursor: pointer;
+  padding-bottom: 2px;
+  border-bottom: 2px solid white;
 }
 
 .nav-custom span:hover {
   color: #0b0b0b;
-  background-color: white;
-  padding-bottom: 2px;
   border-bottom: 2px solid #73d8ff;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 /** Toggle Locations **/
@@ -173,11 +186,6 @@ h3,
 h3:hover {
   color: #e88f7e;
     /*width: 10px;*/
-
-    transition: border-color 1s linear;
-    -moz-transition: border-color 1s linear;    /* FF3.7+ */
-    -o-transition: border-color 1s linear;      /* Opera 10.5 */
-    -webkit-transition: border-color 1s linear; /* Saf3.2+, Chrome */
     -webkit-transition: all 1s ease-in-out;
     -moz-transition: all 1s ease-in-out;
     -o-transition: all 1s ease-in-out;
@@ -442,12 +450,18 @@ div.location-toggle:nth-child(even) {
   color: #0b0b0b;
   font-size: 16px;
   cursor: pointer;
+  border-bottom: 2px solid #f1f1f1;
 }
 
 .nav--footer span:hover {
   color: #0b0b0b;
   padding-bottom: 2px;
   border-bottom: 2px solid #73d8ff;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+
 }
 
 .inline {
