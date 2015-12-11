@@ -23,7 +23,7 @@
   <script src="/js/script.js"></script>
 </head>
 <body>
-  <header class="navbar navbar-custom" role="navigation">
+  <header class="navbar navbar-custom">
     <div class="navbar-inner">
       <div class="container">
         <div id="logo-atnow" class="navbar-brand">@Now</div>
@@ -35,7 +35,7 @@
             <li class= "nav-custom login link"><p><span>Login</span></p></li>
             <li class= "nav-custom signup link"><p><span>Signup</span></p></li>
           </ul>
-        </div>
+        </nav>
         <div class="main-body-test">
         </div>
         <div class= "showuserinfo"></div>
@@ -44,16 +44,16 @@
           <button class="set-location">set</button>
         </div>
       </div>
-    </div>
   </header>
   <div class="container">
-    <div class="pull-right">
+    <div class="pull-right set-location-div">
         <input type="text" placeholder="location" class='location input-div'>
         <button class="set-location btn-custom-set">set</button>
     </div>
+  </div>
 <section class="cta container">
     <div class="cta">
-      <h1 class="cta rotate">
+      <h1 class="cta-rotate">
         <span class="style-banner">I want to go </span>
         <span class="word-wrapper">
           <b>to the bar.</b>
@@ -62,25 +62,22 @@
         </span>
       </h1>
     </div>
+</section>
     <div class="row">
       <div class="loc-space col-md-8">
         <button class="btn-custom restaurants">Restaurants</button>
         <button class="btn-custom stores">Stores</button>
+        <button class="btn-custom movies">Movies</button>
         <span><img src="/images/powered_by_google_on_white.png" alt="Powered by Google"></span>
         <ul class="loc-container"></ul>
       </div>
       <div class="col-md-4 userdiv">
-        <div class="alert alert-success alert-dismissable logoutmessage">
-          <strong>Success: </strong>You are now logged out.
-        </div>
-        <div class="alert alert-success alert-dismissable loginmessage">
-          <strong>Success: </strong>You are currently logged in.
-        </div>
         <div class="alert alert-dismissable sessionmessage">
-        Sorry, There Must Be An Error.
+          Sorry, There Must Be An Error.
         </div>
         <div class="alert alert-success alert-dismissable successmessage">
           You have sucessfully logged out!.
+        </div>
         </div>
         <form method="post" action="/login">
           <h2>Login</h2>
@@ -93,13 +90,11 @@
             <input class="form-control" type="password" name="password" id="password">
           </div>
           <input class="btn btn-default" type="submit">
-          <a href="/auth/twitter" class="twitter"><img id="twitter-login" src="http://i.imgur.com/3kYcO3Y.png"></a>
+          <a href="/auth/twitter" class="twitter"><img id="twitter-login" src="http://i.imgur.com/3kYcO3Y.png" alt='twitter logo'></a>
         </form>
         <div class= 'allvotesdiv'></div>
-        <div class="movie-container">Movie Times</div>
       </div>
     </div>
-  </div>
 <footer>
   <div class="footer-style">
   </div>
@@ -107,6 +102,6 @@
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzKpNRyX1TvArCR_ZHz06J-wu1CqM6Niw&callback=map.initMap">
     </script>
-    <script src="/js/animations-transitions/rotateAnimation.js"></script>
+    <script async src="/js/animations-transitions/rotateAnimation.js"></script>
 </body>
 </html>
