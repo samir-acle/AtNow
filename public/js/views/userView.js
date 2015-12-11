@@ -9,7 +9,7 @@ var userView = {
   showLogin: function(){
     $(".login").on("click", function(){
       if ($('h2').html() !== 'Sign Up') {
-        $("form").toggle();
+        $("form").fadeToggle("400");
       }
 
       $("h2").html("Log In");
@@ -19,7 +19,7 @@ var userView = {
   showSignup: function(){
     $(".signup").on("click", function(){
       if ($('h2').html() !== 'Log In') {
-        $("form").toggle();
+        $("form").fadeToggle("400");
       }
 
       $("h2").html("Sign Up");
@@ -47,11 +47,11 @@ var userView = {
     });
   },
   toggleLoginDisplays: function(){
-    $(".login").toggle();
-    $(".signup").toggle();
+    $(".login").fadeToggle();
+    $(".signup").fadeToggle();
   },
   toggleLogoutDisplays: function(){
-    $(".logout").toggle();
+    $(".logout").fadeToggle();
   },
   userVotes: function(){
     var self = this;
