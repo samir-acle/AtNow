@@ -14,7 +14,11 @@ function error(response, message){
 }
 
 router.get("/", function(req, res){
-  var latlong = req.query.lat ? req.query.lat + "," + req.query.long : 38.9 + "," + -77.0;
+  var latlong = req.query.lat + "," + req.query.long;
+
+  if (!latlong) {
+    res.json('no location set');
+  }
 
   p.findTheaters(latlong, {'date': 2}, function(err, theaters) {
     filterMovies(theaters, function(err, showtimes){

@@ -40,7 +40,7 @@ Location.fetch = function(type){
   var long = session.currentLong ? session.currentLong : map.lng;
 
   if (!lat) {
-    session.showErrors('Unable to get current location. Please enter a location above or change your browser settings.');
+    return session.showErrors('Unable to get current location. Please enter a location above or change your browser settings.');
   }
 
   var request = $.getJSON("http://127.0.0.1:3000/locations/", {

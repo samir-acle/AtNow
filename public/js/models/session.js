@@ -17,7 +17,8 @@ session.getLocation = new Promise(function(resolve, reject) {
 
   if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition(geoSuccess, function(){
-      session.showErrors('Unable to get current location. Please enter a location above or change your browser settings.');
+      session.mainMessage('Unable to get current location. Please enter a location above or change your browser settings.', true);
+      $('.set-location-div').show();
       reject(Error("Unable to get current location"));
     });
   } else {
@@ -26,15 +27,17 @@ session.getLocation = new Promise(function(resolve, reject) {
 });
 
 session.loadLocations = function(type){
-  console.log('loading locations');
-  type = type || history.state.type;
-  var request = Location.fetch(type).then(function(data){
-    data.sort(function(a,b){
-      return b.count - a.count;
+  if (session.currentLong || map.lng ) {
+    console.log('loading locations');
+    type = type || history.state.type;
+    var request = Location.fetch(type).then(function(data){
+      data.sort(function(a,b){
+        return b.count - a.count;
+      });
+      session.saveLocations(data,type);
     });
-    session.saveLocations(data,type);
-  });
-  return request;
+    return request;
+  }
 };
 
 session.setState = function(type){
@@ -42,15 +45,17 @@ session.setState = function(type){
 };
 
 session.createLocationViews = function(type){
-  console.log('creating views');
-  type = type || history.state.type;
-  var array = session[type.split('|')[0]];
-  console.log(array);
-  $('.loc-container').empty();
-  array.forEach(function(location){
-    var view = new LocationView(location); //store in model for future access
-    view.render();
-  });
+  if (session.currentLong || map.lng ) {  //TODO: factor out into another function to check if location? call it before every reload?
+    console.log('creating views');
+    type = type || history.state.type;
+    var array = session[type.split('|')[0]];
+    console.log(array);
+    $('.loc-container').empty();
+    array.forEach(function(location){
+      var view = new LocationView(location); //store in model for future access
+      view.render();
+    });
+  } 
 };
 
 session.saveLocations = function(data, type) {
@@ -106,14 +111,6 @@ session.showLogout = function(){
   });
 };
 
-// function to hide and show buttons:
-// session.toggleButtons = function(){
-//   if(userSession){
-//     $(".login").css("display", "none");
-//     $(".signup").css("display", "none");
-//   }
-// };
-
 session.changeType = function(){
   if(session.needReload){
     session.reload();
@@ -128,5 +125,12 @@ session.reload = function(){
   session.loadLocations().then(function(data){
     session.createLocationViews();
   });
+};
+
+session.mainMessage = function(message, warning){
+  var messageType = warning ? 'warning' : 'welcome';
+  var messageDiv = $('<div class="main-message ' + messageType + '"></div>');
+  messageDiv.text(message);
+  $('.loc-container').append(messageDiv);
 };
 //TODO: change sessions to this where applicable
