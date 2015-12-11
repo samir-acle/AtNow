@@ -6,7 +6,6 @@ var User = require("../models/user");
 var usersController = {
   postRedirect: function(req, res){
     var user = req.user;
-    console.log("In this route, I am sending json!!!!" + user);
     res.json({message: "You have sucessfully logged in", success: true});
   },
   failureRedirectLogin: function(req, res){
@@ -36,7 +35,6 @@ var usersController = {
   getLogout:  function(req, res) {
     req.logout();
     res.json({message: "User is logged out"});
-    // res.redirect('/');
   },
   secret: function (req, res){
     res.render("secret.hbs");
