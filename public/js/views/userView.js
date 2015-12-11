@@ -24,6 +24,7 @@ var userView = {
     $(".logout").on("click", function(){
       $('form').attr('action', '#');
       User.logOut();
+      $(".allvotesdiv").empty();
     });
   },
   submitForm: function(){
@@ -50,6 +51,7 @@ var userView = {
   userVotes: function(){
     var self = this;
     self.currentUser = currentUser;
+    console.log(jQuery.isEmptyObject(currentUser));
     if(jQuery.isEmptyObject(currentUser)){
       var user = User.fetch().then(function(user){
         currentUser = user;
@@ -61,9 +63,9 @@ var userView = {
     var account = $(".account");
     var allvotesdiv = $(".allvotesdiv");
     account.on("click", function(){
+      console.log('clicked account');
       if(allvotesdiv.children().length > 0){
-        self.allVotesdiv();
-        allvotesdiv.hide();
+        allvotesdiv.toggle();
       }
       else{
         allvotesdiv.show();
