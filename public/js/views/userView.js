@@ -8,14 +8,20 @@ var userView = {
   // maybe something that toggles login
   showLogin: function(){
     $(".login").on("click", function(){
-      $("form").toggle();
-      $('form').attr('action', '/login');
+      if ($('h2').html() !== 'Sign Up') {
+        $("form").toggle();
+      }
+
       $("h2").html("Log In");
+      $('form').attr('action', '/login');
     });
   },
   showSignup: function(){
     $(".signup").on("click", function(){
-      $("form").toggle();
+      if ($('h2').html() !== 'Log In') {
+        $("form").toggle();
+      }
+
       $("h2").html("Sign Up");
       $('form').attr('action', '/signup');
     });

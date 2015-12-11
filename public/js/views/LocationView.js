@@ -26,13 +26,24 @@ LocationView.prototype = {
       self.$el.find('.toggle').slideToggle("400");
       });
     self.$el.find('.upvote').on('click', function(){
-      if(!jQuery.isEmptyObject(currentUser)){
+      if(!jQuery.isEmptyObject(userView.currentUser)){
         self.loc.postVote(true);
+      } else {
+        var message = 'You must be logged in to vote';
+        session.showErrors(message, false);
+        window.setTimeout(function(){
+          $("form").fadeIn();
+          $("form h2").html("Log In");
+          $('form').attr('action', '/login');
+        }, 1800);
       }
       });
     self.$el.find('.downvote').on('click', function(){
-      if(!jQuery.isEmptyObject(currentUser)){
+      if(!jQuery.isEmptyObject(userView.currentUser)){
         self.loc.postVote(false);
+      } else {
+        var message = 'You must be logged in to vote';
+        session.showErrors(message, false);
       }
       });
     },

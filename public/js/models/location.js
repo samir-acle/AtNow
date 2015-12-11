@@ -24,14 +24,12 @@ Location.prototype.postVote = function(vote) {
       name: self.name
     }
   }).then(function(res){
+    console.log('worked');
     session.needReload = true;
     session.reload();
   })
-  .fail(function(){
-    $("form").show();
-    $('form').attr('action', '/login');
-    $("h2").html("Log In");
-    // session.showErrors('You must be logged in to vote on a location');
+  .fail(function(err){
+    console.log('post failed');
   });
 };
 
