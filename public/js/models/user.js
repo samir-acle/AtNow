@@ -6,39 +6,24 @@ var User = function(info) {
   this.id = info.id;
 };
 
-var UserSession = false;
+var currentUser = {};
 
 // globalCurrentUser = {};
 // need to create object for user new Object()
+
 User.fetch = function() {
   var self = this;
   var url = "http://127.0.0.1:3000/user";
   var request = $.getJSON(url).then(function(req, res){
-    console.log("THIS IS FETCHING THE USER");
-    console.log("req: " + req);
-    console.log("res: " + res);
-    // globalCurrentUser = new User(req);
+    currentUser = req;
     return req;
   }).fail(function(res){
-    if($('form').attr('action') == '/signup'){
+    if(jQuery.isEmptyObject(currentUser)){
       session.grabSignUpErrors();
     }
-    else if($('form').attr('action') == '/login'){
-      session.grabLoginErrors();
-    }
   });
-  console.log("full get request: " + request);
   return request;
 };
-
-// User.prototype = {
-//   fetchVotes: function(){
-//     var user = this;
-//     var url = "http://127.0.0.1:3000/currentuser"
-//     user.votes = [];
-//     var
-//   }
-// }
 
 User.logOut = function(){
   var self = this;
@@ -47,8 +32,8 @@ User.logOut = function(){
     // console.log(response);
   }).then(function(res){
     console.log("LOGOUT!");
-    $(".allvotesdiv").empty();
-    if(!jQuery.isEmptyObject(userView.currentUser)){
+    if(!jQuery.isEmptyObject(currentUser)){
+      currentUser = {};
       userView.currentUser = {};
       session.showLogout();
     }
@@ -64,7 +49,6 @@ User.logOut = function(){
 
 // explaining options???
 User.post = function(){
-  // resetting form:
   var self = this;
   var url = "http://127.0.0.1:3000/signup";
   var request = $.ajax({
@@ -77,12 +61,10 @@ User.post = function(){
       email: $("#email").val(),
       password: $("#password").val()
     }
-  }).then(function(res){
-    User.fetch();
-    // userView.toggleLoginDisplays();
+  }).then(function(res, req){
+    currentUser = res;
     return res;
   }).fail(function(res){
-    console.log(res);
     alert("failure from user post");
   });
 };
@@ -102,11 +84,11 @@ User.postLogin = function(){
       password: $("#password").val()
     }
   }).then(function(res, req){
-    User.fetch();
+    console.log("User login" + res);
+    currentUser = res;
+    session.showLoginSucess();
     session.reload();
     // IF its a sucess, hide login displays
     // userView.toggleLoginDisplays();
-  }).fail(function(res){
-    console("failure from user post to login");
   });
 };

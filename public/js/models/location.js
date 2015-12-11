@@ -28,7 +28,7 @@ Location.prototype.postVote = function(vote) {
     session.reload();
   })
   .fail(function(){
-    alert('FAILRUE');
+    // alert('FAILRUE');
   });
 };
 
@@ -47,7 +47,7 @@ Location.fetch = function(type){
   var long = session.currentLong ? session.currentLong : map.lng;
 
   if (!lat) {
-    alert('please set a location');
+    // alert('please set a location');
     return;
   }
 

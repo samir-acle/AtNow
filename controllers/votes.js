@@ -7,7 +7,6 @@ var Location = require("../models/location");
 var checkUserVotes = require("../modules/checkUserVotes");
 
 router.get("/", function(req, res){
-  // console.log("THIS IS THE CURRENT USER VOTES::: " + global.currentUser.votes );
     res.json(global.currentUser.votes);
 });
 

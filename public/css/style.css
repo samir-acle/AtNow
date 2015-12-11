@@ -123,6 +123,18 @@ h3,
   margin-top: 10px;
 }
 
+.loginmessage{
+  display: none;
+  margin: 0 auto;
+  width: 100%;
+  font-size: 18.5px;
+  height: 80px;
+  margin-top: 10px;
+}
+
+.showuserinfo{
+  background-color: yellow;
+}
 /** Rotating Words **/
 
 
