@@ -6,8 +6,9 @@ var User = function(info) {
   this.id = info.id;
 };
 
-var currentUser = {};
-
+var currentUser = {}; //maybe dont need
+var UserSession = false;
+var userResponse = {};
 // globalCurrentUser = {};
 // need to create object for user new Object()
 
@@ -15,12 +16,11 @@ User.fetch = function() {
   var self = this;
   var url = "http://127.0.0.1:3000/user";
   var request = $.getJSON(url).then(function(req, res){
-    currentUser = req;
+    currentUser = req; //maybe get rid of
     return req;
   }).fail(function(res){
-    if(jQuery.isEmptyObject(currentUser)){
-      session.grabSignUpErrors();
-    }
+    session.message = res;
+    session.showErrors();
   });
   return request;
 };
@@ -61,8 +61,14 @@ User.post = function(){
       email: $("#email").val(),
       password: $("#password").val()
     }
-  }).then(function(res, req){
-    currentUser = res;
+  }).then(function(res){
+    $(".allvotesdiv").empty();
+    User.fetch();
+    var sessionmessage = res;
+    var message = sessionmessage.message;
+    var type = sessionmessage.success;
+    session.showErrors(message, type);
+    // userView.toggleLoginDisplays();
     return res;
   }).fail(function(res){
     alert("failure from user post");
@@ -84,9 +90,13 @@ User.postLogin = function(){
       password: $("#password").val()
     }
   }).then(function(res, req){
-    console.log("User login" + res);
-    currentUser = res;
-    session.showLoginSucess();
+    $(".allvotesdiv").empty();
+    User.fetch();
+    console.log("returning  " + res + " or " + req);
+    var sessionmessage = res;
+    var message = sessionmessage.message;
+    var type = sessionmessage.success;
+    session.showErrors(message, type);
     session.reload();
     // IF its a sucess, hide login displays
     // userView.toggleLoginDisplays();

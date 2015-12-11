@@ -2,47 +2,18 @@ var express = require("express");
 var router = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
-// if(currentUser) {
-//   res.json(currentUser);
-// } else {
-//   res.status(401); //Authorization required
-//   res.json({message: "You are already signed up!"});
-// }
-// app.post("/signup", function(req, res){
-//   var user = new User(req.body.user);
-//   user.save(function(err, user){
-//     if(err){
-//       return res.status(401).send({message:err.errmsg});
-//     }else{
-//       return res.status(200).send({message:"user created"});
-//     }
-//   })
-// })
-// app.post("/signin", function(req,res){
-//   var userParams = req.body.user;
-//   User.findOne({email: userParams.email}, function(err, user){
-//     user.authenticate(userParams.password, function(err, isMatch){
-//       if(err) throw err;
-//       if(isMatch){
-// 	return res.status(200).send({message: "Valid Credentials !"});
-//       }else{
-// 	return res.status(401).send({message: "Invalid Credentials !"});
-//       }
-//     })
-//   })
-// })
 
 var usersController = {
   postRedirect: function(req, res){
-    var user = req.user
+    var user = req.user;
     console.log("In this route, I am sending json!!!!" + user);
-    res.json(user);
+    res.json({message: "You have sucessfully logged in", success: true});
   },
   failureRedirectLogin: function(req, res){
-    res.json({message: "Incorrect Username or Password"});
+    res.json({message: "Incorrect Username or Password", success: false});
   },
   failureRedirectSignup: function(req, res){
-    res.json({message: "This User Already Exists"});
+    res.json({message: "This User Already Exists", success: false});
   },
   postSignup: function(req, res){
     var signUpStrategy = passport.authenticate('local-signup', {

@@ -31,7 +31,7 @@ Location.prototype.postVote = function(vote) {
     $("form").show();
     $('form').attr('action', '/login');
     $("h2").html("Log In");
-    session.showErrors('You must be logged in to vote on a location');
+    // session.showErrors('You must be logged in to vote on a location');
   });
 };
 
