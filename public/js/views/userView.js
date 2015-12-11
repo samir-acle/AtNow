@@ -109,8 +109,8 @@ var userView = {
   appendUserInformation: function(votesTotal, emailOrUserName){
     var allvotesdiv = $(".allvotesdiv");
     allvotesdiv.show();
-    var showEmailOrUsername = $("<h3>Account: " + emailOrUserName + "</h3>");
-    var showVotes = $("<h4>Total Votes: " + votesTotal +"</h4>");
+    var showEmailOrUsername = $("<h3 class='h3-account'>Account: " + emailOrUserName + "</h3>");
+    var showVotes = $("<h4 class='h4-account'>Total Votes: " + votesTotal +"</h4>");
     allvotesdiv.append(showEmailOrUsername);
     showEmailOrUsername.append(showVotes);
     allvotesdiv.append("<h4>Vote History:</h4>");

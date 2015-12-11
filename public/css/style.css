@@ -11,7 +11,7 @@ h2 {
 
 .loc-container {
   background-color: #fafafa;
-  box-shadow: inset 1px 1px 2px #c0c5cc;
+  box-shadow: inset 1px 1px 2px #b4b9c0;
 }
 
 
@@ -118,7 +118,6 @@ li {
     background-color: #61cdf6;
     /*border-radius: 10px 10px 10px 10px;*/
     box-shadow: inset -1px 1px 2px #c76a58;
-
     min-height: 600px;
     background-color: #e88f7e;
 }
@@ -126,7 +125,7 @@ li {
 .loc-space {
   min-height: 600px;
   background-color: #fff;
-  box-shadow: inset 1px 1px 2px #c0c5cc;
+  box-shadow: inset 1px 1px 2px #b4b9c0;
 
 }
 
@@ -146,15 +145,12 @@ form {
 
 /** nav **/
 
-.navbar-brand {
-  margin-top: 5px;
-}
-
 
 .navbar-custom {
   min-height: 65px;
   background-color: white;
   border-bottom: 2px solid #999;
+  padding-top: 5px;
 }
 
 .nav-custom span {
@@ -177,13 +173,13 @@ form {
 
 /** Toggle Locations **/
 
-h3,
+.loc-container h3,
 .link {
   cursor: pointer;
   color: #2c3239;
 }
 
-h3:hover {
+.loc-container h3:hover {
   color: #e88f7e;
     /*width: 10px;*/
     -webkit-transition: all 1s ease-in-out;
@@ -338,7 +334,7 @@ h3:first-of-type {
       transition: font-size 500ms ease-in-out;
     }
   }
-  }
+
 
 @media only screen and (min-width: 40.063em) {
   .logo {
@@ -485,8 +481,10 @@ margin-left: 5px;
 }
 
 .glyphicon:hover {
-  color: #28AADC;
-}
+   color: #28AADC;
+   transform: scale(1.25);
+   cursor: pointer;
+ }
 
 .twitter img {
   width: 50%;
