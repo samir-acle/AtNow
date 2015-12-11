@@ -136,16 +136,6 @@ session.showLogout = function(){
   });
 };
 
-
-
-// function to hide and show buttons:
-// session.toggleButtons = function(){
-//   if(userSession){
-//     $(".login").css("display", "none");
-//     $(".signup").css("display", "none");
-//   }
-// };
-
 session.changeType = function(){
   if(session.needReload){
     session.loadLocations().then(function(data){
@@ -167,6 +157,13 @@ session.reload = function(){
     $(".allvotesdiv").empty();
     userView.userVotes();
   }
+};
+
+session.mainMessage = function(message, warning){
+  var messageType = warning ? 'warning' : 'welcome';
+  var messageDiv = $('<div class="main-message ' + messageType + '"></div>');
+  messageDiv.text(message);
+  $('.loc-container').append(messageDiv);
 };
 
 //TODO: change sessions to this where applicable
