@@ -395,3 +395,23 @@ div.location-toggle:nth-child(even) {
 .welcome {
   font-size: 50px;
 }
+
+.inline {
+  display: inline-block;
+}
+
+.vote-count {
+  border: solid #73d8ff 2px;
+  border-radius: 10px;
+  padding: 5px;
+  background: white;
+}
+
+.loc-name {
+  padding: 10px;
+}
+
+.upvote,
+.downvote {
+  margin-left: 5px;
+}
