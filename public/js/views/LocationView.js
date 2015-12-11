@@ -26,10 +26,14 @@ LocationView.prototype = {
       self.$el.find('.toggle').slideToggle("400");
       });
     self.$el.find('.upvote').on('click', function(){
-      self.loc.postVote(true);
+      if(!jQuery.isEmptyObject(currentUser)){
+        self.loc.postVote(true);
+      }
       });
     self.$el.find('.downvote').on('click', function(){
-      self.loc.postVote(false);
+      if(!jQuery.isEmptyObject(currentUser)){
+        self.loc.postVote(false);
+      }
       });
     },
 

@@ -64,19 +64,21 @@ session.saveLocations = function(data, type) {
 
 session.error = {};
 
-session.grabLoginErrors = function() {
-  var self = this;
-  var url = "http://127.0.0.1:3000/failedlogin";
-  var request = $.getJSON(url).then(function(req, res){
-    console.log("THIS IS FETCHING THE Failed message");
-    session.error = req;
-    session.showErrors();
-    return req;
-  }).fail(function(response){
-    console.log("JS failed to get message");
-  });
-  return request;
-};
+
+
+// session.grabLoginErrors = function() {
+//   var self = this;
+//   var url = "http://127.0.0.1:3000/failedlogin";
+//   var request = $.getJSON(url).then(function(req, res){
+//     console.log("THIS IS FETCHING THE Failed message");
+//     session.error = req;
+//     session.showErrors();
+//     return req;
+//   }).fail(function(response){
+//     console.log("JS failed to get message");
+//   });
+//   return request;
+// };
 
 session.grabSignUpErrors = function(){
   var self = this;
@@ -86,21 +88,40 @@ session.grabSignUpErrors = function(){
     session.error = req;
     session.showErrors();
     return req;
-  }).fail(function(response){
   });
   return request;
 };
 // this needs to go to session view:
 // showing session errors for signup and login
-session.showErrors = function(errorMessage){
+session.showErrors2 = function(errorMessage){
   var message = errorMessage || session.error.message;
   var sessionMessage = $(".sessionmessage");
   sessionMessage.html("<strong>Error : </strong>" + message);
   sessionMessage.fadeIn(500);
   $("body").on("click", function(){
-    sessionMessage.fadeOut(1000);
+    sessionMessage.fadeOut(800);
     session.error = {};
   });
+};
+
+session.showErrors = function(){
+  var sessionMessage = $(".sessionmessage");
+  sessionMessage.html("<strong>Error : </strong>" + session.error.message);
+  sessionMessage.fadeIn(800);
+  $("body").on("click", function(){
+    sessionMessage.fadeOut(800);
+    session.error = {};
+  });
+};
+
+session.showLoginSucess = function(){
+  if(!jQuery.isEmptyObject(currentUser)){
+    var loginMessage = $(".loginmessage");
+    loginMessage.fadeIn(800);
+    $("body").on("click", function(){
+      loginMessage.fadeOut(800);
+    });
+  }
 };
 
 session.showLogout = function(){

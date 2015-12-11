@@ -34,7 +34,7 @@ var User = require("../models/user");
 
 var usersController = {
   postRedirect: function(req, res){
-    var user = global.currentUser;
+    var user = req.user
     console.log("In this route, I am sending json!!!!" + user);
     res.json(user);
   },
