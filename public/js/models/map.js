@@ -14,5 +14,8 @@ map.geocodeLocation = function(location) {
     map.results = results[0].geometry.location;
     map.lat = map.results.lat();
     map.lng = map.results.lng();
+    session.reload();
+    session.loadLocations('store');
+    Movie.fetch();
   });
-}
+};

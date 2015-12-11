@@ -43,26 +43,4 @@ router.get("/", function(req, res){
   });
 });
 
-// router.get("/:id", function(req, res){
-//   var url = "https://maps.googleapis.com/maps/api/place/details/json?";
-//   var options = [
-//     ["placeid", req.params.id],
-//     ["opennow", ""],
-//     ["key", env.googleKey]
-//   ];
-//   // console.log(options);
-//
-//   options.forEach(function(option){
-//     url = url + "&"+ option[0] + "=" + option[1];
-//   });
-//
-//   console.log(url);
-//
-//   request(url, function(err, response, body) {
-//     console.log(response);
-//     if (err) throw err;
-//     res.json(response);
-//   });
-// });
-
 module.exports = router;

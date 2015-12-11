@@ -24,6 +24,7 @@ var userView = {
     $(".logout").on("click", function(){
       $('form').attr('action', '#');
       User.logOut();
+      session.showLogout();
     });
   },
   submitForm: function(){
@@ -49,12 +50,10 @@ var userView = {
   },
   userVotes: function(){
     var self = this;
-    self.currentUser = currentUser;
-    if(jQuery.isEmptyObject(currentUser)){
-      var user = User.fetch().then(function(user){
-        currentUser = user;
-      });
-    }
+    var user = User.fetch().then(function(user){
+      self.currentUser = user;
+      self.allVotesdiv();
+    });
   },
   clickAccountInfo: function(){
     var self = this;
@@ -62,13 +61,12 @@ var userView = {
     var allvotesdiv = $(".allvotesdiv");
     account.on("click", function(){
       if(allvotesdiv.children().length > 0){
-        self.allVotesdiv();
-        allvotesdiv.hide();
+        $(".allvotesdiv").empty();
+        console.log('emptied');
+        allvotesdiv.toggle();
       }
       else{
-        allvotesdiv.show();
         userView.userVotes();
-        self.allVotesdiv();
       }
     });
   },
@@ -105,16 +103,17 @@ var userView = {
   },
   appendUserInformation: function(votesTotal, emailOrUserName){
     var allvotesdiv = $(".allvotesdiv");
-    allvotesdiv.css("display", "inline");
+    allvotesdiv.show();
     var showEmailOrUsername = $("<h3>Account: " + emailOrUserName + "</h3>");
     var showVotes = $("<h4>Total Votes: " + votesTotal +"</h4>");
     allvotesdiv.append(showEmailOrUsername);
     showEmailOrUsername.append(showVotes);
-    allvotesdiv.append("<h4>UpVotes:</h4>");
+    allvotesdiv.append("<h4>Vote History:</h4>");
   },
   addVotesToUserInfo: function(sortedVotes){
     var allvotesdiv = $(".allvotesdiv");
-    for(var i = 0; i < sortedVotes.length; i++){
+    var limit = sortedVotes.length < 20 ? sortedVotes.length : 20;
+    for(var i = 0; i < limit; i++){
       // if(sortedVotes[i].vote){
       var formattedTime = moment(sortedVotes[i].createdAt).format("MMM Do YYYY");
       var voteType = sortedVotes[i].vote ? 'upvote' : 'downvote';

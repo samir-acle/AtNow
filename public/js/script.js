@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  session.mainMessage('Welcome to @Now');
 
   userView.showLogin();
   userView.showSignup();
@@ -13,9 +14,7 @@ $(document).ready(function(){
   session.getLocation.then(function(res){
     session.currentLat = res.lat;
     session.currentLong = res.long;
-    session.loadLocations().then(function(data){
-      session.createLocationViews();
-    });
+    session.reload();
     session.loadLocations('store');
     Movie.fetch();
   }, function(err) {
@@ -35,5 +34,10 @@ $(document).ready(function(){
   $('.movies').on('click', function(){
     session.setState('movies');
     Movie.loadMovies();
+  });
+
+  $('.set-location').on('click', function(){
+    var location = $('input.location').val();
+    map.geocodeLocation(location);
   });
 });
