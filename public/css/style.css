@@ -11,7 +11,7 @@ h2 {
 
 .loc-container {
   background-color: #fafafa;
-  box-shadow: inset 1px 1px 2px #c0c5cc;
+  box-shadow: inset 1px 1px 2px #b4b9c0;
 }
 
 
@@ -125,7 +125,7 @@ li {
 .loc-space {
   min-height: 600px;
   background-color: #fff;
-  box-shadow: inset 1px 1px 2px #c0c5cc;
+  box-shadow: inset 1px 1px 2px #b4b9c0;
 
 }
 
@@ -145,15 +145,12 @@ form {
 
 /** nav **/
 
-.navbar-brand {
-  margin-top: 5px;
-}
-
 
 .navbar-custom {
   min-height: 65px;
   background-color: white;
   border-bottom: 2px solid #999;
+  padding-top: 5px;
 }
 
 .nav-custom span {
@@ -337,7 +334,7 @@ h3:first-of-type {
       transition: font-size 500ms ease-in-out;
     }
   }
-  }
+
 
 @media only screen and (min-width: 40.063em) {
   .logo {
