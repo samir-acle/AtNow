@@ -394,3 +394,18 @@ div.location-toggle:nth-child(even) {
 .welcome {
   font-size: 50px;
 }
+
+/** footer **/
+
+.nav--footer span {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", sans-serif;
+  color: #0b0b0b;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.nav--footer span:hover {
+  color: #0b0b0b;
+  padding-bottom: 2px;
+  border-bottom: 2px solid #73d8ff;
+}
