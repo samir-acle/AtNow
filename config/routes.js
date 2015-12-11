@@ -10,15 +10,19 @@ function authenticatedUser(req, res, next) {
   res.redirect('/');
 }
 
-router.route('/')
-.get(staticsController.index);
+router.route("/currentuser")
+.get(usersController.postRedirect);
+
+router.route("/failedlogin")
+.get(usersController.failureRedirectLogin);
+
+router.route("/failedsignup")
+.get(usersController.failureRedirectSignup);
 
 router.route('/signup')
-.get(usersController.getSignup)
 .post(usersController.postSignup);
 
 router.route('/login')
-.get(usersController.getLogin)
 .post(usersController.postLogin);
 
 router.route('/logout')

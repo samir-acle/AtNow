@@ -1,55 +1,121 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>@Now</title>
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-    <!-- If we want this for mobile at some point we need it ^  -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="/js/models/session.js"></script>
-    <script src="/js/models/location.js"></script>
-    <script src="/js/models/user.js"></script>
-    <script src="/js/views/locationView.js"></script>
-    <script src="/js/script.js"></script>
-  </head>
-  <body>
-    <header class="navbar navbar-custom" role="navigation">
+<head>
+  <title>@Now</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- If we want this for mobile at some point we need it ^  -->
+  <link type="text/css" rel="stylesheet" href="css/normalize.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:600,400,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="/js/libraries/moment.min.js"></script>
+  <script src="/js/models/movie.js"></script>
+  <script src="/js/views/movieView.js"></script>
+  <script src="/js/models/session.js"></script>
+  <script src="/js/models/location.js"></script>
+  <script src="/js/views/userView.js"></script>
+  <script src="/js/models/user.js"></script>
+  <script src="/js/views/LocationView.js"></script>
+  <script src="/js/views/movieView.js"></script>
+  <script src="js/models/map.js"></script>
+  <script src="/js/script.js"></script>
+</head>
+<body>
+  <header class="navbar navbar-custom" role="navigation">
     <div class="navbar-inner">
       <div class="container">
-        <div id="" class="navbar-brand">@Now</div>
+        <div id="logo-atnow" class="navbar-brand">@Now</div>
         <nav class="collapse navbar-collapse navbar-ex1-collapse">
           <!-- If user signed in etc. -->
-            <ul id="custom" class="nav navbar-nav navbar-right">
-              <li><a href="/">Home</a></li>
-              <li>Account</li>
-              <li class="contact-modal">Contact Us</li>
-              <li><a href="/logout">Logout </a></li>
-              <li><a href="/login">Login</a></li>
-              <li><a href="/signup">Signup</a></li>
-            </ul>
-            <!-- if use signed in else etc. -->
-            <ul class="nav navbar-nav pull-right">
-              <!-- <li>Sign Up</li>
-              <li>Sign In</li> -->
-            </ul>
+          <ul id="custom" class="nav navbar-nav navbar-right">
+            <li class="account link"><span>Account</span></li>
+            <li class="logout link"><span>Logout</span></li>
+            <li class= "login link"><span>Login</span></li>
+            <li class= "signup link"><span>Signup</span></li>
+          </ul>
+          <!-- if use signed in else etc. -->
+          <ul class="nav navbar-nav pull-right">
+            <!-- <li>Sign Up</li>
+            <li>Sign In</li> -->
+          </ul>
+        </div>
+        <div class="main-body-test">
+        </div>
+        <div class= "showuserinfo"></div>
+        <div class='set-location-div'>
+          <input type="text" placeholder="location" class='location'>
+          <button class="set-location">set</button>
+        </div>
       </div>
-      <div class="main-body-test">
+    </header>
+  <div class="container">
+    <section class="">
+      <h1 class="cta rotate">
+        <span class="style-banner">I want to go </span>
+        <span class="word-wrapper">
+          <b>to the bar.</b>
+          <b>to the movies.</b>
+          <b>out to eat.</b>
+        </span>
+      </h1>
+    </section>
+    <div class="row">
+      <div class="loc-space col-md-8">
+        <button class="btn-custom restaurants">Restaurants</button>
+        <button class="btn-custom stores">Stores</button>
+        <button class="btn-custom movies">Movies</button>
+        <span><img src="/images/powered_by_google_on_white.png" alt="Powered by Google"></span>
+        <ul class="loc-container"></ul>
+      </div>
+      <div class="col-md-4 userdiv">
+<<<<<<< HEAD
+        <div class="alert alert-success alert-dismissable logoutmessage">
+          <strong>Success: </strong>You are now logged out.
+        </div>
+        <div class="alert alert-success alert-dismissable loginmessage">
+          <strong>Success: </strong>You are currently logged in.
+        </div>
+=======
+        <div class="alert alert-dismissable sessionmessage">
+        Sorry, There Must Be An Error.
+        </div>
+        <div class="alert alert-success alert-dismissable successmessage">
+          You have sucessfully logged out!.
+        </div>
+>>>>>>> 43d31a61aa6cfea625ae0b2cc6c14fd370c7cf99
+        <form method="post" action="/login">
+          <h2>Login</h2>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input class="form-control" type="text" name="email" id="email">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Password</label>
+            <input class="form-control" type="password" name="password" id="password">
+          </div>
+
+          <input class="btn btn-default" type="submit">
+
+          <a href="/auth/twitter"><img id="twitter-login" src="http://i.imgur.com/3kYcO3Y.png"></a>
+        </form>
+        <div class= 'allvotesdiv'></div>
       </div>
     </div>
-  </header>
-  <div class="container">
-  <div class="mid-test">
-    <button class="restaurants">Restaurants/Bars</button>
-    <button class="stores">Stores</button>
-    <ul class="loc-container"></ul>
   </div>
-  <div class="side">
-    <h1> Other stuff can go here</h1>
+
+<footer>
+  <div class="footer-style">
   </div>
-<div id="container" class="col-md-9 center-block">
-  </nav>
-  </body>
+</footer>
+
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzKpNRyX1TvArCR_ZHz06J-wu1CqM6Niw&callback=map.initMap">
+    </script>
+    <script src="/js/animations-transitions/rotateAnimation.js"></script>
+
+</body>
 </html>

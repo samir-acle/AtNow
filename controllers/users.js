@@ -1,37 +1,57 @@
+var express = require("express");
+var router = express.Router();
 var passport = require("passport");
+var User = require("../models/user");
 
 var usersController = {
-  getSignup: function(req, res){
-    res.render("signup.hbs", { message: req.flash('signupMessage')});
+  postRedirect: function(req, res){
+    var user = req.user;
+    console.log("In this route, I am sending json!!!!" + user);
+    res.json({message: "You have sucessfully logged in", success: true});
+  },
+  failureRedirectLogin: function(req, res){
+    res.json({message: "Incorrect Username or Password", success: false});
+  },
+  failureRedirectSignup: function(req, res){
+    res.json({message: "This User Already Exists", success: false});
   },
   postSignup: function(req, res){
     var signUpStrategy = passport.authenticate('local-signup', {
-      successRedirect: '/',
-      failureRedirect: '/signup',
+      successRedirect: '/currentUser',
+      failureRedirect: '/failedsignup',
       failureFlash: true
     });
     return signUpStrategy(req, res);
   },
-  getLogin: function(req, res) {
-    res.render('login.hbs', {message: req.flash('loginMessage')});
-  },
   postLogin: function(req, res) {
+    console.log("Route being hit");
     var loginProperty = passport.authenticate('local-login', {
-      successRedirect : '/',
-      failureRedirect : '/login',
-      failureFlash : true
+      successRedirect: '/currentUser',
+      failureRedirect: '/failedlogin',
+      failureFlash: true
     });
+    console.log(global.currentUser);
     return loginProperty(req, res);
   },
   getLogout:  function(req, res) {
     req.logout();
-    res.redirect('/');
+    res.json({message: "User is logged out"});
+    // res.redirect('/');
   },
   secret: function (req, res){
     res.render("secret.hbs");
   },
   getUser: function(req, res) {
-    res.json(global.currentUser);
+    var currentUser = req.user;
+    User.findOne({"local.email": currentUser.local.email}, function(err, user){
+      if(user){
+        res.json(user);
+      }
+      else{
+        console.log(err);
+        res.json({message: "No user could be found, please login again"});
+      }
+    });
   },
   getTwitter: function(req, res){
     var loginProperty = passport.authenticate('twitter');

@@ -6,7 +6,8 @@ var VoteSchema = new Schema ({
   location_id: String,
   vote: Boolean,
   user: {type: ObjectId, ref: "User"},
-  createdAt: {type: Date, default: Date.now}
+  createdAt: {type: Date, default: Date.now},
+  name: String
 });
 
 var PreferenceSchema = new Schema ({

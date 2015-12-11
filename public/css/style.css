@@ -1,12 +1,40 @@
 body {
   font-size: 18px;
-  background-color: #424242;
+  background-color: #F1F1F1;
 
 }
 
-.navbar-custom {
-  background-color: #d8f2bc;
-  border-bottom: thick solid #b2b8ab;
+.loc-container {
+  background-color: #f7f7f7;
+}
+
+div.location.loc-style {
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+.btn-custom {
+  color: #3ABEC7;
+  background: rgba(0,0,0,0);
+  border: solid 3px #3ABEC7;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", sans-serif;
+  font-weight: 400;
+  padding: 20px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin: 10px;
+}
+
+.btn-custom:hover {
+  border-color: #3ABEC7;
+  color: #fff;
+  background-color: #3ABEC7;
+
+}
+
+.btn-custom:active {
+  border-color: #27496d;
+  color: #27496d;
 }
 
 li {
@@ -20,21 +48,199 @@ li {
   font-size: 22px;
 }
 
-.mid-test {
-    display:inline-block;
-    min-height: 600px;
-    width: 65%;
-    background-color: #e88f7e;
-    border-radius: 10px 10px 10px 10px;
+.container {
+  margin: 0 auto;
+}
+.row {
+  min-height: 600px;
+  background-color: #e88f7e;
+  border-radius: 10px 10px 10px 10px;
 }
 
-.side {
-  display:inline-block;
+.loc-space {
   min-height: 600px;
-  padding-left: 10px;
-  width:32%;
-  background-color: #ffcb87;
-  border-radius: 10px 10px 10px 10px;
-  margin-left: 20px;
+  background-color: #fff;
 
+}
+
+form {
+  display: none;
+}
+
+.allvotesdiv{
+  width: 100%;
+  margin: 0 auto;
+  font-size: 12px;
+  display: none;
+}
+
+.upvote {
+
+}
+
+
+
+/** logo and nav **/
+
+#logo-atnow {
+  background-image:
+}
+
+
+.navbar-custom {
+  background-color: #A0C2EE;
+  border-bottom: 2px solid #8BA8CF;
+}
+
+/** Toggle Locations **/
+
+h3,
+.link {
+  cursor: pointer;
+}
+
+.list-items {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  color: black;
+}
+
+.sessionmessage{
+  display: none;
+  margin: 0 auto;
+  width: 100%;
+  font-size: 18.5px;
+  height: 80px;
+  margin-top: 10px;
+}
+.successmessage{
+  display: none;
+  margin: 0 auto;
+  width: 100%;
+  font-size: 18.5px;
+  height: 80px;
+  margin-top: 10px;
+}
+
+.movie-style:nth-last-of-type(2n){
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.movie-style{
+  margin: 10px;
+  margin-top: 40px;
+  padding-top: 10px;
+}
+.movietitle{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.showuserinfo{
+  background-color: yellow;
+}
+
+/** Rotating Words **/
+
+
+.cta {
+  color: black;
+}
+
+.word-wrapper {
+  position: relative;
+}
+
+.cta.rotate b {
+  opacity: 0;
+  transform-origin: 50% 100%;
+  transform: rotateX(180deg);
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: auto;
+  white-space: nowrap;
+  padding-left: 5px;
+}
+
+.cta.rotate b.is-visible {
+  position: absolute;
+  opacity: 1;
+  transform: rotateX(0deg);
+  animation: cta-rotate-in 1.2s;
+}
+
+.cta.rotate b.is-hidden {
+  position: absolute;
+  transform: rotateX(180deg);
+  animation: cta-rotate-out 1.2s;
+}
+
+@keyframes cta-rotate-in {
+  0% {
+    transform: rotateX(180deg);
+    opacity: 0;
+  }
+  35% {
+    transform: rotateX(120deg);
+    opacity: 0;
+  }
+  65% {
+    opacity: 0;
+  }
+  100% {
+    transform: rotateX(360deg);
+    opacity: 1;
+  }
+}
+
+@keyframes cta-rotate-out {
+  0% {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+  35% {
+    transform: rotateX(-40deg);
+    opacity: 1;
+  }
+  65% {
+    opacity: 0;
+  }
+  100% {
+    transform: rotateX(180deg);
+    opacity: 0;
+  }
+}
+
+
+.red,
+.warning {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+/*style for if user has already voted*/
+.true {
+  color: blue;
+}
+
+/*style if user has not alredy chosen this vote*/
+.false {
+  opacity: 0.5;
+}
+
+.set-location-div {
+  display: none;
+}
+
+.welcome {
+  font-size: 50px;
 }

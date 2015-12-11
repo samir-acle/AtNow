@@ -1,12 +1,10 @@
 var express = require("express");
 var router = express.Router();
-// var Vote = mongoose.model('Vote');
-// var User = mongoose.model('User');
 var Preference = require("../models/preference");
 var Vote = require("../models/vote");
 var User = require("../models/user");
 var Location = require("../models/location");
-// var VoteCount = require("../models/voteCount");
+var checkUserVotes = require("../modules/checkUserVotes");
 
 router.get("/", function(req, res){
     res.json(global.currentUser.votes);
@@ -17,70 +15,73 @@ router.get("/", function(req, res){
 //TODO: add route to delete user vote
 router.post("/", function(req, res){
   var voteInfo = {
+    name: req.body.name,
     location_id: req.body.location_id,
     vote: req.body.vote === 'true' ? true : false //converts string to boolean
   };
-  // console.log('body', req.body);
-  // console.log('body vote',req.body.vote);
-  // console.log('voteInfo', voteInfo);
-  var match, prevVote;
-  var currentUser = global.currentUser;
-  // User.findOne({"local.email": "sammehta88@gmail.com"}, function(err, currentUser){
-    var votesArray = currentUser.votes;
-    // console.log(votesArray);
 
-    function findMatch() {
-      for (var i = 0; i < votesArray.length; i++) {
-        if (votesArray[i].location_id === voteInfo.location_id){
-          match = i;
-          prevVote = votesArray[i].vote;
-          return;
-          // return match;
-        }
-      }
-    }
-    findMatch();
+  // var match, prevVote;
+  // var currentUser = global.currentUser;
+  // var votesArray = currentUser.votes;
+  //
+  //   //TODO: use findOne?
+  // function findMatch() {
+  //   for (var i = 0; i < votesArray.length; i++) {
+  //     if (votesArray[i].location_id === voteInfo.location_id){
+  //       match = i;
+  //       prevVote = votesArray[i].vote;
+  //       // console.log('match found');
+  //       return;
+  //     }
+  //   }
+  // }
+    // var userVote = [];
+    var userVote = checkUserVotes(voteInfo.location_id);
+    var index = userVote ? userVote[0] : '';
+    var prevVote = userVote ? userVote[1] : '';
     // console.log('match', match);
     // console.log('prevvote', prevVote);
+    Location.findOne({"location_id": voteInfo.location_id}, function(err, loc){
+      if (!userVote) {
+        currentUser.votes.push(new Vote(voteInfo));
+        currentUser.save().then(function(){
+          //TODO: refactor, separate out code into different function
+            if (loc){
+              loc.count = voteInfo.vote ? loc.count + 1 : loc.count - 1;
+            } else {
+              loc = new Location({
+                "location_id": voteInfo.location_id,
+                "count": voteInfo.vote ? 1 : -1  //TODO: -1 or 0? can they have negative votes?
+              });
+            }
+            loc.save();
+            // console.log('in create',currentUser.votes.length);
+            res.json(loc);
+          // });
+        });
+      } else if (voteInfo.vote === prevVote){
+        // console.log('in match same');
+        // console.log(currentUser.votes[match]);
+        currentUser.votes[index].remove();
+        currentUser.save(function(err){
+          if(err) throw err;
 
-    if (!match) {
-      // console.log('no match');
-      currentUser.votes.push(new Vote(voteInfo));
-      currentUser.save().then(function(){
-        //TODO: refactor, separate out code into different function
-        Location.findOne({"location_id": voteInfo.location_id}, function(err, loc){
-          if (loc){
-            loc.count = voteInfo.vote ? loc.count + 1 : loc.count - 1;
-          } else {
-            loc = new Location({
-              "location_id": voteInfo.location_id,
-              "count": voteInfo.vote ? 1 : 0  //TODO: -1 or 0? can they have negative votes?
-            });
-          }
+          loc.count = prevVote ? loc.count - 1 : loc.count + 1;
           loc.save();
           res.json(loc);
         });
-      });
-    } else if (voteInfo.vote === prevVote){
-      // console.log('match - same');
-      res.json(currentUser.votes.length);
-    } else {
-      // console.log(voteInfo.vote === votesArray[match].vote);
-      // console.log(votesArray[match].vote);
-      // console.log('match - different');
-      currentUser.votes[match].vote = voteInfo.vote;
-      // console.log('this should be false', currentUser.votes.vote);
-      currentUser.save().then(function(){
-        Location.findOne({"location_id": voteInfo.location_id}, function(err, loc){
-          loc.count = prevVote ? loc.count - 2 : loc.count + 2;
-          loc.save();
-          res.json(loc);
-        }); //do i need these in promises??
-      });
-    }
-  // });
-  // });
+      } else {
+        currentUser.votes[index].vote = voteInfo.vote;
+        currentUser.save(function(){
+            loc.count = prevVote ? loc.count - 2 : loc.count + 2;
+            loc.save();
+            // console.log('in match diff',currentUser.votes.length);
+            res.json(loc);
+        });
+      }
+  });
 });
 
-
 module.exports = router;
+
+//TODO: change to use better mongoose methods - findbyandupdate

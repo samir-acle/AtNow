@@ -1,72 +1,49 @@
-
 var LocationView = function(location) {
   this.loc = location;
-  this.$el = $("<div class='location'></div>");
-//   $(this).append('<input type="button" value="Upvote">').on("click", "button", function(){
-//
-// });
+  this.$el = $("<div class='location loc-style'></div>");
 };
 
 LocationView.prototype = {
   render: function(){
     var self = this;
-
-    var showLocations = self.$el.find(".showLocations");
-    var locationsDiv = self.$el.find("div.location");
-
-
-    showLocations.on("click", function(){
-      console.log("setup click");
-        self.toggleLocations(locationsDiv);
-      });
+    var upvote = self.loc.userUpvote.toString();
+    var downvote = self.loc.userDownvote.toString();
 
     self.$el.append("<h3>" + self.loc.name + "</h3>");
-<<<<<<< HEAD
-=======
     self.$el.append("<h4>" + self.loc.count + "</h4>");
->>>>>>> 3d2cd456487a464342a9d2326bdbaaa8d972d8d1
-    self.$el.append('<input type="button" value="upvote" class="upvote">');
-    self.$el.append('<input type="button" value="downvote" class="downvote">');
+    self.$el.append('<span class="upvote glyphicon glyphicon-thumbs-up ' + upvote + '"></span>');
+    self.$el.append('<span class="downvote glyphicon glyphicon-thumbs-down ' + downvote + '"></span>');
+    self.$el.append('<div class="toggle"></div>');
+    self.addInfo();
+
+
     self.click();
     $('.loc-container').append(self.$el);
   },
   click: function(){
     var self = this;
-<<<<<<< HEAD
-       self.$el.find('h3').on('click', function(){
-         console.log(self.loc);
-       });
-       self.$el.find('.upvote').on('click', function(){
-         self.loc.postVote(self.loc.id, true);
-       });
-       self.$el.find('.downvote').on('click', function(){
-         self.loc.postVote(self.loc.id, false);
-       });
-     },
-  toggleLocations: function(locationsDiv){
-    console.log("test");
-    var self = this;
-    if(locationDiv.children().length === 0){
-      this.Location.fetch().then(function(locations){
-        self.$el.append("<div>" + this.loc.icon + "</div>");
-        self.$el.append("<div>" + this.loc.address + "</div>");
-        self.$el.append("<div>" + this.loc.types + "</div>");
-        self.$el.append("<div>" + this.loc.rating + "</div>");
-      });
-    }
-    locationsDiv.toggle();
-    this.toggleDiv(locationsDiv);
-=======
     self.$el.find('h3').on('click', function(){
-      console.log(self.loc);
-      // self.loc.getVoteCount(self.loc);
-    });
+      self.$el.find('.toggle').slideToggle("400");
+      });
     self.$el.find('.upvote').on('click', function(){
-      self.loc.postVote(self.loc.id, true);
-    });
+      if(!jQuery.isEmptyObject(currentUser)){
+        self.loc.postVote(true);
+      }
+      });
     self.$el.find('.downvote').on('click', function(){
-      self.loc.postVote(self.loc.id, false);
-    });
->>>>>>> 3d2cd456487a464342a9d2326bdbaaa8d972d8d1
+      if(!jQuery.isEmptyObject(currentUser)){
+        self.loc.postVote(false);
+      }
+      });
+    },
+
+  addInfo: function(){
+    var self = this;
+    var subDiv = self.$el.find('.toggle');
+    // subDiv.append('<div><img src="' + this.loc.icon + '" height="32px" width="32px"></div>');
+    subDiv.append("<div class='location-toggle'>" + "<span class='list-items'>Address: </span>" + this.loc.address + "</div>");
+    subDiv.append("<div class='location-toggle'>"  + "<span class='list-items'>Types: </span>" + this.loc.types + "</div>");
+    subDiv.append("<div class='location-toggle'>"  + "<span class='list-items'>Rating: </span>" + this.loc.rating + "</div>");
+    subDiv.hide();
   }
 };
