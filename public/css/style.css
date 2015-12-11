@@ -6,6 +6,7 @@ body {
 
 .loc-container {
   background-color: #f7f7f7;
+  box-shadow: inset 2px 2px 2px #c0c5cc;
 }
 
 
@@ -88,7 +89,8 @@ li {
 
 .loc-space {
   min-height: 600px;
-  background-color: #fff;
+  background-color: #ccdbf5;
+  box-shadow: inset 2px 2px 3px #c0c5cc;
 
 }
 
@@ -115,14 +117,21 @@ form {
 
 .navbar-custom {
   min-height: 65px;
-  background-color: #444;
+  background-color: white;
   border-bottom: 2px solid #333;
 }
 
-ul li {
+.nav-custom span {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", sans-serif;
-  color: white;
+  color: #0b0b0b;
+  font-size: 16px;
   cursor: pointer;
+}
+
+.nav-custom span:hover {
+  color: #0b0b0b;
+  background-color: white;
+  border: 2px solid #ebecec;
 }
 
 /** Toggle Locations **/
@@ -132,10 +141,14 @@ h3,
   cursor: pointer;
 }
 
+h3:first-of-type {
+  padding-top: 20px;
+}
+
 .list-items {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Helvetica Neue", sans-serif;
   font-size: 20px;
-  color: black;
+  color: #777;
 }
 
 .sessionmessage{
@@ -330,4 +343,41 @@ h1 {
 
 .set-location-div {
   display: none;
+}
+
+/** line **/
+
+.separate {
+  width: 10%;
+  border: 1px solid #f2f2f2;
+}
+
+h3 {
+  color: #28AADC;
+}
+
+div.location-toggle:nth-child(odd) {
+  border:1px solid #CCCCCC;
+  border-radius:4px;
+  box-shadow:rgba(0, 0, 0, 0.0745098) 0 1px 1px;
+  background-color: white;
+  display:block;
+  font-size:14px;
+  height:34px;
+  line-height:1.42857;
+  padding:6px 12px;
+  width:100%;
+}
+
+div.location-toggle:nth-child(even) {
+  border:1px solid #CCCCCC;
+  /*border-radius:4px;*/
+  box-shadow:rgba(0, 0, 0, 0.0745098) 0 1px 1px;
+  background-color: #f2f2f2;
+  display:block;
+  font-size:14px;
+  height:34px;
+  line-height:1.42857;
+  padding:6px 12px;
+  width:100%;
 }
