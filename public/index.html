@@ -32,12 +32,12 @@
           <!-- If user signed in etc. -->
           <ul id="custom" class="nav navbar-nav navbar-right">
             <li class="nav-custom account link"><p><span>Account</span></p></li>
-            <li class="nav-custom logout link"><p><span>Logout</span></p></li>
             <li class= "nav-custom login link"><p><span>Login</span></p></li>
+            <li class="nav-custom logout link"><p><span>Logout</span></p></li>
             <li class= "nav-custom signup link"><p><span>Signup</span></p></li>
           </ul>
         </nav>
-        <div class="main-body-test">
+      <div class="main-body-test">
         </div>
         <div class= "showuserinfo"></div>
       </div>
@@ -86,7 +86,7 @@
             <label for="email">Password</label>
             <input class="form-control" type="password" name="password" id="password">
           </div>
-          <input class="btn btn-default" type="submit">
+          <input class="btn-submit" type="submit">
           <a href="/auth/twitter" class="twitter"><img id="twitter-login" src="http://i.imgur.com/3kYcO3Y.png" alt='twitter logo'></a>
         </form>
         <div class= 'allvotesdiv'></div>
@@ -94,7 +94,13 @@
     </div>
   </div>
 <footer>
-  <div class="footer-style">
+  <div class="footer-style panel-footer">
+    <ul id="custom" class="footer nav navbar-nav">
+          <li class="nav--footer account link"><p><span>Account</span></p></li>
+          <li class= "nav--footer login link"><p><span>Login</span></p></li>
+          <li class="nav--footer logout link"><p><span>Logout</span></p></li>
+          <li class= "nav--footer signup link"><p><span>Signup</span></p></li>
+    </ul>
   </div>
 </footer>
     <script async defer
