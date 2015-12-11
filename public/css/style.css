@@ -118,7 +118,6 @@ li {
     background-color: #61cdf6;
     /*border-radius: 10px 10px 10px 10px;*/
     box-shadow: inset -1px 1px 2px #c76a58;
-
     min-height: 600px;
     background-color: #e88f7e;
 }
@@ -177,13 +176,13 @@ form {
 
 /** Toggle Locations **/
 
-h3,
+.loc-container h3,
 .link {
   cursor: pointer;
   color: #2c3239;
 }
 
-h3:hover {
+.loc-container h3:hover {
   color: #e88f7e;
     /*width: 10px;*/
     -webkit-transition: all 1s ease-in-out;
@@ -485,5 +484,7 @@ margin-left: 5px;
 }
 
 .glyphicon:hover {
-  color: #28AADC;
-}
+   color: #28AADC;
+   transform: scale(1.25);
+   cursor: pointer;
+ }
