@@ -1,12 +1,12 @@
 body {
   font-size: 18px;
-  background-color: #F1F1F1;
+  background-color: #f6f9ff;
 
 }
 
 .loc-container {
-  background-color: #f7f7f7;
-  box-shadow: inset 2px 2px 2px #c0c5cc;
+  background-color: #f6f9ff;
+  box-shadow: inset 1px 1px 2px #c0c5cc;
 }
 
 
@@ -83,14 +83,16 @@ li {
 }
 .row {
     min-height: 600px;
-    background-color: #e88f7e;
-    border-radius: 10px 10px 10px 10px;
+    background-color: #61cdf6;
+    /*border-radius: 10px 10px 10px 10px;*/
+    box-shadow: inset 1px 1px 2px #c0c5cc;
+
 }
 
 .loc-space {
   min-height: 600px;
-  background-color: #ccdbf5;
-  box-shadow: inset 2px 2px 3px #c0c5cc;
+  background-color: #fff;
+  box-shadow: inset 1px 1px 2px #c0c5cc;
 
 }
 
@@ -118,7 +120,7 @@ form {
 .navbar-custom {
   min-height: 65px;
   background-color: white;
-  border-bottom: 2px solid #333;
+  border-bottom: 2px solid #f1f1f1;
 }
 
 .nav-custom span {
@@ -139,6 +141,11 @@ form {
 h3,
 .link {
   cursor: pointer;
+  color: #2c3239;
+}
+
+h3:hover {
+  /*background-color: white;*/
 }
 
 h3:first-of-type {
@@ -148,7 +155,7 @@ h3:first-of-type {
 .list-items {
   font-family: "Helvetica Neue", sans-serif;
   font-size: 20px;
-  color: #777;
+  color: #333;
 }
 
 .sessionmessage{
@@ -196,7 +203,7 @@ h3:first-of-type {
 
 
 .cta {
-  color: black;
+  color: #222;
 }
 .cta.rotate b {
   opacity: 0;
@@ -352,13 +359,10 @@ h1 {
   border: 1px solid #f2f2f2;
 }
 
-h3 {
-  color: #28AADC;
-}
-
 div.location-toggle:nth-child(odd) {
+  max-width: 500px;
   border:1px solid #CCCCCC;
-  border-radius:4px;
+  /*border-radius:4px;*/
   box-shadow:rgba(0, 0, 0, 0.0745098) 0 1px 1px;
   background-color: white;
   display:block;
@@ -370,10 +374,11 @@ div.location-toggle:nth-child(odd) {
 }
 
 div.location-toggle:nth-child(even) {
+  max-width: 500px;
   border:1px solid #CCCCCC;
   /*border-radius:4px;*/
   box-shadow:rgba(0, 0, 0, 0.0745098) 0 1px 1px;
-  background-color: #f2f2f2;
+  background-color: #f6f9ff;
   display:block;
   font-size:14px;
   height:34px;
