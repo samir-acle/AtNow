@@ -24,6 +24,7 @@ var userView = {
     $(".logout").on("click", function(){
       $('form').attr('action', '#');
       User.logOut();
+      session.showLogout();
     });
   },
   submitForm: function(){
@@ -51,27 +52,28 @@ var userView = {
     var self = this;
     var user = User.fetch().then(function(user){
       self.currentUser = user;
+      self.allVotesdiv();
     });
   },
   clickAccountInfo: function(){
     var self = this;
-    var uservotes = $(".account");
+    var account = $(".account");
     var allvotesdiv = $(".allvotesdiv");
-    uservotes.on("click", function(){
+    account.on("click", function(){
       if(allvotesdiv.children().length > 0){
         $(".allvotesdiv").empty();
+        console.log('emptied');
         allvotesdiv.toggle();
       }
       else{
         userView.userVotes();
-        self.allVotesdiv();
       }
     });
   },
   allVotesdiv: function(){
     var self = this;
-    if(!jQuery.isEmptyObject(self.currentUser)){
-      if(self.currentUser.hasOwnProperty("twitter")){
+    if(!jQuery.isEmptyObject(currentUser)){
+      if(currentUser.hasOwnProperty("twitter")){
         self.grabTwitterUserVotesInfo();
       }
       else{
@@ -81,13 +83,12 @@ var userView = {
   },
   grabTwitterUserVotesInfo: function(){
     var self = this;
-    var userDiv = $(".userdiv");
-    var username = self.currentUser.twitter.displayName;
+    var username = currentUser.twitter.displayName;
     self.grabUserVotes(username);
   },
   grabUserVotes:function(emailOrUserName){
     var self = this;
-    self.currentUserVotesArray = self.currentUser.votes;
+    self.currentUserVotesArray = currentUser.votes;
     var votesTotal = self.currentUserVotesArray.length;
     self.appendUserInformation(votesTotal, emailOrUserName);
     if(votesTotal > 0){
@@ -97,27 +98,27 @@ var userView = {
   },
   grabLocalUserVotesInfo: function(){
     var self = this;
-    var userDiv = $(".userdiv");
-    var email = self.currentUser.local.email;
+    var email = currentUser.local.email;
     self.grabUserVotes(email);
   },
   appendUserInformation: function(votesTotal, emailOrUserName){
     var allvotesdiv = $(".allvotesdiv");
-    allvotesdiv.css("display", "inline");
+    allvotesdiv.show();
     var showEmailOrUsername = $("<h3>Account: " + emailOrUserName + "</h3>");
     var showVotes = $("<h4>Total Votes: " + votesTotal +"</h4>");
     allvotesdiv.append(showEmailOrUsername);
     showEmailOrUsername.append(showVotes);
-    allvotesdiv.append("<h4>UpVotes:</h4>");
+    allvotesdiv.append("<h4>Vote History:</h4>");
   },
   addVotesToUserInfo: function(sortedVotes){
     var allvotesdiv = $(".allvotesdiv");
-    for(var i = 0; i < sortedVotes.length; i++){
+    var limit = sortedVotes.length < 20 ? sortedVotes.length : 20;
+    for(var i = 0; i < limit; i++){
       // if(sortedVotes[i].vote){
-        var formattedTime = moment(sortedVotes[i].createdAt).format("MMM Do YYYY");
-        var voteType = sortedVotes[i].vote ? 'upvote' : 'downvote';
-        var dates = $("<p>" + formattedTime + " - " + sortedVotes[i].name + ' - ' + voteType + "</p>");
-        allvotesdiv.append(dates);
+      var formattedTime = moment(sortedVotes[i].createdAt).format("MMM Do YYYY");
+      var voteType = sortedVotes[i].vote ? 'upvote' : 'downvote';
+      var dates = $("<p>" + formattedTime + " - " + sortedVotes[i].name + ' - ' + voteType + "</p>");
+      allvotesdiv.append(dates);
       // }
     }
   },

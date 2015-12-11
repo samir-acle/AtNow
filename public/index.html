@@ -38,6 +38,7 @@
         </div>
         <div class="main-body-test">
         </div>
+        <div class= "showuserinfo"></div>
         <div class='set-location-div'>
           <input type="text" placeholder="location" class='location'>
           <button class="set-location">set</button>
@@ -50,12 +51,12 @@
         <input type="text" placeholder="location" class='location input-div'>
         <button class="set-location btn-custom-set">set</button>
     </div>
-    <section class="cta container">
+<section class="cta container">
     <div class="cta">
       <h1 class="cta rotate">
-        <span class="style-banner">I want to go</span>
+        <span class="style-banner">I want to go </span>
         <span class="word-wrapper">
-          <b class="is-visible">to the bar.</b>
+          <b>to the bar.</b>
           <b>to the movies.</b>
           <b>out to eat.</b>
         </span>
@@ -69,28 +70,29 @@
         <ul class="loc-container"></ul>
       </div>
       <div class="col-md-4 userdiv">
-        <div class="alert alert-danger alert-dismissable sessionmessage">
-          <strong>Failed!</strong>
-        </div>
         <div class="alert alert-success alert-dismissable logoutmessage">
           <strong>Success: </strong>You are now logged out.
         </div>
-
+        <div class="alert alert-success alert-dismissable loginmessage">
+          <strong>Success: </strong>You are currently logged in.
+        </div>
+        <div class="alert alert-dismissable sessionmessage">
+        Sorry, There Must Be An Error.
+        </div>
+        <div class="alert alert-success alert-dismissable successmessage">
+          You have sucessfully logged out!.
+        </div>
         <form method="post" action="/login">
           <h2>Login</h2>
-
           <div class="form-group">
             <label for="email">Email</label>
             <input class="form-control" type="text" name="email" id="email">
           </div>
-
           <div class="form-group">
             <label for="email">Password</label>
             <input class="form-control" type="password" name="password" id="password">
           </div>
-
           <input class="btn btn-default" type="submit">
-
           <a href="/auth/twitter"><img id="twitter-login" src="http://i.imgur.com/3kYcO3Y.png"></a>
         </form>
         <div class= 'allvotesdiv'></div>
@@ -98,16 +100,13 @@
       </div>
     </div>
   </div>
-
 <footer>
   <div class="footer-style">
   </div>
 </footer>
-
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzKpNRyX1TvArCR_ZHz06J-wu1CqM6Niw&callback=map.initMap">
     </script>
     <script src="/js/animations-transitions/rotateAnimation.js"></script>
-
 </body>
 </html>

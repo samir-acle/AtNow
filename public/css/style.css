@@ -87,6 +87,9 @@ li {
     /*border-radius: 10px 10px 10px 10px;*/
     box-shadow: inset 1px 1px 2px #c0c5cc;
 
+  min-height: 600px;
+  background-color: #e88f7e;
+  border-radius: 10px 10px 10px 10px;
 }
 
 .loc-space {
@@ -133,7 +136,8 @@ form {
 .nav-custom span:hover {
   color: #0b0b0b;
   background-color: white;
-  border: 2px solid #ebecec;
+  padding-bottom: 2px;
+  border-bottom: 2px solid #73d8ff;
 }
 
 /** Toggle Locations **/
@@ -166,8 +170,7 @@ h3:first-of-type {
   height: 80px;
   margin-top: 10px;
 }
-
-.logoutmessage{
+.successmessage{
   display: none;
   margin: 0 auto;
   width: 100%;
@@ -176,14 +179,6 @@ h3:first-of-type {
   margin-top: 10px;
 }
 
-.loginmessage{
-  display: none;
-  margin: 0 auto;
-  width: 100%;
-  font-size: 18.5px;
-  height: 80px;
-  margin-top: 10px;
-}
 .movie-style:nth-last-of-type(2n){
   background-color: rgba(0, 0, 0, 0.1);
 }
@@ -198,31 +193,42 @@ h3:first-of-type {
   font-weight: bold;
 }
 
-.nth-child-
+.showuserinfo{
+  background-color: yellow;
+}
+
 /** Rotating Words **/
 
 
 .cta {
   color: #222;
 }
+
+.word-wrapper {
+  position: relative;
+}
+
 .cta.rotate b {
   opacity: 0;
   transform-origin: 50% 100%;
   transform: rotateX(180deg);
   display: inline-block;
   position: absolute;
-  left: auto;
+  left: 0;
   top: auto;
+  white-space: nowrap;
+  padding-left: 5px;
 }
 
 .cta.rotate b.is-visible {
-  position: relative;
+  position: absolute;
   opacity: 1;
   transform: rotateX(0deg);
   animation: cta-rotate-in 1.2s;
 }
 
 .cta.rotate b.is-hidden {
+  position: absolute;
   transform: rotateX(180deg);
   animation: cta-rotate-out 1.2s;
 }
@@ -325,7 +331,8 @@ h3:first-of-type {
 
 /** Other Stuff **/
 
-.red {
+.red,
+.warning {
   color: red;
 }
 
@@ -383,4 +390,6 @@ div.location-toggle:nth-child(even) {
   line-height:1.42857;
   padding:6px 12px;
   width:100%;
-}
+=======
+.welcome {
+  font-size: 50px;

@@ -1,14 +1,18 @@
 $(document).ready(function($){
 
   var animationDelay = 2500;
+  var cta = $('.cta');
+  $('b').eq(0).addClass('is-visible');
 
   animateHeadline($('.cta'));
 
   function animateHeadline($headlines) {
   	$headlines.each(function(){
   		var headline = $(this);
+      console.log(headline);
   		//trigger animation
-  		setTimeout(function(){ hideWord( headline.find('.is-visible') );
+  		setTimeout(function(){
+        hideWord( headline.find('.is-visible') );
      },
       animationDelay);
   		//other checks here ...

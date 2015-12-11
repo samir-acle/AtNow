@@ -17,7 +17,7 @@ session.getLocation = new Promise(function(resolve, reject) {
 
   if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition(geoSuccess, function(){
-      session.mainMessage('Unable to get current location. Please enter a location above or change your browser settings.', true);
+      session.mainMessage('Unable to get current location. Please enter a location above or change your browser settings an reload the page.', true);
       $('.set-location-div').show();
       reject(Error("Unable to get current location"));
     });
@@ -27,17 +27,15 @@ session.getLocation = new Promise(function(resolve, reject) {
 });
 
 session.loadLocations = function(type){
-  if (session.currentLong || map.lng ) {
-    console.log('loading locations');
-    type = type || history.state.type;
-    var request = Location.fetch(type).then(function(data){
-      data.sort(function(a,b){
-        return b.count - a.count;
-      });
-      session.saveLocations(data,type);
+  console.log('loading locations');
+  type = type || history.state.type;
+  var request = Location.fetch(type).then(function(data){
+    data.sort(function(a,b){
+      return b.count - a.count;
     });
-    return request;
-  }
+    session.saveLocations(data,type);
+  });
+  return request;
 };
 
 session.setState = function(type){
@@ -55,25 +53,25 @@ session.createLocationViews = function(type){
       var view = new LocationView(location); //store in model for future access
       view.render();
     });
-  } 
+  }
 };
 
 session.saveLocations = function(data, type) {
   session[type.split('|')[0]] = data;
 };
 
-session.error = {};
+session.message = {};
 
 session.grabLoginErrors = function() {
   var self = this;
   var url = "http://127.0.0.1:3000/failedlogin";
   var request = $.getJSON(url).then(function(req, res){
-    console.log("THIS IS FETCHING THE Failed message");
-    session.error = req;
-    session.showErrors();
+    var sessionmessage = req;
+    var type = sessionmessage.success;
+    var message = sessionmessage.message;
+    session.showErrors(message, type);
     return req;
   }).fail(function(response){
-    console.log("JS failed to get message");
   });
   return request;
 };
@@ -82,38 +80,77 @@ session.grabSignUpErrors = function(){
   var self = this;
   var url = "http://127.0.0.1:3000/failedsignup";
   var request = $.getJSON(url).then(function(req, res){
-    console.log("THIS IS FETCHING THE Failed signmessage");
-    session.error = req;
-    session.showErrors();
+    var sessionmessage = req;
+    var type= sessionmessage.success;
+    var message = sessionmessage.message;
+    session.showErrors(message, type);
     return req;
-  }).fail(function(response){
   });
   return request;
 };
 // this needs to go to session view:
 // showing session errors for signup and login
-session.showErrors = function(errorMessage){
-  var message = errorMessage || session.error.message;
+
+session.showErrors = function(message, type){
   var sessionMessage = $(".sessionmessage");
-  sessionMessage.html("<strong>Error : </strong>" + message);
-  sessionMessage.fadeIn(500);
+  if(type){
+    sessionMessage.removeClass("alert-danger");
+    sessionMessage.addClass("alert-success");
+  }
+  else{
+    sessionMessage.removeClass("alert-success");
+    sessionMessage.addClass("alert-danger");
+  }
+  sessionMessage.html(message);
+  sessionMessage.fadeIn(800);
   $("body").on("click", function(){
-    sessionMessage.fadeOut(1000);
+    sessionMessage.fadeOut(800);
+  });
+};
+
+session.showErrors = function(){
+  var sessionMessage = $(".sessionmessage");
+  sessionMessage.html("<strong>Error : </strong>" + session.error.message);
+  sessionMessage.fadeIn(800);
+  $("body").on("click", function(){
+    sessionMessage.fadeOut(800);
     session.error = {};
   });
 };
 
+session.showLoginSucess = function(){
+  if(!jQuery.isEmptyObject(currentUser)){
+    var loginMessage = $(".loginmessage");
+    loginMessage.fadeIn(800);
+    $("body").on("click", function(){
+      loginMessage.fadeOut(800);
+    });
+  }
+};
+
 session.showLogout = function(){
-  var logoutMessage = $(".logoutmessage");
-  logoutMessage.fadeIn(500);
+  var logoutMessage = $(".successmessage");
+  logoutMessage.fadeIn(800);
   $("body").on("click", function(){
-    logoutMessage.fadeOut(1000);
+    logoutMessage.fadeOut(800);
   });
 };
 
+
+
+// function to hide and show buttons:
+// session.toggleButtons = function(){
+//   if(userSession){
+//     $(".login").css("display", "none");
+//     $(".signup").css("display", "none");
+//   }
+// };
+
 session.changeType = function(){
   if(session.needReload){
-    session.reload();
+    session.loadLocations().then(function(data){
+      session.createLocationViews();
+    });
   } else {
     session.createLocationViews();
   }
@@ -122,15 +159,14 @@ session.changeType = function(){
 };
 
 session.reload = function(){
+  session.needReload = true;
   session.loadLocations().then(function(data){
     session.createLocationViews();
   });
+  if($('.allvotesdiv').is(':visible')){
+    $(".allvotesdiv").empty();
+    userView.userVotes();
+  }
 };
 
-session.mainMessage = function(message, warning){
-  var messageType = warning ? 'warning' : 'welcome';
-  var messageDiv = $('<div class="main-message ' + messageType + '"></div>');
-  messageDiv.text(message);
-  $('.loc-container').append(messageDiv);
-};
 //TODO: change sessions to this where applicable

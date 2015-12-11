@@ -8,6 +8,7 @@ var Location = function(info){
   this.count = info.count;
   this.userUpvote = info.userUpvote;
   this.userDownvote = info.userDownvote;
+  this.url = "https://www.google.com/maps/search/" + info.name;
 };
 
 Location.prototype.postVote = function(vote) {
@@ -23,13 +24,14 @@ Location.prototype.postVote = function(vote) {
       name: self.name
     }
   }).then(function(res){
-    //TODO: refactor out below since in code in script.js
-    //TODO: fix so will update both categories
     session.needReload = true;
     session.reload();
   })
   .fail(function(){
-    alert('FAILRUE');
+    $("form").show();
+    $('form').attr('action', '/login');
+    $("h2").html("Log In");
+    // session.showErrors('You must be logged in to vote on a location');
   });
 };
 
@@ -38,10 +40,6 @@ Location.fetch = function(type){
 
   var lat = session.currentLat ? session.currentLat : map.lat;
   var long = session.currentLong ? session.currentLong : map.lng;
-
-  if (!lat) {
-    return session.showErrors('Unable to get current location. Please enter a location above or change your browser settings.');
-  }
 
   var request = $.getJSON("http://127.0.0.1:3000/locations/", {
     lat: lat,
@@ -54,7 +52,6 @@ Location.fetch = function(type){
     var locations = [];
     for (var i = 0; i < venues.length; i++) {
       var newLoc = new Location(venues[i]);
-      // newLoc.getDetails();
       locations.push(newLoc);
     }
     return locations;
