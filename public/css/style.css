@@ -486,6 +486,8 @@ margin-left: 5px;
 
 .glyphicon:hover {
   color: #28AADC;
+  transform: scale(1.25);
+  cursor: pointer;
 }
 
 .twitter img {
