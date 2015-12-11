@@ -6,12 +6,6 @@ var User = function(info) {
   this.id = info.id;
 };
 
-var currentUser = {}; //maybe dont need
-var UserSession = false;
-var userResponse = {};
-// globalCurrentUser = {};
-// need to create object for user new Object()
-
 User.fetch = function() {
   var self = this;
   var url = "http://127.0.0.1:3000/user";
@@ -19,8 +13,9 @@ User.fetch = function() {
     currentUser = req; //maybe get rid of
     return req;
   }).fail(function(res){
-    session.message = res;
-    session.showErrors();
+    var message = res.message;
+    var type = message.success;
+    session.showErrors(message, type);
   });
   return request;
 };
