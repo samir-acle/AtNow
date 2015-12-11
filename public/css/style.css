@@ -233,3 +233,7 @@ h1 {
 .false {
   opacity: 0.5;
 }
+
+.set-location-div {
+  display: none;
+}
