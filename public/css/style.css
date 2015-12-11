@@ -219,8 +219,30 @@ h3:first-of-type {
   margin-top: 10px;
 }
 
-.movie-style:nth-last-of-type(2n){
-  background-color: rgba(0, 0, 0, 0.1);
+.movie-style:nth-child(even)){
+  max-width: 500px;
+    /*border-radius:4px;*/
+  box-shadow:inset 1px 1px 1px #55bde4;
+  background-color: #61cdf6;
+  display:block;
+  font-size:14px;
+  height:34px;
+  line-height:1.42857;
+  padding:6px 12px;
+  width:100%;
+}
+
+.movie-style:nth-child(odd)){
+  max-width: 500px;
+  /*border-radius:4px;*/
+  box-shadow:inset 1px 1px 1px #55bde4;
+  background-color: #b2edf6;
+  display:block;
+  font-size:14px;
+  height:34px;
+  line-height:1.42857;
+  padding:6px 12px;
+  width:100%;
 }
 
 .movie-style{
