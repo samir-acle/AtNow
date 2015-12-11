@@ -9,14 +9,6 @@ function error(response, message){
   response.json({error: message});
 }
 
-// var preferencesController = {
-//   index: function(req, res){
-//     PreferenceModel.find({}, function(err, docs){
-//       res.render("/index", {preferences: docs})
-//     })
-//   },
-//
-// }
 router.get("/", function(req, res){
   Preference.find({}).populate("preferences").then(function(Preferences){
     res.json(Preferences);

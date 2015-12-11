@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
+var bcrypt = require("bcrypt-nodejs");
 
 var VoteSchema = new Schema ({
   location_id: String,
@@ -38,7 +39,7 @@ var UserSchema = new Schema ({
   preferences: [PreferenceSchema]
 });
 
-var bcrypt = require("bcrypt-nodejs");
+
 
 var PreferenceModel = mongoose.model("Preference", PreferenceSchema);
 var VoteModel = mongoose.model("Vote", VoteSchema);

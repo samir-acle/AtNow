@@ -127,22 +127,3 @@ var userView = {
     return dateA < dateB ? 1 : -1;
   }
 };
-
-
-
-
-// we can use something like this to check if fields have value:
-// checkIfValid: function(){
-//   var formDivs = $(".form-group input");
-//   for(var i = 0; i < formDivs.length; i++){
-//
-//     if(!formDivs.eq(i).val()){
-//       console.log("Your missing a field");
-//       return false;
-//     }
-//     else{
-//       console.log("true");
-//       return true;
-//     }
-//   }
-// }

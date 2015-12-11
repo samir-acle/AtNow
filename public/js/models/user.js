@@ -5,19 +5,16 @@ var User = function(info) {
   this.password = info.password;
   this.id = info.id;
 };
-
-var UserSession = false;
-var userResponse = {};
-// globalCurrentUser = {};
-// need to create object for user new Object()
+// ajax request to get User, then se
 User.fetch = function() {
   var self = this;
   var url = "http://127.0.0.1:3000/user";
   var request = $.getJSON(url).then(function(req, res){
     return req;
   }).fail(function(res){
-    session.message = res;
-    session.showErrors();
+    var message = res.message;
+    var type = message.success;
+    session.showErrors(message, type);
   });
   console.log("full get request: " + request);
   return request;
