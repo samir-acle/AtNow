@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  session.mainMessage('Welcome to At Now');
+  // session.mainMessage('Welcome to At Now');
 
   userView.showLogin();
   userView.showSignup();
