@@ -17,7 +17,7 @@ session.getLocation = new Promise(function(resolve, reject) {
 
   if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition(geoSuccess, function(){
-      session.mainMessage('Unable to get current location. Please enter a location above or change your browser settings.', true);
+      session.mainMessage('Unable to get current location. Please enter a location above or change your browser settings an reload the page.', true);
       $('.set-location-div').show();
       reject(Error("Unable to get current location"));
     });

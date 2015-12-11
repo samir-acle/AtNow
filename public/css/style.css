@@ -152,24 +152,32 @@ h3,
 .cta {
   color: black;
 }
+
+.word-wrapper {
+  position: relative;
+}
+
 .cta.rotate b {
   opacity: 0;
   transform-origin: 50% 100%;
   transform: rotateX(180deg);
   display: inline-block;
   position: absolute;
-  left: auto;
+  left: 0;
   top: auto;
+  white-space: nowrap;
+  padding-left: 5px;
 }
 
 .cta.rotate b.is-visible {
-  position: relative;
+  position: absolute;
   opacity: 1;
   transform: rotateX(0deg);
   animation: cta-rotate-in 1.2s;
 }
 
 .cta.rotate b.is-hidden {
+  position: absolute;
   transform: rotateX(180deg);
   animation: cta-rotate-out 1.2s;
 }

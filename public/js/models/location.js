@@ -8,6 +8,7 @@ var Location = function(info){
   this.count = info.count;
   this.userUpvote = info.userUpvote;
   this.userDownvote = info.userDownvote;
+  this.url = "https://www.google.com/maps/search/" + info.name;
 };
 
 Location.prototype.postVote = function(vote) {
