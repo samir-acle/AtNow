@@ -17,8 +17,8 @@ session.getLocation = new Promise(function(resolve, reject) {
 
   if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition(geoSuccess, function(){
-      alert('unable to get position');
-      reject(Error("It broke"));
+      session.showErrors('Unable to get current location. Please enter a location above or change your browser settings.');
+      reject(Error("Unable to get current location"));
     });
   } else {
     reject(Error("No geolocation"));
@@ -45,6 +45,7 @@ session.createLocationViews = function(type){
   console.log('creating views');
   type = type || history.state.type;
   var array = session[type.split('|')[0]];
+  console.log(array);
   $('.loc-container').empty();
   array.forEach(function(location){
     var view = new LocationView(location); //store in model for future access
@@ -86,9 +87,10 @@ session.grabSignUpErrors = function(){
 };
 // this needs to go to session view:
 // showing session errors for signup and login
-session.showErrors = function(){
+session.showErrors = function(errorMessage){
+  var message = errorMessage || session.error.message;
   var sessionMessage = $(".sessionmessage");
-  sessionMessage.html("<strong>Error : </strong>" + session.error.message);
+  sessionMessage.html("<strong>Error : </strong>" + message);
   sessionMessage.fadeIn(500);
   $("body").on("click", function(){
     sessionMessage.fadeOut(1000);
@@ -114,9 +116,7 @@ session.showLogout = function(){
 
 session.changeType = function(){
   if(session.needReload){
-    session.loadLocations().then(function(data){
-      session.createLocationViews();
-    });
+    session.reload();
   } else {
     session.createLocationViews();
   }
@@ -125,10 +125,8 @@ session.changeType = function(){
 };
 
 session.reload = function(){
-  session.needReload = true;
   session.loadLocations().then(function(data){
     session.createLocationViews();
   });
 };
-
 //TODO: change sessions to this where applicable

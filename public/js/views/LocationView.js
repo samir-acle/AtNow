@@ -32,16 +32,7 @@ LocationView.prototype = {
       self.loc.postVote(false);
       });
     },
-  //  toggleDiv: function(locationsDiv){
-  //    console.log("test");
-  //    if(this.$el.is(":visible")){
-  //      console.log("Hide/Show");
-  //      ("#hide").locationsDiv.children("div.location");
-  //    } else {
-  //      console.log("second statement");
-  //      ("#show").locationsDiv.children("div.location");
-  //    }
-  //  },
+
   addInfo: function(){
     var self = this;
     var subDiv = self.$el.find('.toggle');
@@ -51,17 +42,4 @@ LocationView.prototype = {
     subDiv.append("<div class='location-toggle'>"  + "<span class='list-items'>Rating: </span>" + this.loc.rating + "</div>");
     subDiv.hide();
   }
-
-
-  // appendLocations: function(locationsDiv){
-  //   var self = this;
-  //   if(locationsDiv.children().length === 0){
-  //       this.$el.append('<div><img src="' + this.loc.icon + '" height="32px" width="32px"></div>');
-  //       this.$el.append("<div class='location-toggle'>" + "<span class='list-items'>Address: </span>" + this.loc.address + "</div>");
-  //       this.$el.append("<div class='location-toggle'>"  + "<span class='list-items'>Types: </span>" + this.loc.types + "</div>");
-  //       this.$el.append("<div class='location-toggle'>"  + "<span class='list-items'>Rating: </span>" + this.loc.rating + "</div>");
-  //   }
-  //   this.$el.toggle();
-  // this.toggleDiv(locationsDiv);
-  // }
 };
