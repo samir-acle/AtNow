@@ -367,8 +367,7 @@ h1 {
 }
 
 div.location-toggle:nth-child(odd) {
-  max-width: 500px;
-  /*border-radius:4px;*/
+    /*border-radius:4px;*/
   box-shadow:inset 1px 1px 1px #55bde4;
   background-color: #61cdf6;
   display:block;
