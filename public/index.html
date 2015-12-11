@@ -30,15 +30,10 @@
         <nav class="collapse navbar-collapse navbar-ex1-collapse">
           <!-- If user signed in etc. -->
           <ul id="custom" class="nav navbar-nav navbar-right">
-            <li class="account link"><span>Account</span></li>
-            <li class="logout link"><span>Logout</span></li>
-            <li class= "login link"><span>Login</span></li>
-            <li class= "signup link"><span>Signup</span></li>
-          </ul>
-          <!-- if use signed in else etc. -->
-          <ul class="nav navbar-nav pull-right">
-            <!-- <li>Sign Up</li>
-            <li>Sign In</li> -->
+            <li class="nav-custom account link"><p><span>Account</span></p></li>
+            <li class="nav-custom logout link"><p><span>Logout</span></p></li>
+            <li class= "nav-custom login link"><p><span>Login</span></p></li>
+            <li class= "nav-custom signup link"><p><span>Signup</span></p></li>
           </ul>
         </div>
         <div class="main-body-test">
@@ -49,9 +44,15 @@
           <button class="set-location">set</button>
         </div>
       </div>
-    </header>
+    </div>
+  </header>
   <div class="container">
-    <section class="">
+    <div class="pull-right">
+        <input type="text" placeholder="location" class='location input-div'>
+        <button class="set-location btn-custom-set">set</button>
+    </div>
+<section class="cta container">
+    <div class="cta">
       <h1 class="cta rotate">
         <span class="style-banner">I want to go </span>
         <span class="word-wrapper">
@@ -60,16 +61,21 @@
           <b>out to eat.</b>
         </span>
       </h1>
-    </section>
+    </div>
     <div class="row">
       <div class="loc-space col-md-8">
         <button class="btn-custom restaurants">Restaurants</button>
         <button class="btn-custom stores">Stores</button>
-        <button class="btn-custom movies">Movies</button>
         <span><img src="/images/powered_by_google_on_white.png" alt="Powered by Google"></span>
         <ul class="loc-container"></ul>
       </div>
       <div class="col-md-4 userdiv">
+        <div class="alert alert-success alert-dismissable logoutmessage">
+          <strong>Success: </strong>You are now logged out.
+        </div>
+        <div class="alert alert-success alert-dismissable loginmessage">
+          <strong>Success: </strong>You are currently logged in.
+        </div>
         <div class="alert alert-dismissable sessionmessage">
         Sorry, There Must Be An Error.
         </div>
@@ -78,34 +84,29 @@
         </div>
         <form method="post" action="/login">
           <h2>Login</h2>
-
           <div class="form-group">
             <label for="email">Email</label>
             <input class="form-control" type="text" name="email" id="email">
           </div>
-
           <div class="form-group">
             <label for="email">Password</label>
             <input class="form-control" type="password" name="password" id="password">
           </div>
-
           <input class="btn btn-default" type="submit">
           <a href="/auth/twitter" class="twitter"><img id="twitter-login" src="http://i.imgur.com/3kYcO3Y.png"></a>
         </form>
         <div class= 'allvotesdiv'></div>
+        <div class="movie-container">Movie Times</div>
       </div>
     </div>
   </div>
-
 <footer>
   <div class="footer-style">
   </div>
 </footer>
-
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzKpNRyX1TvArCR_ZHz06J-wu1CqM6Niw&callback=map.initMap">
     </script>
     <script src="/js/animations-transitions/rotateAnimation.js"></script>
-
 </body>
 </html>
