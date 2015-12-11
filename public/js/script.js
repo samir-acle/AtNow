@@ -8,6 +8,10 @@ $(document).ready(function(){
   // need a function when this
   userView.clickAccountInfo();
 
+  window.setTimeout(function(){
+    $('form').fadeIn();
+  }, 1000);
+
 //TODO: put in function so can call again (dont include location call
 //TODO: make so can choose location
   session.setState('restaurant|bar');

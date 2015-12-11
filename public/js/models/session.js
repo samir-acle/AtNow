@@ -108,16 +108,6 @@ session.showErrors = function(message, type){
   });
 };
 
-// session.showErrors = function(){
-//   var sessionMessage = $(".sessionmessage");
-//   sessionMessage.html("<strong>Error : </strong>" + session.error.message);
-//   sessionMessage.fadeIn(800);
-//   $("body").on("click", function(){
-//     sessionMessage.fadeOut(800);
-//     session.error = {};
-//   });
-// };
-
 session.showLoginSucess = function(){
   if(!jQuery.isEmptyObject(currentUser)){
     var loginMessage = $(".loginmessage");

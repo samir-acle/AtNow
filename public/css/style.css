@@ -485,3 +485,8 @@ margin-left: 5px;
    transform: scale(1.25);
    cursor: pointer;
  }
+
+.twitter img {
+  width: 50%;
+  height: 40px;
+}

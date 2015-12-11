@@ -1,5 +1,5 @@
 var Location = function(info){
-  this.name = info.name;
+  this.name = info.name.length > 25 ? info.name.slice(0,25) : info.name;
   this.id = info.place_id;
   this.icon = info.icon;
   this.address = info.vicinity;
@@ -13,7 +13,6 @@ var Location = function(info){
 
 Location.prototype.postVote = function(vote) {
   var self = this;
-  console.log(self);
   $.ajax({
     url: "http://127.0.0.1:3000/votes/",
     type: "POST",
@@ -24,14 +23,12 @@ Location.prototype.postVote = function(vote) {
       name: self.name
     }
   }).then(function(res){
+    console.log('worked');
     session.needReload = true;
     session.reload();
   })
-  .fail(function(){
-    $("form").show();
-    $('form').attr('action', '/login');
-    $("h2").html("Log In");
-    // session.showErrors('You must be logged in to vote on a location');
+  .fail(function(err){
+    console.log('post failed');
   });
 };
 
@@ -47,7 +44,6 @@ Location.fetch = function(type){
     type: type
   })
   .then(function(res){
-    console.log('res',res);
     var venues = res;
     var locations = [];
     for (var i = 0; i < venues.length; i++) {

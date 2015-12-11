@@ -9,9 +9,11 @@ var User = function(info) {
 User.fetch = function() {
   var self = this;
   var url = "http://127.0.0.1:3000/user";
-  var request = $.getJSON(url).then(function(req, res){
-    currentUser = req; //maybe get rid of
-    return req;
+  var request = $.getJSON(url).then(function(user,res){
+    console.log('user',user);
+    console.log('res',res);
+    userView.currentUser = user;
+    return user;
   }).fail(function(res){
     var message = res.message;
     var type = message.success;
@@ -27,8 +29,7 @@ User.logOut = function(){
     // console.log(response);
   }).then(function(res){
     console.log("LOGOUT!");
-    if(!jQuery.isEmptyObject(currentUser)){
-      currentUser = {};
+    if(!jQuery.isEmptyObject(userView.currentUser)){
       userView.currentUser = {};
       session.showLogout();
     }
@@ -95,5 +96,7 @@ User.postLogin = function(){
     session.reload();
     // IF its a sucess, hide login displays
     // userView.toggleLoginDisplays();
+  }).fail(function(){
+    console.log('failed from post');
   });
 };
