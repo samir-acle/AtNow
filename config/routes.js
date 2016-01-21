@@ -47,12 +47,6 @@ router.route('/auth/facebook')
 router.route('/auth/facebook/callback')
 .get(usersController.getUserFacebook);
 
-// router.route('/auth/google')
-// .get(usersController.getGoogle);
-//
-// router.route('/auth/google/callback')
-// .get(usersController.getUserGoogle);
-
 router.route('/auth/google')
   .get(passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/plus.login' }));
 

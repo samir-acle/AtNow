@@ -1,5 +1,7 @@
 var moment = require('moment');
 
+//return list of movies sorted by showtime
+//movies must be starting within the next two hours
 module.exports = function(theaters, callback){
   var data = [];
   var currentTime = Date.now();

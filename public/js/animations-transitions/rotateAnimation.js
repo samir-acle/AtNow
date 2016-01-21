@@ -15,7 +15,6 @@ $(document).ready(function($){
         hideWord( headline.find('.is-visible') );
      },
       animationDelay);
-  		//other checks here ...
   	});
   }
 

@@ -26,7 +26,6 @@ User.logOut = function(){
   var self = this;
   var url = "http://127.0.0.1:3000/logout";
   $.getJSON(url, function(response){
-    // console.log(response);
   }).then(function(res){
     console.log("LOGOUT!");
     if(!jQuery.isEmptyObject(userView.currentUser)){
@@ -34,16 +33,12 @@ User.logOut = function(){
       session.showLogout();
     }
     session.reload();
-    // userView.toggleLoginDisplays();
-    // userView.toggleLogoutDisplays();
   }).fail(function(res){
     console.log("FAILED LOGOUTTTT");
     alert("failure from user post");
   });
 };
 
-
-// explaining options???
 User.post = function(){
   var self = this;
   var url = "http://127.0.0.1:3000/signup";
@@ -64,7 +59,6 @@ User.post = function(){
     var message = sessionmessage.message;
     var type = sessionmessage.success;
     session.showErrors(message, type);
-    // userView.toggleLoginDisplays();
     return res;
   }).fail(function(res){
     alert("failure from user post");
@@ -72,7 +66,6 @@ User.post = function(){
 };
 
 User.postLogin = function(){
-  // resetting form
   var self = this;
   var url = "http://127.0.0.1:3000/login";
   var request = $.ajax({
@@ -94,8 +87,6 @@ User.postLogin = function(){
     var type = sessionmessage.success;
     session.showErrors(message, type);
     session.reload();
-    // IF its a sucess, hide login displays
-    // userView.toggleLoginDisplays();
   }).fail(function(){
     console.log('failed from post');
   });

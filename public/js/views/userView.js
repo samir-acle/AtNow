@@ -1,11 +1,9 @@
-// code is not DRY, need to refactor methods in this object
 var userView = {
 
-  // need function where if upvoted clicked or downvote, object is added to user
   currentUser: {},
 
   currentUserVotesArray: [],
-  // maybe something that toggles login
+
   showLogin: function(){
     $(".login").on("click", function(){
       if ($('h2').html() !== 'Sign Up') {
@@ -119,12 +117,10 @@ var userView = {
     var allvotesdiv = $(".allvotesdiv");
     var limit = sortedVotes.length < 20 ? sortedVotes.length : 20;
     for(var i = 0; i < limit; i++){
-      // if(sortedVotes[i].vote){
       var formattedTime = moment(sortedVotes[i].createdAt).format("MMM Do YYYY");
       var voteType = sortedVotes[i].vote ? 'upvote' : 'downvote';
       var dates = $("<p>" + formattedTime + " - " + sortedVotes[i].name + ' - ' + voteType + "</p>");
       allvotesdiv.append(dates);
-      // }
     }
   },
   sortFunction: function(a,b){

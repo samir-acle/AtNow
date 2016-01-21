@@ -51,7 +51,6 @@ LocationView.prototype = {
   addInfo: function(){
     var self = this;
     var subDiv = self.$el.find('.toggle');
-    // subDiv.append('<div><img src="' + this.loc.icon + '" height="32px" width="32px"></div>');
     subDiv.append("<div class='location-toggle'>" + "<span class='list-items'>Address: </span>" + this.loc.address + "</div>");
     subDiv.append("<div class='location-toggle'>"  + "<span class='list-items'>URL: </span>" + this.loc.url + "</div>");
     subDiv.append("<div class='location-toggle'>"  + "<span class='list-items'>Rating: </span>" + this.loc.rating + "</div>");

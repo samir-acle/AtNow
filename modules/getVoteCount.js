@@ -3,14 +3,15 @@ var User = require("../models/user");
 var Location = require("../models/location");
 var checkUserVotes = require("./checkUserVotes");
 
+//adds total vote count to each location object in the provided array
+//returns a new array with updated locations once all locations have completed
+//their vote retrieval
 module.exports = function(array, callback){
-  // console.log('in getvotecount');
   var oldArray = array;
   var newArray = [];
 
   function getCount() {
-    if (oldArray.length === 0) {
-      // console.log('get vote count done');
+    if (oldArray.length === 0) {;
       return callback(null, newArray);
     }
 

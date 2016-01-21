@@ -11,7 +11,7 @@ session.getLocation = new Promise(function(resolve, reject) {
     if (lat){
       resolve({lat: lat,long: long});
     } else {
-      reject(Error("It broke")); //TODO: take to or show set location
+      reject(Error("It broke")); 
     }
   };
 
@@ -43,7 +43,7 @@ session.setState = function(type){
 };
 
 session.createLocationViews = function(type){
-  if (session.currentLong || map.lng ) {  //TODO: factor out into another function to check if location? call it before every reload?
+  if (session.currentLong || map.lng ) {
     console.log('creating views');
     type = type || history.state.type;
     var array = session[type.split('|')[0]];
@@ -88,8 +88,6 @@ session.grabSignUpErrors = function(){
   });
   return request;
 };
-// this needs to go to session view:
-// showing session errors for signup and login
 
 session.showErrors = function(message, type){
   var sessionMessage = $(".sessionmessage");

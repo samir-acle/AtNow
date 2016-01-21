@@ -28,7 +28,7 @@ Movie.loadMovies = function(){
     Movie.fetch().then(function(movies){
       Movie.createMovieViews(movies);
     });
-  } 
+  }
 };
 
 Movie.createMovieViews = function(movies){
@@ -38,5 +38,3 @@ Movie.createMovieViews = function(movies){
     view.render();
   });
 };
-
-//TODO: fix no location movie- error handling

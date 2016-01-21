@@ -1,3 +1,5 @@
+//checks database to see if user has voted for the location provided
+//returns index of the vote in the userVotes array as well as the vote type (upvote or downvote)
 module.exports = function(locationID){
   var index, prevVote;
   var currentUser = global.currentUser;
@@ -8,12 +10,10 @@ module.exports = function(locationID){
 
   var votesArray = currentUser.votes;
 
-    //TODO: use findOne?
   for (var i = 0; i < votesArray.length; i++) {
     if (votesArray[i].location_id === locationID){
-      index = i; //TODO: remoe match
+      index = i;
       prevVote = votesArray[i].vote;
-      // console.log('match found');
       return [index,prevVote];
     }
   }
