@@ -8,9 +8,16 @@ $(document).ready(function(){
   userView.logOut();
   userView.clickAccountInfo();
 
-  window.setTimeout(function(){
+  var loginTimeout = window.setTimeout(function(){
     $('form').fadeIn();
   }, 1000);
+
+  if (!jQuery.isEmptyObject(userView.currentUser)){
+    window.clearTimeout(loginTimeout);
+    var currentUser = userView.currentUser;
+    var displayName = currentUser.twitter.displayName ? currentUser.twitter.displayName : currentUser.local.email;
+    session.showErrors('Welcome ' + displayName, true);
+  }
 
   session.setState('restaurant|bar');
   session.getLocation.then(function(res){
