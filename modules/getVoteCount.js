@@ -11,6 +11,8 @@ module.exports = function(array, callback){
   var newArray = [];
 
   function getCount() {
+    
+    //returns if every location has vote counts added
     if (oldArray.length === 0) {;
       return callback(null, newArray);
     }
@@ -28,6 +30,8 @@ module.exports = function(array, callback){
     location.userUpvote = userUpvote;
     location.userDownvote = userDownvote;
 
+    //When database query complete, updates location and recursively calls getCount() to perform the same action
+    //on the next location
     Location.findOne({"location_id" : location.place_id}, function(err, loc){
       var voteCount = loc ? loc.count : 0;
       location.count = voteCount;
