@@ -13,7 +13,6 @@ Movie.fetch = function(){
     lat: lat,
     long: long
   }).then(function(data){
-    console.log('movies', data);
     var movies = [];
     for (var i = 0; i < data.length; i++) {
       movies.push(new Movie(data[i]));

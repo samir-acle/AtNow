@@ -10,8 +10,6 @@ User.fetch = function() {
   var self = this;
   var url = "http://127.0.0.1:3000/user";
   var request = $.getJSON(url).then(function(user,res){
-    console.log('user',user);
-    console.log('res',res);
     userView.currentUser = user;
     return user;
   }).fail(function(res){
@@ -35,7 +33,6 @@ User.logOut = function(){
     session.reload();
   }).fail(function(res){
     console.log("FAILED LOGOUTTTT");
-    alert("failure from user post");
   });
 };
 
@@ -61,7 +58,7 @@ User.post = function(){
     session.showErrors(message, type);
     return res;
   }).fail(function(res){
-    alert("failure from user post");
+    console.log("failure from user post");
   });
 };
 
@@ -81,13 +78,12 @@ User.postLogin = function(){
   }).then(function(res, req){
     $(".allvotesdiv").empty();
     User.fetch();
-    console.log("returning  " + res + " or " + req);
     var sessionmessage = res;
     var message = sessionmessage.message;
     var type = sessionmessage.success;
     session.showErrors(message, type);
     session.reload();
   }).fail(function(){
-    console.log('failed from post');
+    console.log('failed form post');
   });
 };

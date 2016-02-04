@@ -9,7 +9,6 @@ $(document).ready(function($){
   function animateHeadline($headlines) {
   	$headlines.each(function(){
   		var headline = $(this);
-      console.log(headline);
   		//trigger animation
   		setTimeout(function(){
         hideWord( headline.find('.is-visible') );

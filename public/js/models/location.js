@@ -23,7 +23,6 @@ Location.prototype.postVote = function(vote) {
       name: self.name
     }
   }).then(function(res){
-    console.log('worked');
     session.needReload = true;
     session.reload();
   })

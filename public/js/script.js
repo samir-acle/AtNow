@@ -20,7 +20,7 @@ $(document).ready(function(){
     session.loadLocations('store');
     Movie.fetch();
   }, function(err) {
-    console.log(err);
+    session.showErrors('Unable to load data. Please try again by refreshing the page');
   });
 
   $('.restaurants').on('click', function(){

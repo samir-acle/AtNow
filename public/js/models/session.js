@@ -11,13 +11,13 @@ session.getLocation = new Promise(function(resolve, reject) {
     if (lat){
       resolve({lat: lat,long: long});
     } else {
-      reject(Error("It broke")); 
+      reject(Error("It broke"));
     }
   };
 
   if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition(geoSuccess, function(){
-      session.mainMessage('Unable to get current location. Please enter a location above or change your browser settings an reload the page.', true);
+      session.mainMessage('Unable to get current location. Please enter a location above or change your browser settings and reload the page.', true);
       $('.set-location-div').show();
       reject(Error("Unable to get current location"));
     });
@@ -27,7 +27,6 @@ session.getLocation = new Promise(function(resolve, reject) {
 });
 
 session.loadLocations = function(type){
-  console.log('loading locations');
   type = type || history.state.type;
   var request = Location.fetch(type).then(function(data){
     data.sort(function(a,b){
@@ -44,10 +43,8 @@ session.setState = function(type){
 
 session.createLocationViews = function(type){
   if (session.currentLong || map.lng ) {
-    console.log('creating views');
     type = type || history.state.type;
     var array = session[type.split('|')[0]];
-    console.log(array);
     $('.loc-container').empty();
     array.forEach(function(location){
       var view = new LocationView(location); //store in model for future access
